@@ -8,8 +8,14 @@ import {
   CCol,
   CDataTable,
   CRow,
-  CPagination
-} from '@coreui/react'
+  CPagination,
+  CNav,
+  CNavItem,
+  CNavLink,
+  CTabContent,
+  CTabPane,
+  CTabs,
+} from '@coreui/react';
 
 import usersData from './UsersData'
 
@@ -23,6 +29,7 @@ const getBadge = status => {
   }
 }
 
+const fields = ['name','registered', 'role', 'status'];
 
 const Users = () => {
   const history = useHistory()
@@ -39,48 +46,131 @@ const Users = () => {
   }, [currentPage, page])
 
   return (
-    <CRow>
-      <CCol xl={12}>
-        <CCard>
-          <CCardHeader>
-            Users
-            <small className="text-muted"> example</small>
-          </CCardHeader>
-          <CCardBody>
-          <CDataTable
-            items={usersData}
-            fields={[
-              { key: 'name', _classes: 'font-weight-bold' },
-              'registered', 'role', 'status'
-            ]}
-            hover
-            striped
-            itemsPerPage={5}
-            activePage={page}
-            clickableRows
-            onRowClick={(item) => history.push(`/users/${item.id}`)}
-            scopedSlots = {{
-              'status':
-                (item)=>(
-                  <td>
-                    <CBadge color={getBadge(item.status)}>
-                      {item.status}
-                    </CBadge>
-                  </td>
-                )
-            }}
-          />
-          <CPagination
-            activePage={page}
-            onActivePageChange={pageChange}
-            pages={5}
-            doubleArrows={false} 
-            align="center"
-          />
-          </CCardBody>
-        </CCard>
+    <>
+      <CCol xs="12" md="12" className="mb-4">
+          <CCard>
+              <CCardBody>
+                  <CTabs>
+                      <CNav variant="tabs">
+                          <CNavItem>
+                              <CNavLink> All </CNavLink>
+                          </CNavItem>
+                          <CNavItem>
+                              <CNavLink> Admin </CNavLink>
+                          </CNavItem>
+                          <CNavItem>
+                              <CNavLink> User </CNavLink>
+                          </CNavItem>
+                      </CNav>
+                      <CTabContent>
+                          <CTabPane>
+                              <CCard>
+                              <CDataTable
+                                items={usersData}
+                                fields={[
+                                  { key: 'name', _classes: 'font-weight-bold' },
+                                  'registered', 'role', 'status'
+                                ]}
+                                hover
+                                striped
+                                itemsPerPage={7}
+                                activePage={page}
+                                clickableRows
+                                onRowClick={(item) => history.push(`/users/${item.id}`)}
+                                scopedSlots = {{
+                                  'status':
+                                    (item)=>(
+                                      <td>
+                                        <CBadge color={getBadge(item.status)}>
+                                          {item.status}
+                                        </CBadge>
+                                      </td>
+                                    )
+                                }}
+                              />
+                              <CPagination
+                                activePage={page}
+                                onActivePageChange={pageChange}
+                                pages={5}
+                                doubleArrows={false} 
+                                align="center"
+                              />
+                              </CCard>
+                          </CTabPane>
+                          <CTabPane>
+                              <CCard>
+                              <CDataTable
+                                items={usersData}
+                                fields={[
+                                  { key: 'name', _classes: 'font-weight-bold' },
+                                  'registered', 'role', 'status'
+                                ]}
+                                hover
+                                striped
+                                itemsPerPage={7}
+                                activePage={page}
+                                clickableRows
+                                onRowClick={(item) => history.push(`/users/${item.id}`)}
+                                scopedSlots = {{
+                                  'status':
+                                    (item)=>(
+                                      <td>
+                                        <CBadge color={getBadge(item.status)}>
+                                          {item.status}
+                                        </CBadge>
+                                      </td>
+                                    )
+                                }}
+                              />
+                              <CPagination
+                                activePage={page}
+                                onActivePageChange={pageChange}
+                                pages={5}
+                                doubleArrows={false} 
+                                align="center"
+                              />
+                              </CCard>
+                          </CTabPane>
+                          <CTabPane>
+                              <CCard>
+                              <CDataTable
+                                items={usersData}
+                                fields={[
+                                  { key: 'name', _classes: 'font-weight-bold' },
+                                  'registered', 'role', 'status'
+                                ]}
+                                hover
+                                striped
+                                itemsPerPage={7}
+                                activePage={page}
+                                clickableRows
+                                onRowClick={(item) => history.push(`/users/${item.id}`)}
+                                scopedSlots = {{
+                                  'status':
+                                    (item)=>(
+                                      <td>
+                                        <CBadge color={getBadge(item.status)}>
+                                          {item.status}
+                                        </CBadge>
+                                      </td>
+                                    )
+                                }}
+                              />
+                              <CPagination
+                                activePage={page}
+                                onActivePageChange={pageChange}
+                                pages={5}
+                                doubleArrows={false} 
+                                align="center"
+                              />
+                              </CCard>
+                          </CTabPane>
+                      </CTabContent>
+                  </CTabs>
+              </CCardBody>
+          </CCard>
       </CCol>
-    </CRow>
+    </>
   )
 }
 

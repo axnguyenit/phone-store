@@ -27,22 +27,11 @@ const _nav =  [
     icon: 'cil-user',
   },
   {
-    _tag: 'CSidebarNavItem',
-    name: 'Brands',
-    to: '/brands',
-    icon: 'cil-puzzle',
-  },
-  {
     _tag: 'CSidebarNavDropdown',
     name: 'Base',
     route: '/base',
     icon: 'cil-puzzle',
     _children: [
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Breadcrumb',
-        to: '/base/breadcrumbs',
-      },
       {
         _tag: 'CSidebarNavItem',
         name: 'Cards',
@@ -65,38 +54,8 @@ const _nav =  [
       },
       {
         _tag: 'CSidebarNavItem',
-        name: 'Jumbotron',
-        to: '/base/jumbotrons',
-      },
-      {
-        _tag: 'CSidebarNavItem',
         name: 'List group',
         to: '/base/list-groups',
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Navs',
-        to: '/base/navs',
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Navbars',
-        to: '/base/navbars',
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Pagination',
-        to: '/base/paginations',
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Popovers',
-        to: '/base/popovers',
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Progress',
-        to: '/base/progress-bar',
       },
       {
         _tag: 'CSidebarNavItem',
@@ -121,59 +80,10 @@ const _nav =  [
     ],
   },
   {
-    _tag: 'CSidebarNavDropdown',
+    _tag: 'CSidebarNavItem',
     name: 'Buttons',
-    route: '/buttons',
+    to: '/buttons',
     icon: 'cil-cursor',
-    _children: [
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Buttons',
-        to: '/buttons/buttons',
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Brand buttons',
-        to: '/buttons/brand-buttons',
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Buttons groups',
-        to: '/buttons/button-groups',
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Dropdowns',
-        to: '/buttons/button-dropdowns',
-      }
-    ],
-  },
-  {
-    _tag: 'CSidebarNavDropdown',
-    name: 'Icons',
-    route: '/icons',
-    icon: 'cil-star',
-    _children: [
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'CoreUI Free',
-        to: '/icons/coreui-icons',
-        badge: {
-          color: 'success',
-          text: 'NEW',
-        },
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'CoreUI Flags',
-        to: '/icons/flags',
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'CoreUI Brands',
-        to: '/icons/brands',
-      },
-    ],
   },
   {
     _tag: 'CSidebarNavDropdown',

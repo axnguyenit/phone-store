@@ -11,8 +11,7 @@ import {
   CModalHeader,
   CModalTitle,
   CRow
-} from '@coreui/react'
-import { DocsLink } from '../../../reusable';
+} from '@coreui/react';
 
 const Modals = () => {
 
@@ -31,7 +30,6 @@ const Modals = () => {
         <CCard>
           <CCardHeader>
             Bootstrap Modals
-            <DocsLink name="CModal"/>
           </CCardHeader>
           <CCardBody>
             <CButton 

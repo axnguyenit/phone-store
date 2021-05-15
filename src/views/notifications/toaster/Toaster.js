@@ -16,8 +16,7 @@ import {
   CCol,
   CFormGroup,
   CLabel
-} from '@coreui/react'
-import { DocsLink } from '../../../reusable';
+} from '@coreui/react';
 
 const Toaster = () => {
 
@@ -65,8 +64,7 @@ const Toaster = () => {
   return (
     <CCard>
       <CCardHeader>
-        Toasts.
-        <DocsLink name="-Toast"/>
+        Toasts
       </CCardHeader>
       <CCardBody>
         <CContainer>
