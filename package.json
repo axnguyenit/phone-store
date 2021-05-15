@@ -14,6 +14,7 @@
     "@fortawesome/fontawesome-free": "^5.15.3",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
+    "@glidejs/glide": "^3.4.1",
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
     "@popperjs/core": "^2.9.2",
@@ -23,16 +24,22 @@
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.1",
+    "aos": "^2.3.4",
+    "axios": "^0.21.1",
     "chart.js": "^3.2.1",
     "classnames": "^2.3.1",
     "core-js": "^3.12.1",
     "enzyme": "^3.11.0",
+    "firebase": "^8.6.1",
     "framer-motion": "^4.1.16",
+    "json-server": "^0.16.3",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
+    "react-animate-on-scroll": "^2.1.5",
     "react-app-polyfill": "^2.0.0",
     "react-chartjs-2": "^3.0.3",
     "react-dom": "^17.0.2",
+    "react-glide": "^3.2.0",
     "react-redux": "^7.2.4",
     "react-responsive": "^8.2.0",
     "react-router-dom": "^5.2.0",
@@ -44,6 +51,7 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
+    "dev": "nodemon index.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -66,5 +74,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
   }
 }

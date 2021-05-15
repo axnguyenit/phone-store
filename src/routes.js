@@ -25,7 +25,9 @@ const routes = [
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/theme', name: 'Theme', component: Orders, exact: true },
   { path: '/orders', name: 'Orders', component: Orders },
+  // { path: '/orders/:id', name: 'Orders', component: Order },
   { path: '/products', name: 'Products', component: Products },
+  // { path: '/products/:id', name: 'Products', component: Product },
   { path: '/base', name: 'Base', component: Cards, exact: true },
   { path: '/base/cards', name: 'Cards', component: Cards },
   { path: '/base/carousels', name: 'Carousel', component: Carousels },
@@ -41,7 +43,7 @@ const routes = [
   { path: '/notifications/modals', name: 'Modals', component: Modals },
   { path: '/notifications/toaster', name: 'Toaster', component: Toaster },
   { path: '/users', exact: true,  name: 'Users', component: Users },
-  { path: '/users/:id', exact: true, name: 'User Details', component: User }
+  { path: '/users/:id', exact: true, name: 'User Detail', component: User }
 ];
 
 export default routes;

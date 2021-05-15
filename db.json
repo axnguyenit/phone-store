@@ -1,0 +1,135 @@
+{
+    "users": [
+      {
+        "id": 1,
+        "fullname": "Nguyen Dinh Kha",
+        "email": "kha.nguyen22@student.passerellesnumeriques.org",
+        "password": "admin",
+        "phone": "0337965469",
+        "role": "admin",
+        "address": "Binh Dinh"
+      },
+      {
+        "id": 2,
+        "fullname": "Nguyen Dinh Kha",
+        "email": "vuong.thai22@student.passerellesnumeriques.org",
+        "password": "admin",
+        "phone": "0987654321",
+        "role": "admin",
+        "address": "Binh Dinh"
+      },
+      {
+        "id": 3,
+        "fullname": "Nguyen Thi Thanh Nga",
+        "email": "nga.nguyen22@student.passerellesnumeriques.org",
+        "password": "admin",
+        "phone": "0987654321",
+        "role": "admin",
+        "address": "Binh Dinh"
+      },
+      {
+        "id": 4,
+        "fullname": "Nguyen Thi Thuy",
+        "email": "thuy.nguyen22@student.passerellesnumeriques.org",
+        "password": "admin",
+        "phone": "0987654321",
+        "role": "admin",
+        "address": "Quang Binh"
+      },
+      {
+        "id": 5,
+        "fullname": "Yomost",
+        "email": "kha.nguyen01.it@gmail.com",
+        "password": "yma",
+        "phone": "0337965469",
+        "role": "user",
+        "address": "Binh Dinh"
+      }
+    ],
+    "products": [
+        {
+            "id": "",
+            "quantity": ""
+        },
+        {
+            "id": "",
+            "quantity": ""
+        },
+        {
+            "id": "",
+            "quantity": ""
+        },
+        {
+            "id": "",
+            "quantity": ""
+        },
+        {
+            "id": "",
+            "quantity": ""
+        },
+        {
+            "id": "",
+            "quantity": ""
+        },
+        {
+            "id": "",
+            "quantity": ""
+        },
+        {
+            "id": "",
+            "quantity": ""
+        },
+        {
+            "id": "",
+            "quantity": ""
+        },
+        {
+            "id": "",
+            "quantity": ""
+        },
+        {
+            "id": "",
+            "quantity": ""
+        },
+        {
+            "id": "",
+            "quantity": ""
+        },
+        {
+            "id": "",
+            "quantity": ""
+        },
+        {
+            "id": "",
+            "quantity": ""
+        },
+        {
+            "id": "",
+            "quantity": ""
+        },
+        {
+            "id": "",
+            "quantity": ""
+        }
+    ],
+    "orders": [
+        {
+            "id": 1,
+            "user_id": 5,
+            "total": 250,
+            "status": "pending",
+            "details": [
+                {
+                    "detail_id": 1,
+                    "prod_id": "prod_...",
+                    "quantity": 1
+                },
+                {
+                    "detail_id": 2,
+                    "prod_id": "prod_...",
+                    "quantity": 1
+                }
+            ]
+        }
+    ]
+}
