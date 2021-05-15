@@ -19,34 +19,55 @@ import {
   CModalBody,
   CModalFooter,
 } from '@coreui/react';
-import commerce from '../../lib/commerce';
+import axios from 'axios';
 
-import usersData from '../users/UsersData'
+const API_ORDERS_URL = `http://localhost:4000/api/orders`;
 
 const fields = [
-  'name',
   {
-    key: 'price',
-    _style: { width: '20%' }
+    key: 'user_id',
+    _style: { width: '25%' }
   },
   {
-    key: 'brand',
-    _style: { width: '20%' }
+    key: 'total',
+    _style: { width: '35%' }
   },
   {
-    key: 'quantity',
-    _style: { width: '10%' }
-},
-  {
-    key: 'show_details',
-    label: 'Action',
-    _style: { width: '15%' },
-    filter: false
+    key: 'status',
+    _style: { width: '15%' }
   }
+  // {
+  //   key: 'address',
+  //   _style: { width: '10%' }
+  // },
+  // {
+  //   key: 'role',
+  //   _style: { width: '10%' }
+  // },
+
+  // {
+  //   key: 'show_details',
+  //   label: 'Action',
+  //   _style: { width: '1%' },
+  //   filter: false
+  // }
 ]
 
 
 const Orders = () => {
+  const [orders, setOrders] = useState([]);
+
+  const fetchOrders = async() => {
+    axios.get(API_ORDERS_URL).then( res => {
+      console.log(res.data);
+      setOrders(res.data);
+    })
+  }
+
+  useEffect(() => {
+    fetchOrders();
+  }, []);
+
   const [products, setProducts] = useState([]);
   const [products2, setProducts2] = useState([]);
   const [isUpdate, setUpdate] = useState(false);
@@ -68,7 +89,7 @@ const Orders = () => {
               <CCardBody>
                   <CCard>
                     <CDataTable
-                      items={usersData}
+                      items={orders}
                       fields={fields}
                       columnFilter
                       itemsPerPage={7}
@@ -77,7 +98,6 @@ const Orders = () => {
                       scopedSlots = {{
                         'show_details':
                           (item, index)=>{
-                            console.log(index);
                             return (
                               <td className="py-2">
                                 <CButton

@@ -12,7 +12,7 @@ import { icons } from './assets/icons';
 import { Provider } from 'react-redux';
 import store from './store';
 
-React.icons = icons
+React.icons = icons;
 
 ReactDOM.render(
   <Provider store={store}>

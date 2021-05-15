@@ -12,8 +12,7 @@ import {
   CProgress,
   CRow,
   CCallout
-} from '@coreui/react'
-import usersData from '../users/UsersData'
+} from '@coreui/react';
 
 const getBadge = status => {
   switch (status) {
@@ -25,7 +24,7 @@ const getBadge = status => {
   }
 }
 
-const fields = ['name','registered', 'role', 'status']
+const fields = ['name','registered', 'role', 'status'];
 
 const WidgetsDropdown = lazy(() => import('../widgets/WidgetsDropdown.js'))
 
@@ -40,8 +39,8 @@ const Dashboard = () => {
               Combined All Table
             </CCardHeader>
             <CCardBody>
-            <CDataTable
-              items={usersData}
+            {/* <CDataTable
+              items
               fields={fields}
               hover
               striped
@@ -59,7 +58,7 @@ const Dashboard = () => {
                     </td>
                   )
               }}
-            />
+            /> */}
             </CCardBody>
           </CCard>
         </CCol>

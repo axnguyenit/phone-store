@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
 import {
   CRow,
   CBadge, 
@@ -19,38 +18,56 @@ import {
   CModalBody,
   CModalFooter,
 } from '@coreui/react';
-import commerce from '../../lib/commerce';
+import axios from 'axios';
 
-import usersData from '../users/UsersData'
+const API_USERS_URL = `http://localhost:4000/api/users`;
 
 const fields = [
-  'name',
   {
-    key: 'price',
-    _style: { width: '20%' }
+    key: 'name',
+    _style: { width: '25%' }
   },
   {
-    key: 'brand',
-    _style: { width: '20%' }
+    key: 'email',
+    _style: { width: '35%' }
   },
   {
-    key: 'quantity',
+    key: 'phone',
+    _style: { width: '15%' }
+  },
+  {
+    key: 'address',
     _style: { width: '10%' }
-},
+  },
+  {
+    key: 'role',
+    _style: { width: '10%' }
+  },
+
   {
     key: 'show_details',
     label: 'Action',
-    _style: { width: '15%' },
+    _style: { width: '1%' },
     filter: false
   }
 ]
 
 
 const Users = () => {
-  const [products, setProducts] = useState([]);
-  const [products2, setProducts2] = useState([]);
+  const [users, setUsers] = useState([]);
+
+  const fetchUsers = async() => {
+    axios.get(API_USERS_URL).then( res => {
+      console.log(res.data);
+      setUsers(res.data);
+    })
+  }
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
   const [isUpdate, setUpdate] = useState(false);
-  const [quantity, setQuantity] = useState(0);
 
   const handleUpdate = () => {
     setUpdate(!isUpdate);
@@ -58,7 +75,6 @@ const Users = () => {
 
   const handleUpdateOnChange = (e) => {
     console.log(e.target.value);
-    setQuantity(e.target.value);
   }
 
   return (
@@ -68,7 +84,7 @@ const Users = () => {
               <CCardBody>
                   <CCard>
                     <CDataTable
-                      items={usersData}
+                      items={users}
                       fields={fields}
                       columnFilter
                       itemsPerPage={6}
@@ -86,7 +102,7 @@ const Users = () => {
                                   size="sm"
                                   onClick={()=>{setUpdate(!isUpdate)}}
                                 >
-                                  Update Quantity
+                                  Edit
                                 </CButton>
                               </td>
                               )

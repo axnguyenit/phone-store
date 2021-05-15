@@ -21,8 +21,6 @@ import {
 } from '@coreui/react';
 import commerce from '../../lib/commerce';
 
-import usersData from '../users/UsersData'
-
 const fields = [
   'name',
   {
@@ -55,6 +53,7 @@ const Products = () => {
 
   const fetchProducts = async() => {
     const res = await commerce.products.list();
+    console.log(res.data);
     saveProducts(res.data);
     setProducts((res && res.data) || []);
   }
@@ -73,7 +72,6 @@ const Products = () => {
         }
         productList.push(productTemp);
         setProducts2(productList);
-        
       })
     }
   }

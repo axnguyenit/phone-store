@@ -1,6 +1,5 @@
 import React from 'react';
 const Toaster = React.lazy(() => import('./views/notifications/toaster/Toaster'));
-const Tables = React.lazy(() => import('./views/base/tables/Tables'));
 
 const Cards = React.lazy(() => import('./views/base/cards/Cards'));
 const Carousels = React.lazy(() => import('./views/base/carousels/Carousels'));
@@ -16,7 +15,6 @@ const Buttons = React.lazy(() => import('./views/buttons'));
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'));
 const Modals = React.lazy(() => import('./views/notifications/modals/Modals'));
 const Users = React.lazy(() => import('./views/users/Users'));
-const User = React.lazy(() => import('./views/users/User'));
 const Orders = React.lazy(() => import('./views/orders/orders'));
 const Products = React.lazy(() => import('./views/products/products'));
 
@@ -35,7 +33,6 @@ const routes = [
   { path: '/base/forms', name: 'Forms', component: BasicForms },
   { path: '/base/list-groups', name: 'List Groups', component: ListGroups },
   { path: '/base/switches', name: 'Switches', component: Switches },
-  { path: '/base/tables', name: 'Tables', component: Tables },
   { path: '/base/tabs', name: 'Tabs', component: Tabs },
   { path: '/base/tooltips', name: 'Tooltips', component: Tooltips },
   { path: '/buttons', name: 'Buttons', component: Buttons },
@@ -43,7 +40,6 @@ const routes = [
   { path: '/notifications/modals', name: 'Modals', component: Modals },
   { path: '/notifications/toaster', name: 'Toaster', component: Toaster },
   { path: '/users', exact: true,  name: 'Users', component: Users },
-  { path: '/users/:id', exact: true, name: 'User Detail', component: User }
 ];
 
 export default routes;
