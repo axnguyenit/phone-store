@@ -25,7 +25,6 @@ const routes = [
   { path: '/orders', name: 'Orders', component: Orders },
   // { path: '/orders/:id', name: 'Orders', component: Order },
   { path: '/products', name: 'Products', component: Products },
-  // { path: '/products/:id', name: 'Products', component: Product },
   { path: '/base', name: 'Base', component: Cards, exact: true },
   { path: '/base/cards', name: 'Cards', component: Cards },
   { path: '/base/carousels', name: 'Carousel', component: Carousels },

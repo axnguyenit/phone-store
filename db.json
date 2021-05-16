@@ -1,217 +1,217 @@
 {
-    "users": [
-      {
-        "id": 1,
-        "name": "Nguyen Dinh Kha",
-        "email": "kha.nguyen22@student.passerellesnumeriques.org",
-        "password": "admin",
-        "phone": "0337965469",
-        "role": "admin",
-        "address": "Binh Dinh"
-      },
-      {
-        "id": 2,
-        "name": "Thai Tran Hung Vuong",
-        "email": "vuong.thai22@student.passerellesnumeriques.org",
-        "password": "admin",
-        "phone": "0987654321",
-        "role": "admin",
-        "address": "Binh Dinh"
-      },
-      {
-        "id": 3,
-        "name": "Nguyen Thi Thanh Nga",
-        "email": "nga.nguyen22@student.passerellesnumeriques.org",
-        "password": "admin",
-        "phone": "0987654321",
-        "role": "admin",
-        "address": "Binh Dinh"
-      },
-      {
-        "id": 4,
-        "name": "Nguyen Thi Thuy",
-        "email": "thuy.nguyen22@student.passerellesnumeriques.org",
-        "password": "admin",
-        "phone": "0987654321",
-        "role": "admin",
-        "address": "Quang Binh"
-      },
-      {
-        "id": 5,
-        "name": "Ha Mong Khang",
-        "email": "khang.ha22@student.passerellesnumeriques.org",
-        "password": "2001",
-        "phone": "0987654321",
-        "role": "user",
-        "address": "Binh Dinh"
-      },
-      {
-        "id": 6,
-        "name": "Nguyen Hong Quan",
-        "email": "quan.nguyen22@student.passerellesnumeriques.org",
-        "password": "2703",
-        "phone": "0987288954",
-        "role": "user",
-        "address": "Quang Tri"
-      },
-      {
-        "id": 7,
-        "name": "Tran Van Phat",
-        "email": "phat.tran22@student.passerellesnumeriques.org",
-        "password": "123",
-        "phone": "0987645651",
-        "role": "user",
-        "address": "Quang Tri"
-      },
-      {
-        "id": 8,
-        "name": "Gia Cao Bang",
-        "email": "bang.gia22@student.passerellesnumeriques.org",
-        "password": "123",
-        "phone": "0987654321",
-        "role": "user",
-        "address": "Quang Binh"
-      },
-      {
-        "id": 9,
-        "name": "Nguyen Dinh Long",
-        "email": "long.nguyen22@student.passerellesnumeriques.org",
-        "password": "123",
-        "phone": "0987654321",
-        "role": "user",
-        "address": "Quang Binh"
-      },
-      {
-        "id": 10,
-        "name": "Nguyen Van Sy",
-        "email": "sy.nguyen22@student.passerellesnumeriques.org",
-        "password": "123",
-        "phone": "0987654321",
-        "role": "user",
-        "address": "Quang Binh"
-      },
-      {
-        "id": 11,
-        "name": "Nguyen Doan Ngoc Hau",
-        "email": "hau.nguyen22@student.passerellesnumeriques.org",
-        "password": "123",
-        "phone": "0987654321",
-        "role": "user",
-        "address": "Quang Tri"
-      },
-      {
-        "id": 12,
-        "name": "Tran Thi Xanh",
-        "email": "xanh.tran22@student.passerellesnumeriques.org",
-        "password": "2004",
-        "phone": "0987895252",
-        "role": "user",
-        "address": "Binh Dinh"
-      },
-      {
-        "id": 13,
-        "name": "Nguyen Thi Thang",
-        "email": "thang.nguyen22@student.passerellesnumeriques.org",
-        "password": "123",
-        "phone": "0987654321",
-        "role": "user",
-        "address": "Quang Binh"
-      },
-      {
-        "id": 14,
-        "name": "Nguyen Hoang Huan",
-        "email": "huan.nguyen22@student.passerellesnumeriques.org",
-        "password": "123",
-        "phone": "0987654321",
-        "role": "user",
-        "address": "Quang Nam"
-      },
-      {
-        "id": 15,
-        "name": "Yomost",
-        "email": "kha.nguyen01.it@gmail.com",
-        "password": "yma",
-        "phone": "0337965469",
-        "role": "user",
-        "address": "Binh Dinh"
-      }
-    ],
-    "products": [
+  "users": [
+    {
+      "id": 1,
+      "name": "Nguyen Dinh Kha ",
+      "email": "kha.nguyen22@student.passerellesnumeriques.org",
+      "password": "admin",
+      "phone": "0337965469",
+      "role": "admin",
+      "address": "Binh Dinh"
+    },
+    {
+      "id": 2,
+      "name": "Thai Tran Hung Vuong",
+      "email": "vuong.thai22@student.passerellesnumeriques.org",
+      "password": "admin",
+      "phone": "0987654321",
+      "role": "admin",
+      "address": "Binh Dinh"
+    },
+    {
+      "id": 3,
+      "name": "Nguyen Thi Thanh Nga",
+      "email": "nga.nguyen22@student.passerellesnumeriques.org",
+      "password": "admin",
+      "phone": "0987654321",
+      "role": "admin",
+      "address": "Binh Dinh"
+    },
+    {
+      "id": 4,
+      "name": "Nguyen Thi Thuy",
+      "email": "thuy.nguyen22@student.passerellesnumeriques.org",
+      "password": "admin",
+      "phone": "0987654321",
+      "role": "admin",
+      "address": "Quang Binh"
+    },
+    {
+      "id": 5,
+      "name": "Ha Mong Khang",
+      "email": "khang.ha22@student.passerellesnumeriques.org",
+      "password": "2001",
+      "phone": "0987654321",
+      "role": "user",
+      "address": "Binh Dinh"
+    },
+    {
+      "id": 6,
+      "name": "Nguyen Hong Quan",
+      "email": "quan.nguyen22@student.passerellesnumeriques.org",
+      "password": "2703",
+      "phone": "0987288954",
+      "role": "user",
+      "address": "Quang Tri"
+    },
+    {
+      "id": 7,
+      "name": "Tran Van Phat",
+      "email": "phat.tran22@student.passerellesnumeriques.org",
+      "password": "123",
+      "phone": "0987645651",
+      "role": "user",
+      "address": "Quang Tri"
+    },
+    {
+      "id": 8,
+      "name": "Gia Cao Bang",
+      "email": "bang.gia22@student.passerellesnumeriques.org",
+      "password": "123",
+      "phone": "0987654321",
+      "role": "user",
+      "address": "Quang Binh"
+    },
+    {
+      "id": 9,
+      "name": "Nguyen Dinh Long",
+      "email": "long.nguyen22@student.passerellesnumeriques.org",
+      "password": "123",
+      "phone": "0987654321",
+      "role": "user",
+      "address": "Quang Binh"
+    },
+    {
+      "id": 10,
+      "name": "Nguyen Van Sy",
+      "email": "sy.nguyen22@student.passerellesnumeriques.org",
+      "password": "123",
+      "phone": "0987654321",
+      "role": "user",
+      "address": "Quang Binh"
+    },
+    {
+      "id": 11,
+      "name": "Nguyen Doan Ngoc Hau",
+      "email": "hau.nguyen22@student.passerellesnumeriques.org",
+      "password": "123",
+      "phone": "0987654321",
+      "role": "user",
+      "address": "Quang Tri"
+    },
+    {
+      "id": 12,
+      "name": "Tran Thi Xanh",
+      "email": "xanh.tran22@student.passerellesnumeriques.org",
+      "password": "2004",
+      "phone": "0987895252",
+      "role": "user",
+      "address": "Binh Dinh"
+    },
+    {
+      "id": 13,
+      "name": "Nguyen Thi Thang",
+      "email": "thang.nguyen22@student.passerellesnumeriques.org",
+      "password": "123",
+      "phone": "0987654321",
+      "role": "user",
+      "address": "Quang Binh"
+    },
+    {
+      "id": 14,
+      "name": "Nguyen Hoang Huan",
+      "email": "huan.nguyen22@student.passerellesnumeriques.org",
+      "password": "123",
+      "phone": "0987654321",
+      "role": "user",
+      "address": "Quang Nam"
+    },
+    {
+      "id": 15,
+      "name": "Yomost",
+      "email": "kha.nguyen01.it@gmail.com",
+      "password": "yma",
+      "phone": "0337965469",
+      "role": "user",
+      "address": "Binh Dinh"
+    }
+  ],
+  "products": [
+    {
+      "id": "prod_kd6Ll28YEoV2mj",
+      "quantity": "204"
+    },
+    {
+      "id": "prod_4OANwRpDY5vYL8",
+      "quantity": "204"
+    },
+    {
+      "id": "prod_yA6nldj93oEWbz",
+      "quantity": "204"
+    },
+    {
+      "id": "prod_gnZO5kNOvo7MNq",
+      "quantity": "199"
+    },
+    {
+      "id": "prod_Op1YoVKNy5XLv9",
+      "quantity": "204"
+    },
+    {
+      "id": "prod_zkK6oLYZG5Xn0Q",
+      "quantity": "199"
+    },
+    {
+      "id": "prod_DWy4oGn9zw6Jx2",
+      "quantity": "204"
+    },
+    {
+      "id": "prod_bWZ3l8PA8lkpEQ",
+      "quantity": "199"
+    },
+    {
+      "id": "prod_QG375v68Q5rMOg",
+      "quantity": "204"
+    },
+    {
+      "id": "prod_0egY5eZXpl3QnA",
+      "quantity": "199"
+    },
+    {
+      "id": "prod_8XxzoBdeglPQAZ",
+      "quantity": "204"
+    },
+    {
+      "id": "prod_VKXmwDNBX5rgDA",
+      "quantity": "199"
+    },
+    {
+      "id": "prod_LvJjoP0Npoe0nO",
+      "quantity": "204"
+    },
+    {
+      "id": "prod_eN1ql99pplz3ym",
+      "quantity": "199"
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "user_id": 15,
+      "total": 840,
+      "status": "pending",
+      "details": [
         {
-            "id": "prod_kd6Ll28YEoV2mj",
-            "quantity": "204"
+          "detail_id": 1,
+          "prod_id": "prod_kd6Ll28YEoV2mj",
+          "quantity": 1
         },
         {
-            "id": "prod_4OANwRpDY5vYL8",
-            "quantity": "199"
-        },
-        {
-            "id": "prod_yA6nldj93oEWbz",
-            "quantity": "204"
-        },
-        {
-            "id": "prod_gnZO5kNOvo7MNq",
-            "quantity": "199"
-        },
-        {
-            "id": "prod_Op1YoVKNy5XLv9",
-            "quantity": "204"
-        },
-        {
-            "id": "prod_zkK6oLYZG5Xn0Q",
-            "quantity": "199"
-        },
-        {
-            "id": "prod_DWy4oGn9zw6Jx2",
-            "quantity": "204"
-        },
-        {
-            "id": "prod_bWZ3l8PA8lkpEQ",
-            "quantity": "199"
-        },
-        {
-            "id": "prod_QG375v68Q5rMOg",
-            "quantity": "204"
-        },
-        {
-            "id": "prod_0egY5eZXpl3QnA",
-            "quantity": "199"
-        },
-        {
-            "id": "prod_8XxzoBdeglPQAZ",
-            "quantity": "204"
-        },
-        {
-            "id": "prod_VKXmwDNBX5rgDA",
-            "quantity": "199"
-        },
-        {
-            "id": "prod_LvJjoP0Npoe0nO",
-            "quantity": "204"
-        },
-        {
-            "id": "prod_eN1ql99pplz3ym",
-            "quantity": "199"
+          "detail_id": 2,
+          "prod_id": "prod_eN1ql99pplz3ym",
+          "quantity": 1
         }
-    ],
-    "orders": [
-        {
-            "id": 1,
-            "user_id": 15,
-            "total": 840,
-            "status": "pending",
-            "details": [
-                {
-                    "detail_id": 1,
-                    "prod_id": "prod_kd6Ll28YEoV2mj",
-                    "quantity": 1
-                },
-                {
-                    "detail_id": 2,
-                    "prod_id": "prod_eN1ql99pplz3ym",
-                    "quantity": 1
-                }
-            ]
-        }
-    ]
+      ]
+    }
+  ]
 }

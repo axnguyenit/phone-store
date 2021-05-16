@@ -17,9 +17,11 @@ import {
   CModalTitle,
   CModalBody,
   CModalFooter,
+  CSelect
 } from '@coreui/react';
 import axios from 'axios';
 
+// API URL
 const API_USERS_URL = `http://localhost:4000/api/users`;
 
 const fields = [
@@ -52,29 +54,110 @@ const fields = [
   }
 ]
 
-
 const Users = () => {
   const [users, setUsers] = useState([]);
+  const [user, setUser] = useState({});
+  const [isUpdate, setUpdate] = useState(false);
+  const [name, setName] = useState();
+  const [address, setAddress] = useState();
+  const [email, setEmail] = useState();
+  const [phone, setPhone] = useState();
+  const [password, setPassword] = useState();
+  const [role, setRole] = useState();
+  const [validEmail, setValidEmail] = useState(false);
+  const [validPhone, setValidPhone] = useState(false);
 
+  // Function fetch users from JSon Server
   const fetchUsers = async() => {
     axios.get(API_USERS_URL).then( res => {
-      console.log(res.data);
       setUsers(res.data);
     })
+  }
+
+  // Function update user info
+  const updateUser = () => {
+    if(name || address || email || phone || password || role) {
+      let nameTerm = '';
+      let addressTerm = '';
+      let emailTerm = '';
+      let phoneTerm = '';
+      let passwordTerm = '';
+      let roleTerm = '';
+      if(name) {
+        nameTerm = name;
+      } else {
+        nameTerm = user.name;
+      }
+
+      if(address) {
+        addressTerm = address;
+      } else {
+        addressTerm = user.address;
+      }
+
+      if(email) {
+        emailTerm = email;
+      } else {
+        emailTerm = user.email;
+      }
+
+      if(phone) {
+        phoneTerm = phone;
+      } else {
+        phoneTerm = user.phone;
+      }
+
+      if(password) {
+        passwordTerm = password;
+      } else {
+        passwordTerm = user.password;
+      }
+
+      if(role) {
+        roleTerm = role;
+      } else {
+        roleTerm = user.role;
+      }
+
+      const userTerm = {
+        id: user.id,
+        name: nameTerm,
+        email: emailTerm,
+        password: passwordTerm,
+        phone: phoneTerm,
+        role: roleTerm,
+        address: addressTerm,
+      }
+
+      axios.put(API_USERS_URL + "/" + user.id, userTerm).then( res => {
+        let usersTerm = users;
+        let index = usersTerm.indexOf(user);
+        usersTerm[index] = userTerm;
+        setUsers(usersTerm);
+      })
+    }
+    setUser({});
+    setUpdate(!isUpdate);
+  }
+
+  const cancelUpdate = () => {
+    setUser({});
+    setName("");
+    setAddress("");
+    setEmail("");
+    setPhone("");
+    setPassword("");
+    setRole("");
+    setUpdate(!isUpdate);
   }
 
   useEffect(() => {
     fetchUsers();
   }, []);
 
-  const [isUpdate, setUpdate] = useState(false);
-
-  const handleUpdate = () => {
+  const handleUpdate = (userTerm) => {
+    setUser(userTerm);
     setUpdate(!isUpdate);
-  }
-
-  const handleUpdateOnChange = (e) => {
-    console.log(e.target.value);
   }
 
   return (
@@ -92,15 +175,14 @@ const Users = () => {
                       pagination
                       scopedSlots = {{
                         'show_details':
-                          (item, index)=>{
-                            console.log(index);
+                          (userTerm, index)=>{
                             return (
                               <td className="py-2">
                                 <CButton
                                   color="primary"
                                   shape="square"
                                   size="sm"
-                                  onClick={()=>{setUpdate(!isUpdate)}}
+                                  onClick={() => handleUpdate(userTerm)}
                                 >
                                   Edit
                                 </CButton>
@@ -120,12 +202,55 @@ const Users = () => {
                 <CModalTitle>Modal title</CModalTitle>
               </CModalHeader>
               <CModalBody>
-                <CLabel>Quantity</CLabel>
-                <CInput size="sm" onChange={handleUpdateOnChange}/>
+                <CRow>
+                  <CCol xs="6">
+                    <CFormGroup>
+                      <CLabel htmlFor="name">Name</CLabel>
+                      <CInput name="name" placeholder="Fullname" defaultValue={user.name} onChange={(e) => {setName(e.target.value)}} required />
+                    </CFormGroup>
+                  </CCol>
+                  <CCol xs="6">
+                    <CFormGroup>
+                      <CLabel htmlFor="name">Address</CLabel>
+                      <CInput name="address" placeholder="Address" defaultValue={user.address} onChange={(e) => {setAddress(e.target.value)}} required />
+                    </CFormGroup>
+                  </CCol>
+                </CRow>
+                <CRow>
+                  <CCol xs="12">
+                    <CFormGroup>
+                      <CLabel htmlFor="ccnumber">Email</CLabel>
+                      <CInput name="email" type="email" placeholder="Email address" defaultValue={user.email} onChange={(e) => {setEmail(e.target.value)}} required />
+                    </CFormGroup>
+                  </CCol>
+                </CRow>
+                <CRow>
+                  <CCol xs="4">
+                    <CFormGroup>
+                      <CLabel htmlFor="cvv">Phone</CLabel>
+                      <CInput name="phone" placeholder="phone" defaultValue={user.phone} onChange={(e) => {setPhone(e.target.value)}} required/>
+                    </CFormGroup>
+                  </CCol>
+                  <CCol xs="4">
+                    <CFormGroup>
+                      <CLabel htmlFor="cvv">Password</CLabel>
+                      <CInput name="password" type="password" defaultValue={user.password} placeholder="Password" onChange={(e) => {setPassword(e.target.value)}} required/>
+                    </CFormGroup>
+                  </CCol>
+                  <CCol xs="4">
+                    <CFormGroup>
+                      <CLabel htmlFor="ccmonth">Role</CLabel>
+                      <CSelect custom name="ccmonth" name="ccmonth" onChange={(e) => {setRole(e.target.value)}}>
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                      </CSelect>
+                    </CFormGroup>
+                  </CCol>
+                </CRow>
               </CModalBody>
               <CModalFooter>
-                <CButton color="success" onClick={() => {handleUpdate()}}>Update</CButton>
-                <CButton color="danger" onClick={() => setUpdate(!isUpdate)}>Cancel</CButton>
+                <CButton color="success" onClick={() => updateUser()}>Update</CButton>
+                <CButton color="danger" onClick={() => cancelUpdate()}>Cancel</CButton>
               </CModalFooter>
             </CModal>
           </CCard>

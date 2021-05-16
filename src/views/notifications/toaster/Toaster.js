@@ -21,15 +21,7 @@ import {
 const Toaster = () => {
 
   const positions = [
-    'static',
-    'top-left',
-    'top-center',
-    'top-right',
-    'top-full',
     'bottom-left',
-    'bottom-center',
-    'bottom-right',
-    'bottom-full'
   ]
 
   const [toasts, setToasts] = useState([
@@ -38,16 +30,14 @@ const Toaster = () => {
     { position: 'top-right', autohide: 3000 }
   ])
 
-  const [position, setPosition] = useState('top-right')
+  // const [position, setPosition] = useState('bottom-left')
   const [autohide, setAutohide] = useState(true)
   const [autohideValue, setAutohideValue] = useState(5000)
-  const [closeButton, setCloseButton] = useState(true)
-  const [fade, setFade] = useState(true)
 
   const addToast = () => {
     setToasts([
       ...toasts, 
-      { position, autohide: autohide && autohideValue, closeButton, fade }
+      { position: "bottom-left", autohide: true && 5000, closeButton: true, fade: true }
     ])
   }
 
@@ -73,7 +63,7 @@ const Toaster = () => {
               <CForm>
                 <h5>Add toast with following props:</h5>
 
-                <CFormGroup variant="custom-checkbox" className="my-2 mt-4">
+                {/* <CFormGroup variant="custom-checkbox" className="my-2 mt-4">
                   <CInputCheckbox
                     id="autohide"
                     checked={autohide}
@@ -83,7 +73,7 @@ const Toaster = () => {
                   <CLabel variant="custom-checkbox" htmlFor="autohide">
                     Autohide of the toast
                   </CLabel>
-                </CFormGroup>
+                </CFormGroup> */}
                 {
                   autohide &&
                   <CFormGroup className="my-2">
@@ -98,43 +88,6 @@ const Toaster = () => {
                   </CFormGroup>
                 }
 
-                <CFormGroup className="my-2">
-                  <CLabel htmlFor="ccyear">Position</CLabel>
-                  <select
-                    className="form-control"
-                    value={position}
-                    onChange={e => {setPosition(e.target.value)}}
-                  >
-                    {
-                      positions.map((position, i)=>(
-                        <option key={i}>{position}</option>
-                      ))
-                    }
-                  </select>
-                </CFormGroup>
-
-                <CFormGroup variant="custom-checkbox" className="my-2">
-                  <CInputCheckbox
-                    id="fade"
-                    checked={fade}
-                    onChange={e => { setFade(e.target.checked) }}
-                    custom
-                  />
-                  <CLabel variant="custom-checkbox" htmlFor="fade">fade</CLabel>
-                </CFormGroup>
-
-                <CFormGroup variant="custom-checkbox" className="my-2">
-                  <CInputCheckbox
-                    id="close"
-                    custom
-                    checked={closeButton}
-                    onChange={e=> { setCloseButton(e.target.checked) }}
-                  />
-                  <CLabel variant="custom-checkbox" htmlFor="close">
-                    closeButton
-                  </CLabel>
-                </CFormGroup>
-
                 <CButton
                   className="mr-1 w-25"
                   color="success"
@@ -148,23 +101,25 @@ const Toaster = () => {
             <CCol sm="12" lg="6">
               {Object.keys(toasters).map((toasterKey) => (
                 <CToaster
-                  position={toasterKey}
-                  key={'toaster' + toasterKey}
+                position={toasterKey}
+                key={'toaster' + toasterKey}
                 >
                   {
                     toasters[toasterKey].map((toast, key)=>{
+                      console.log(toasterKey);
+                      // console.log(toast.fade);
                     return(
                       <CToast
                         key={'toast' + key}
                         show={true}
-                        autohide={toast.autohide}
-                        fade={toast.fade}
+                        autohide={5000}
+                        fade={true}
                       >
-                        <CToastHeader closeButton={toast.closeButton}>
+                        <CToastHeader closeButton={true}>
                           Toast title
                         </CToastHeader>
                         <CToastBody>
-                          {`This is a toast in ${toasterKey} positioned toaster number ${key + 1}.`}
+                          {`This is a toast in message positioned toaster number Kha.`}
                         </CToastBody>
                       </CToast>
                     )
