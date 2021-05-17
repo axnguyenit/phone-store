@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../js/slider';
 
  const Banner = () => {
     return (

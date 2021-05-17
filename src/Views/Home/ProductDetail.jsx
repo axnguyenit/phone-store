@@ -1,13 +1,15 @@
 
+import React from 'react';
 import CustomCard from "../../components/CustomCard";
 import { Facility } from "../../components/Facility";
 import { Footer } from "../../components/Footer";
-import NavBar from "../../components/Header/NavBar";
+// import NavBar from "../../components/Header/NavBar";
 import { Products } from "../../components/Products";
 import { ProDetail } from "../../components/Products/ProDetail";
 import { RelatedProduct } from "../../components/Products/RelatedProduct";
 import commerce from '../../lib/commerce';
 import { useState, useEffect } from "react";
+const NavBar = React.lazy(() => import ('../../components/Header/NavBar'));
 
 function ProductDetail(props) {
   const [products, setProducts] = useState([]);

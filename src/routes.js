@@ -1,44 +1,28 @@
 import React from 'react';
-const Toaster = React.lazy(() => import('./views/notifications/toaster/Toaster'));
 
-const Cards = React.lazy(() => import('./views/base/cards/Cards'));
-const Carousels = React.lazy(() => import('./views/base/carousels/Carousels'));
-const Collapses = React.lazy(() => import('./views/base/collapses/Collapses'));
-const BasicForms = React.lazy(() => import('./views/base/forms/BasicForms'));
-
-const ListGroups = React.lazy(() => import('./views/base/list-groups/ListGroups'));
-const Switches = React.lazy(() => import('./views/base/switches/Switches'));
-
-const Tabs = React.lazy(() => import('./views/base/tabs/Tabs'));
-const Tooltips = React.lazy(() => import('./views/base/tooltips/Tooltips'));
-const Buttons = React.lazy(() => import('./views/buttons'));
-const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'));
-const Modals = React.lazy(() => import('./views/notifications/modals/Modals'));
-const Users = React.lazy(() => import('./views/users/Users'));
-const Orders = React.lazy(() => import('./views/orders/orders'));
-const Products = React.lazy(() => import('./views/products/products'));
+const SignIn = React.lazy(() => import('./components/Account/signIn'));
+const SignUp = React.lazy(() => import('./components/Account/signUp'));
+const ResetPassword = React.lazy(() => import('./components/Account/resetPassword'));
+const Home = React.lazy(() => import('./Views/Home'));
+const ProductDetail = React.lazy(() => import('./Views/Home/ProductDetail'));
+const ForgotPassword = React.lazy(() => import('./components/Account/forgotPassword'));
+const ErrorPage = React.lazy(() => import('./components/Account/404'));
+const Checkout = React.lazy(() => import('./components/Checkout'));
+const Basket = React.lazy(() => import('./Views/Home/Basket'));
+const ViewProfile = React.lazy(() => import('./Views/Home/ViewProfile'));
 
 const routes = [
-  { path: '/', exact: true, name: 'Home' },
-  { path: '/dashboard', name: 'Dashboard', component: Dashboard },
-  { path: '/theme', name: 'Theme', component: Orders, exact: true },
-  { path: '/orders', name: 'Orders', component: Orders },
-  // { path: '/orders/:id', name: 'Orders', component: Order },
-  { path: '/products', name: 'Products', component: Products },
-  { path: '/base', name: 'Base', component: Cards, exact: true },
-  { path: '/base/cards', name: 'Cards', component: Cards },
-  { path: '/base/carousels', name: 'Carousel', component: Carousels },
-  { path: '/base/collapses', name: 'Collapse', component: Collapses },
-  { path: '/base/forms', name: 'Forms', component: BasicForms },
-  { path: '/base/list-groups', name: 'List Groups', component: ListGroups },
-  { path: '/base/switches', name: 'Switches', component: Switches },
-  { path: '/base/tabs', name: 'Tabs', component: Tabs },
-  { path: '/base/tooltips', name: 'Tooltips', component: Tooltips },
-  { path: '/buttons', name: 'Buttons', component: Buttons },
-  { path: '/notifications', name: 'Notifications', component: Modals, exact: true },
-  { path: '/notifications/modals', name: 'Modals', component: Modals },
-  { path: '/notifications/toaster', name: 'Toaster', component: Toaster },
-  { path: '/users', exact: true,  name: 'Users', component: Users },
+  { path: '/', exact: true, component: Home},
+  { path: '/sign-in', exact: true, component: SignIn },
+  { path: '/sign-up', exact: true, component: SignUp },
+  { path: '/reset-password', exact: true, component: ResetPassword },
+  { path: '/forgot-password', exact: true, component: ForgotPassword },
+  { path: '/profile',  exact: true, component: ViewProfile },
+  { path: '/detail/:id/:slug', exact: true, component: ProductDetail },
+  { path: '/basket', exact: true, component: Basket },
+  { path: '/checkout', exact: true, component: Checkout },
+  { path: '', exact: true, component: ErrorPage },
+  
 ];
 
 export default routes;

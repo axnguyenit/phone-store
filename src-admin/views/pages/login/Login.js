@@ -20,17 +20,12 @@ import CIcon from '@coreui/icons-react';
 // API URL
 const API_USERS_URL = `http://localhost:4000/api/users`;
 
-function CheckLogin () {
-  console.log("log in");
-    // const history = useHistory();
-    localStorage.setItem('accessToken', true);
-    // history.replace('/dashboard');
-}
-
-const Login = () => {
+const Login = (props) => {
   const [users, setUsers] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const history = useHistory();
+
 
   // Function fetch users from JSon Server
   const fetchUsers = async() => {
@@ -44,13 +39,12 @@ const Login = () => {
   }, []);
 
   const login = () => {
-    console.log(users);
     const user = users.find( user => user.email === email 
                                   && user.password === password
-                                  && user.role === 'admin');
-                                  console.log(user);
+                                  && user.role === 'admin');  
     if(user) {
-      CheckLogin();
+      localStorage.setItem('accessToken', true);
+      history.replace('/dashboard');
     }
   }
 

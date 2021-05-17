@@ -127,13 +127,11 @@ const _nav =  [
     ],
   },
   {
-    _tag: 'CSidebarNavDivider',
-    className: 'm-2'
+    _tag: 'CSidebarNavItem',
+    name: 'Log out',
+    to: '/logout',
+    icon: 'cil-account-logout',
   },
-  {
-    _tag: 'CSidebarNavDivider',
-    className: 'm-2'
-  }
 ]
 
 export default _nav;
