@@ -69,7 +69,7 @@ const Payment = ({
                 <Button
                   variant="contained"
                   color="primary"
-                  onClick={(e) => handleBackStep(e, "order-details")}
+                  onClick={(e) => handleBackStep(e, "Details")}
                 >
                   Back
                 </Button>

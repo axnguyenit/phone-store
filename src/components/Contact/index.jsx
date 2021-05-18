@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Contact = () => {
+const Contact = () => {
     return (
         <>
             <section className="section newsletter" id="contact">
@@ -20,3 +20,5 @@ export const Contact = () => {
         </>
     )
 }
+
+export default Contact;
