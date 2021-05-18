@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Contact from "../../components/Contact";
-import { Header } from "../../components/Header";
+import Header from "../../components/Header";
 import { Products } from "../../components/Products";
 import commerce from '../../lib/commerce';
 
@@ -17,12 +17,12 @@ function Home() {
   }
 
   const saveProducts = (data) => {
-    localStorage.setItem('products', JSON.stringify(data));
+    localStorage.setItem('products', JSON.stringify(products));
   }
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  });
 
   return (
     <>

@@ -11,7 +11,7 @@ const CartBody = ({item}) => {
                     arr.splice(index, 1);
                     localStorage.setItem('basket', JSON.stringify(arr));
                 }
-            }) 
+            })
         }
     }
 
@@ -19,43 +19,27 @@ const CartBody = ({item}) => {
         <>
             <tr>
                 <td className="product__thumbnail">
-                    <a href="#">
                     <img src={item.media.source} alt="" />
+                </td>
+                <td className="product__content">
+                    <span >{item.name}</span>
+                </td>
+                <td className="product__content">
+                    <span >{item.price.formatted_with_symbol}</span>
+                </td>
+                <td className="product__content">
+                    <a className="minus-btn">
+                        <i class="fas fa-minus"></i>
+                    </a>
+                    <input type="text" min={1} defaultValue={1} max={10} className="counter-btn" />
+                    <a className="plus-btn">
+                        <i class="fas fa-plus"></i>
                     </a>
                 </td>
-                <td className="product__name">
-                    <a href="#">{item.name}</a>
-                </td>
-                <td className="product__price">
-                    <div className="price">
-                    <span className="new__price">{item.price.formatted_with_symbol}</span>
-                    </div>
-                </td>
-                <td className="product__quantity">
-                    <div className="input-counter">
-                    <div>
-                        <span className="minus-btn">
-                        <svg>
-                            <use xlinkHref="./images/sprite.svg#icon-minus" />
-                        </svg>
-                        </span>
-                        <input type="text" min={1} defaultValue={1} max={10} className="counter-btn" />
-                        <span className="plus-btn">
-                        <svg>
-                            <use xlinkHref="./images/sprite.svg#icon-plus" />
-                        </svg>
-                        </span>
-                    </div>
-                    </div>
-                </td>
-                <td className="product__subtotal">
-                    <div className="price">
-                    <span className="new__price">{item.price.formatted_with_symbol}</span>
-                    </div>
+                <td className="product__content">
+                    <span>{item.price.formatted_with_symbol}</span>
                     <a href="#" className="remove__cart-item" onClick={ () => removeItem(item.id) }>
-                    <svg>
-                        <use xlinkHref="./images/sprite.svg#icon-trash" />
-                    </svg>
+                        <i class="fas fa-trash-alt"></i>
                     </a>
                 </td>
             </tr>

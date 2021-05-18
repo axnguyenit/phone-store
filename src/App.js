@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import commerce from './lib/commerce';
 
 const SignIn = React.lazy(() => import('./components/Account/signIn'));
 const SignUp = React.lazy(() => import('./components/Account/signUp'));

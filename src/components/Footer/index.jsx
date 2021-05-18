@@ -31,35 +31,28 @@ const Footer = () => {
                         <a href="#">Returns</a>
                         </div>
                         <div className="footer-top__box">
-                        <h3>CONTACT US</h3>
-                        <div>
-                            <span>
-                            <svg>
-                                <use xlinkHref="./images/sprite.svg#icon-location" />
-                            </svg>
-                            </span> Son Tra, Da Nang, Vietnam
-                        </div>
-                        <div>
-                            <span>
-                            <svg>
-                                <use xlinkHref="./images/sprite.svg#icon-envelop" />
-                            </svg>
-                            </span> kha.nguyen01.it@gmail.com
-                        </div>
-                        <div>
-                            <span>
-                            <svg>
-                                <use xlinkHref="./images/sprite.svg#icon-phone" />
-                            </svg>
-                            </span> (+84) 337 965 469
-                        </div>
-                        <div>
-                            <span>
-                            <svg>
-                                <use xlinkHref="./images/sprite.svg#icon-paperplane" />
-                            </svg>
-                            </span> Da Nang City, Vietnam
-                        </div>
+                            <h3>CONTACT US</h3>
+                            <div>
+                                <span>
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </span> Son Tra, Da Nang, Vietnam
+                            </div>
+                            <div>
+                                <span>
+                                    <i class="fas fa-envelope"></i>
+                                </span> kha.nguyen01.it@gmail.com
+                            </div>
+                            <div>
+                                <span>
+                                    <i class="fas fa-phone"></i>
+                                </span> (+84) 337 965 469
+                            </div>
+                            <div>
+                                <span>
+                                    <i class="fab fa-github"></i>
+                                </span> 
+                                    <a href="https://github.com/khanguyen01it">khanguyen01it</a>
+                            </div>
                         </div>
                     </div>
                     </div>
@@ -70,12 +63,6 @@ const Footer = () => {
                     </div>
                 </div>
             </footer>
-
-            <a href="#header" className="goto-top scroll-link">
-                <svg>
-                    <use xlinkHref="./images/sprite.svg#icon-arrow-up" />
-                </svg>
-            </a>
         </>
     )
 }

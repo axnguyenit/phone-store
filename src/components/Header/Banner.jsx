@@ -22,7 +22,8 @@ import React from 'react';
                             </div>
                             </div>
                         </li>
-                        <li className="glide__slide">
+                        </ul>
+                        {/* <li className="glide__slide">
                             <div className="hero__center">
                             <div className="hero__left">
                                 <span>New Inspiration 2021</span>
@@ -35,7 +36,7 @@ import React from 'react';
                             </div>
                             </div>
                         </li>
-                        </ul>
+                        </ul> */}
                     </div>
                     {/* <div className="glide__bullets" data-glide-el="controls[nav]">
                         <button className="glide__bullet" data-glide-dir="=0" />

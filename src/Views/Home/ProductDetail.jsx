@@ -5,7 +5,6 @@ import CustomCard from "../../components/CustomCard";
 import { Products } from "../../components/Products";
 import { ProDetail } from "../../components/Products/ProDetail";
 import { RelatedProduct } from "../../components/Products/RelatedProduct";
-import commerce from '../../lib/commerce';
 import { useState, useEffect } from "react";
 const NavBar = React.lazy(() => import ('../../components/Header/NavBar'));
 const Contact = React.lazy(() => import ('../../components/Contact/index'));
@@ -16,15 +15,15 @@ function ProductDetail(props) {
   const [products, setProducts] = useState([]);
   const id_product = props.match.params.id;
 
-  const fetchProducts = async() => {
-    const res = await commerce.products.list();
-    setProducts((res && res.data) || []);
+  const fetchProducts = () => {
+    if(localStorage.getItem('products')) {
+      let productsList = JSON.parse(localStorage.getItem('products'));
+      setProducts(productsList);
+    }
   }
 
   useEffect(() => {
-    if(!products.length > 0) {
-      fetchProducts();
-    }
+    fetchProducts();
   });
   
   return (
