@@ -3,7 +3,7 @@ import commerce from '../../lib/commerce';
 
 export const ProDetail = ({product}) => {
     return (
-      <>
+      <div className="container">
         <section className="mt-70 section product-details__section">
         <div className="product-detail__container">
           <div className="product-detail__left">
@@ -142,7 +142,7 @@ export const ProDetail = ({product}) => {
           </div>
         </div>
       </section>
-      </>
+      </div>
     )
 }
 

@@ -4,7 +4,7 @@ import CustomCard from '../CustomCard';
 
 export const Products = ({products}) => {
     return (
-        <>
+        <div className="container">
             <section className="category__section section" id="category">
                 <div className="tab__list">
                 <div className="title__container tabs">
@@ -45,6 +45,6 @@ export const Products = ({products}) => {
                 </div>
                 </div>
             </section>
-        </>
+        </div>
     )
 }

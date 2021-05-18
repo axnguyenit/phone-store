@@ -2,7 +2,8 @@ import React from 'react';
 
 export const RelatedProduct = (id) => {
     return (
-      <>
+      
+      <div className="container">
         <section className="section related__products">
         <div className="title__container">
           <div className="section__title filter-btn active">
@@ -516,7 +517,7 @@ export const RelatedProduct = (id) => {
           </div>
         </div>
       </section>
-      </>
+      </div>
     )
 }
 

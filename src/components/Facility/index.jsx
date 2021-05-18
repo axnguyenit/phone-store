@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Facility = () => {
+const Facility = () => {
     return (
         <>
             <section className="facility__section section" id="facility">
@@ -44,3 +44,5 @@ export const Facility = () => {
         </>
     )
 }
+
+export default Facility;

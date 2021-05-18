@@ -28,7 +28,7 @@ import React from 'react';
                                 <span>New Inspiration 2021</span>
                                 <h1>PHONES MADE FOR YOU!</h1>
                                 <p>Trending from mobile and headphone style collection</p>
-                                <a href="#"><button className="hero__btn">SHOP NOW</button></a>
+                                <a href="#category"><button className="hero__btn">SHOP NOW</button></a>
                             </div>
                             <div className="hero__right">
                                 <img className="banner_02" src="./images/banner_02.png" alt="banner2" />

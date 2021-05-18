@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import commerce from './lib/commerce';
 
 const SignIn = React.lazy(() => import('./components/Account/signIn'));
 const SignUp = React.lazy(() => import('./components/Account/signUp'));
@@ -20,6 +21,22 @@ const loading = (
 )
 
 function App() {
+  const [products, setProducts] = useState([]);
+
+  const fetchProducts = async() => {
+    const res = await commerce.products.list();
+    setProducts((res && res.data) || []);
+  }
+
+  // setTimeout((fetchProducts()),1000)
+  const saveProducts = () => {
+    localStorage.setItem('products', JSON.stringify(products));
+  }
+
+  useEffect(() => {
+    fetchProducts();
+    saveProducts();
+  }, []);
   return (
     <BrowserRouter>
         <React.Suspense fallback={loading}>

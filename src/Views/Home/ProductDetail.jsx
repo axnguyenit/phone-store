@@ -1,15 +1,16 @@
 
 import React from 'react';
 import CustomCard from "../../components/CustomCard";
-import { Facility } from "../../components/Facility";
-import { Footer } from "../../components/Footer";
-// import NavBar from "../../components/Header/NavBar";
+// import { Footer } from "../../components/Footer";
 import { Products } from "../../components/Products";
 import { ProDetail } from "../../components/Products/ProDetail";
 import { RelatedProduct } from "../../components/Products/RelatedProduct";
 import commerce from '../../lib/commerce';
 import { useState, useEffect } from "react";
 const NavBar = React.lazy(() => import ('../../components/Header/NavBar'));
+const Contact = React.lazy(() => import ('../../components/Contact/index'));
+const Facility = React.lazy(() => import('../../components/Facility'));
+const Footer = React.lazy(() => import('../../components/Footer'));
 
 function ProductDetail(props) {
   const [products, setProducts] = useState([]);
@@ -32,7 +33,6 @@ function ProductDetail(props) {
             <NavBar/>
         </header>
         <main id="main">
-            <div className="container">
               {
                 products.map((product, index) => {
                   if(product.id === id_product) {
@@ -40,9 +40,9 @@ function ProductDetail(props) {
                   }
                 })
               }
-                {/* <RelatedProduct/> */}
+                <RelatedProduct/>
                 {/* <Products /> */}
-            </ div>
+            <Contact/>
             <Facility/>
         </ main>
         <Footer/>

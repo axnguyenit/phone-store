@@ -1,6 +1,7 @@
 import React from 'react';
 
-const CartBody = ({product}) => {
+const CartBody = ({item}) => {
+    console.log(item);
     const removeItem = (id) => {
         if(localStorage.getItem('basket')) {
             let arr = JSON.parse(localStorage.getItem('basket'))
@@ -12,21 +13,22 @@ const CartBody = ({product}) => {
                 }
             }) 
         }
-    } 
+    }
+
     return (
         <>
             <tr>
                 <td className="product__thumbnail">
                     <a href="#">
-                    <img src={product.media.source} alt="" />
+                    <img src={item.media.source} alt="" />
                     </a>
                 </td>
                 <td className="product__name">
-                    <a href="#">{product.name}</a>
+                    <a href="#">{item.name}</a>
                 </td>
                 <td className="product__price">
                     <div className="price">
-                    <span className="new__price">{product.price.formatted_with_symbol}</span>
+                    <span className="new__price">{item.price.formatted_with_symbol}</span>
                     </div>
                 </td>
                 <td className="product__quantity">
@@ -48,9 +50,9 @@ const CartBody = ({product}) => {
                 </td>
                 <td className="product__subtotal">
                     <div className="price">
-                    <span className="new__price">{product.price.formatted_with_symbol}</span>
+                    <span className="new__price">{item.price.formatted_with_symbol}</span>
                     </div>
-                    <a href="#" className="remove__cart-item" onClick={ () => removeItem(product.id) }>
+                    <a href="#" className="remove__cart-item" onClick={ () => removeItem(item.id) }>
                     <svg>
                         <use xlinkHref="./images/sprite.svg#icon-trash" />
                     </svg>
@@ -61,21 +63,24 @@ const CartBody = ({product}) => {
     )
 }
 
-export const Cart = (basket) => {
+const Cart = () => {
+    let basket = [];
     let products;
     let items = [];
-    if(localStorage.getItem('products')) {
-        products = JSON.parse(localStorage.getItem('products'))
-        basket.basket.map( item => {
-            products.find( product => {
-                if(product.id === item) {
-                    items.push(product);
-                }
+    if(localStorage.getItem('basket')) {
+        basket = JSON.parse(localStorage.getItem('basket'));
+        if(localStorage.getItem('products')) {
+            products = JSON.parse(localStorage.getItem('products'))
+            basket.map( item => {
+                products.find( product => {
+                    if(product.id === item) {
+                        items.push(product);
+                    }
+                })
             })
-        })
+        }
     }
     // const user = usersData.find( user => user.id.toString() === match.params.id)
-
 
     return (
         <>
@@ -97,7 +102,7 @@ export const Cart = (basket) => {
                         <tbody>
                             {
                                 items.map((item, index) => 
-                                    <CartBody key={index} product={item}/>
+                                    <CartBody key={index} item={item}/>
                                 )
                             }
                         </tbody>
@@ -120,3 +125,5 @@ export const Cart = (basket) => {
         </>
     )
 }
+
+export default Cart;

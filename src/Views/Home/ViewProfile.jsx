@@ -1,9 +1,8 @@
 import React from 'react';
-import Profile from '../../components/Account/Profile';
-// import { Cart } from '../../components/Cart';
-import { Facility } from "../../components/Facility";
-import { Footer } from "../../components/Footer";
-import NavBar from "../../components/Header/NavBar";
+const NavBar = React.lazy(() => import('../../components/Header/NavBar'));
+const Profile = React.lazy(() => import('../../components/Account/Profile'));
+const Facility = React.lazy(() => import('../../components/Facility'));
+const Footer = React.lazy(() => import('../../components/Footer'));
 
 const ViewProfile = () => {
     return (
