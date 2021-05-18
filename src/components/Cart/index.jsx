@@ -1,17 +1,47 @@
 import React from 'react';
 
 const CartBody = ({item}) => {
-    console.log(item);
-    const removeItem = (id) => {
+    // console.log(item);
+    // remove item from basket
+    const removeItem = (item) => {
+        console.log(item);
+        const itemDelete = {
+            id: item.id,
+            quantity: item.quantity,
+            total: item.total,
+        }
+        console.log(itemDelete);
         if(localStorage.getItem('basket')) {
-            let arr = JSON.parse(localStorage.getItem('basket'))
-            arr.find( item => {
-                if(item === id) {
-                    let index = arr.indexOf(id);
+            let arr = JSON.parse(localStorage.getItem('basket'));
+            console.log(arr);
+            const item = arr.find( item => item.id === itemDelete.id);
+            console.log(item);
+            if(item) {
+                    let index = arr.indexOf(item);
                     arr.splice(index, 1);
                     localStorage.setItem('basket', JSON.stringify(arr));
-                }
-            })
+            }
+        }
+    }
+
+    const plusQuantity = (item) => {
+        let itemPlus = {
+            id: item.id,
+            quantity: item.quantity,
+            total: item.total,
+        }
+
+        if(localStorage.getItem('basket')) {
+            let arr = JSON.parse(localStorage.getItem('basket'));
+            console.log(arr);
+            const item = arr.find( item => item.id === itemPlus.id);
+            console.log(item);
+            if(item) {
+                    let index = arr.indexOf(item);
+                    itemPlus.quantity += 1;
+                    arr[index] = itemPlus;
+                    localStorage.setItem('basket', JSON.stringify(arr));
+            }
         }
     }
 
@@ -19,26 +49,26 @@ const CartBody = ({item}) => {
         <>
             <tr>
                 <td className="product__thumbnail">
-                    <img src={item.media.source} alt="" />
+                    <img src={item.img} alt="" />
                 </td>
                 <td className="product__content">
                     <span >{item.name}</span>
                 </td>
                 <td className="product__content">
-                    <span >{item.price.formatted_with_symbol}</span>
+                    <span >${item.unitPrice}</span>
                 </td>
                 <td className="product__content">
                     <a className="minus-btn">
                         <i class="fas fa-minus"></i>
                     </a>
-                    <input type="text" min={1} defaultValue={1} max={10} className="counter-btn" />
-                    <a className="plus-btn">
+                    <input type="text" min={1} defaultValue={item.quantity} max={10} className="counter-btn" />
+                    <a className="plus-btn" onClick={() => plusQuantity(item)}>
                         <i class="fas fa-plus"></i>
                     </a>
                 </td>
                 <td className="product__content">
-                    <span>{item.price.formatted_with_symbol}</span>
-                    <a href="#" className="remove__cart-item" onClick={ () => removeItem(item.id) }>
+                    <span>${item.total}</span>
+                    <a href="#" className="remove__cart-item" onClick={ () => removeItem(item) }>
                         <i class="fas fa-trash-alt"></i>
                     </a>
                 </td>
@@ -57,12 +87,21 @@ const Cart = () => {
             products = JSON.parse(localStorage.getItem('products'))
             basket.map( item => {
                 products.find( product => {
-                    if(product.id === item) {
-                        items.push(product);
+                    if(product.id === item.id) {
+                        let itemTerm = {
+                            id: product.id,
+                            name: product.name,
+                            img: product.media.source,
+                            unitPrice: product.price.raw,
+                            quantity: item.quantity,
+                            total: item.total,
+                        }
+                        items.push(itemTerm);
                     }
                 })
             })
         }
+        console.log(items);
     }
     // const user = usersData.find( user => user.id.toString() === match.params.id)
 

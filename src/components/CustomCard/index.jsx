@@ -27,19 +27,37 @@ const CustomCard = ({product}) => {
         return str;
     }
 
-    const addToBasket = (id) => {
-        console.log(id);
+    const addToBasket = (item) => {
+        let itemAdd = {
+            id: item.id,
+            quantity: 1,
+            total: item.price.raw,
+        }
+
         if(localStorage.getItem('basket')) {
             //add to basket
             let basket = JSON.parse(localStorage.getItem('basket'));
-            basket.push(id);
-            console.log(basket);
-            localStorage.setItem('basket', JSON.stringify(basket));
+            const item = basket.find( item => item.id === itemAdd.id );
+
+            //if basket contain item => item quantity =+ 1
+            if(item) {
+                let itemTerm = item;
+                itemTerm.quantity += 1;
+                let totalPrice = itemTerm.quantity * itemTerm.total;
+                itemTerm.total = totalPrice;
+                //find index of add item in basket to change quantity
+                let index = basket.indexOf(item);
+                basket[index] = itemTerm;
+                localStorage.setItem('basket', JSON.stringify(basket));
+            }
+            else {
+                basket.push(itemAdd);
+                localStorage.setItem('basket', JSON.stringify(basket));
+            }
         }
         else {
-            //create => add to basket
             let basket = new Array();
-            basket.push(id);
+            basket.push(itemAdd);
             localStorage.setItem('basket', JSON.stringify(basket));
         }
     }
@@ -72,7 +90,7 @@ const CustomCard = ({product}) => {
                     </a>
                     </li>
                     <li>
-                    <a data-tip="Add To Compare" data-place="left" onClick={ () => addToBasket(product.id) }>
+                    <a data-tip="Add To Compare" data-place="left" onClick={ () => addToBasket(product) }>
                         <svg>
                             <use xlinkHref="./images/sprite.svg#icon-cart-plus" />
                         </svg>
