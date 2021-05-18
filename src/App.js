@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import commerce from './lib/commerce';
 
@@ -21,22 +21,8 @@ const loading = (
 )
 
 function App() {
-  const [products, setProducts] = useState([]);
-
-  const fetchProducts = async() => {
-    const res = await commerce.products.list();
-    setProducts((res && res.data) || []);
-  }
-
-  // setTimeout((fetchProducts()),1000)
-  const saveProducts = () => {
-    localStorage.setItem('products', JSON.stringify(products));
-  }
-
-  useEffect(() => {
-    fetchProducts();
-    saveProducts();
-  }, []);
+  
+  // render={props => <Login {...props}
   return (
     <BrowserRouter>
         <React.Suspense fallback={loading}>

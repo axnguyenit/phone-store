@@ -37,7 +37,7 @@ const CustomCard = ({product}) => {
             localStorage.setItem('basket', JSON.stringify(basket));
         }
         else {
-            //reate => add to basket
+            //create => add to basket
             let basket = new Array();
             basket.push(id);
             localStorage.setItem('basket', JSON.stringify(basket));
