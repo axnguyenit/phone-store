@@ -778,6 +778,27 @@ Latest Products
     background-color: var(--primaryColor);
 }
 
+
+.title__container .search-field {
+    width: 80%;
+}
+
+.title__container .search-field input{
+    width: 100%;
+    height: 30px;
+    padding: 4px 8px;
+    font-size: 19px;
+    border: none;
+    color: #000;
+    outline: none;
+}
+
+.title__container .search-field input:hover ,
+.title__container .search-field input:focus {
+    box-shadow: 0 0 4px var(--blue);
+    transition: all 0.2s ease-in-out;
+}
+
 .section__titles:not(:last-child) {
     margin-right: 1.5rem;
 }
@@ -1730,6 +1751,24 @@ NewsLetter
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.newsletter__content .newsletter__btn {
+    font-size: 16px;
+    padding: 1.4rem 3rem;
+    cursor: pointer;
+    /* margin-top: 1px; */
+    margin-left: -0.5rem;
+    /* background-color: var(--black); */
+    border: 1px solid #000;
+    color: #000;
+    transition: 0.3s;
+    outline: none;
+}
+
+.newsletter__content .newsletter__btn:hover {
+    color: #fff;
+    background-color: #000;
 }
 
 .newsletter__data h3 {

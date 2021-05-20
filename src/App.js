@@ -12,7 +12,7 @@ const Checkout = React.lazy(() => import('./components/Checkout'));
 const Basket = React.lazy(() => import('./Views/Home/Basket'));
 const ViewProfile = React.lazy(() => import('./Views/Home/ViewProfile'));
 const CodeVerification = React.lazy(() => import('./components/Account/codeVerification'))
-
+const Admin = React.lazy(() => import('./components/Admin/App'));
 const loading = (
   <div className="pt-3 text-center">
     <div className="sk-spinner sk-spinner-pulse">Loading...</div>
@@ -29,8 +29,10 @@ function App() {
                 { /* add routes with layouts */ } 
                 { /* <Route path="/admin" component={Admin} /> */ }
                 { /* <Route path="/auth" component={Auth} /> */ }
-                { /* add routes without layouts */ } 
-                <Route path = "/sign-in" exact component = { SignIn }/> 
+                { /* add routes without layouts */ }
+
+                <Route path = "/admin" exact component = { Admin }/> 
+                <Route path = "/sign-in" exact component = { SignIn }/>
                 <Route path = "/sign-up" exact component = { SignUp }/>
                 <Route path = "/reset-password" exact component = { ResetPassword }/>
                 <Route path = "/forgot-password" exact component = { ForgotPassword }/>

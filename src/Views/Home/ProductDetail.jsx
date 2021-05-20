@@ -1,10 +1,6 @@
 
 import React from 'react';
-import CustomCard from "../../components/CustomCard";
-// import { Footer } from "../../components/Footer";
-import { Products } from "../../components/Products";
 import { ProDetail } from "../../components/Products/ProDetail";
-import { RelatedProduct } from "../../components/Products/RelatedProduct";
 import { useState, useEffect } from "react";
 const NavBar = React.lazy(() => import ('../../components/Header/NavBar'));
 const Contact = React.lazy(() => import ('../../components/Contact/index'));
@@ -32,17 +28,15 @@ function ProductDetail(props) {
             <NavBar/>
         </header>
         <main id="main">
-              {
-                products.map((product, index) => {
-                  if(product.id === id_product) {
-                    return <ProDetail key={index} product={product}/>
-                  }
-                })
+          {
+            products.map((product, index) => {
+              if(product.id === id_product) {
+                return <ProDetail key={index} product={product}/>
               }
-                <RelatedProduct/>
-                {/* <Products /> */}
-            <Contact/>
-            <Facility/>
+            })
+          }
+          <Contact/>
+          <Facility/>
         </ main>
         <Footer/>
     </>

@@ -37,10 +37,10 @@ const CartBody = ({item}) => {
             const item = arr.find( item => item.id === itemPlus.id);
             console.log(item);
             if(item) {
-                    let index = arr.indexOf(item);
-                    itemPlus.quantity += 1;
-                    arr[index] = itemPlus;
-                    localStorage.setItem('basket', JSON.stringify(arr));
+                let index = arr.indexOf(item);
+                itemPlus.quantity += 1;
+                arr[index] = itemPlus;
+                localStorage.setItem('basket', JSON.stringify(arr));
             }
         }
     }
