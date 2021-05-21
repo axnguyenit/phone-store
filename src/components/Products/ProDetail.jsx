@@ -9,7 +9,7 @@ export const ProDetail = ({product}) => {
           <div className="product-detail__left">
             <div className="details__container--left">
               <div className="product__picture" id="product__picture">
-                <div class="rect" id="rect"></div>
+                <div className="rect" id="rect"></div>
                 <div className="picture__container">
                   <img src={product.media.source} id="pic" />
                 </div>

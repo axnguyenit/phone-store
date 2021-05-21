@@ -1,15 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import emailjs from 'emailjs-com';
 import NavBar from '../Header/NavBar';
+import { useHistory } from 'react-router';
+import axios from 'axios';
+const API_USERS_URL = `http://localhost:4000/api/users`;
+
 // field send mail: to_name, to_email, code
 const SignUp = () => {
+    const history = useHistory();
     const [code, setCode] = useState(0);
     const [to_name, setName] = useState();
     const [to_email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [cfpassword, setCfpassword] = useState();
     const [errorText, setErrorText] = useState('');
-    
+    const [users, setUsers] = useState([]);
+
+    const fetchUsers = async () => {
+        const res = await axios.get(API_USERS_URL);
+        setUsers(res.data);
+    }
 
     const sendEmail = (e) => {
         e.preventDefault();
@@ -27,26 +37,47 @@ const SignUp = () => {
         const max = 999999;
         const rand = min + Math.random() * (max - min);
         setCode(Math.round(rand));
-        console.log(code);
+        // console.log(code);
     }
 
     const handleSignup = (e) => {
         e.preventDefault();
-        // if()
-        console.log(to_name);
-        console.log(to_email);
-        console.log(password);
-        console.log(cfpassword);
-        console.log(code);
-        if(password != cfpassword) {
-            setErrorText('Your password not match! Try again.');
-        }
-        else {
-            
-        }
+        // confirm that email not already exist??????????
+        users.find(user => {
+            if(user.email === to_email && !user.status) {
+                console.log("1");
+                history.replace('/code-verification');
+            }
+            if(user.email === to_email) {
+                setErrorText('Email that you have entered is already exist!');
+            }
+        })
+        
+            if(password != cfpassword) {
+                setErrorText('Your password not match! Try again.');
+            }
+            else {
+                const user = {
+                    name: to_name,
+                    email: to_email,
+                    password: password,
+                    phone: '',
+                    address: '',
+                    active: false,
+                    code: code,
+                    status: false,
+                    role: 'user',
+                }
+                axios.post(API_USERS_URL, user).then( res => {
+                    console.log(res.data);
+                    localStorage.setItem('userID', res.data.id);
+                    history.replace('/code-verification');
+                })
+            }
     }
 
     useEffect(() => {
+        fetchUsers();
         rand();
     }, []);
 

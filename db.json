@@ -134,6 +134,32 @@
       "phone": "0337965469",
       "role": "user",
       "address": "Binh Dinh"
+    },
+    {
+      "name": "aa",
+      "email": "kha.nguyen22@student.passerellesnumeriques.org",
+      "password": "a",
+      "phone": "",
+      "address": "",
+      "active": false,
+      "code": 329045,
+      "status": false,
+      "role": "user",
+      "createdAt": 1621613484502,
+      "id": 16
+    },
+    {
+      "name": "aa",
+      "email": "kha.nguyen22@student.passerellesnumeriques.org",
+      "password": "a",
+      "phone": "",
+      "address": "",
+      "active": false,
+      "code": 880273,
+      "status": false,
+      "role": "user",
+      "createdAt": 1621613503363,
+      "id": 17
     }
   ],
   "products": [
