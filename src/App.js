@@ -11,6 +11,7 @@ const ErrorPage = React.lazy(() => import('./components/Account/404'));
 const Checkout = React.lazy(() => import('./components/Checkout'));
 const Basket = React.lazy(() => import('./Views/Home/Basket'));
 const ViewProfile = React.lazy(() => import('./Views/Home/ViewProfile'));
+// const ViewProfile = React.lazy(() => import('./components/Account/Profile'));
 const CodeVerification = React.lazy(() => import('./components/Account/codeVerification'))
 const Admin = React.lazy(() => import('./components/Admin/App'));
 const loading = (

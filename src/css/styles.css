@@ -1,10 +1,16 @@
+/*===== GOOGLE FONTS =====*/
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
+
 /*
 ======================
 Reset
 ======================
 */
 
-:root {
+/*===== VARIABLES CSS =====*/
+:root{
+    --body-font: 'Nunito', sans-serif;
+    --z-fixed: 100;
     --primaryColor: #f1f1f1;
     --black: #222;
     --black2: #555;
@@ -39,7 +45,7 @@ body,
 input {
     font-size: 1.6rem;
     font-weight: 400;
-    font-family: "Archivo", sans-serif;
+    font-family: var(--body-font);
     color: var(--black);
 }
 
@@ -169,6 +175,7 @@ Navigation
 }
 
 .nav__icons .icon__item i{
+    color: red;
     cursor: pointer;
     font-size: 24px;
     display: flex;
@@ -330,6 +337,7 @@ Navigation Media Query
         padding: 0.4rem;
     }
 }
+
 /*
 ======================
 Sign In
@@ -632,6 +640,10 @@ Collection
 
 .mt-70 {
     margin-top: 70px;
+}
+
+.mt-100 {
+    margin-top: 100px;
 }
 
 .section {

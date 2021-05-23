@@ -10,10 +10,10 @@ const ViewProfile = () => {
             <header id="header" className="header">
                 <NavBar/>
             </header>
-            <main id="main">
+            {/* <main id="main"> */}
                 <Profile />
                 <Facility/>
-            </ main>
+            {/* </ main> */}
             <Footer/>
         </>
     )

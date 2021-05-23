@@ -42,18 +42,25 @@ const NavBar = () =>{
                             </Link>
                         </div>
                         <div className="nav__icons">
-                        <Link to={isSignIn ? "/profile" : "/sign-in"} className="icon__item">
-                            <i className="fa fa-user"></i>
-                        </Link>
-                        <Link to="/basket" className="icon__item">
-                            <i className="fa fa-shopping-cart shopping-cart"><span id="cart__total">{quantityOfBasket}</span></i>
-                            
-                        </Link>
-                        {
-                            isSignIn ? <a className="icon__item" onClick={() => signout()}>
-                                            <i className="fa fa-sign-out-alt"></i>
-                                        </a> : ''
-                        }
+                            <Link to={isSignIn ? "/profile" : "/sign-in"} className="icon__item">
+                                <i className="fa fa-user"></i>
+                            </Link>
+                            <Link to="/basket" className="icon__item">
+                                <i className="fa fa-shopping-cart shopping-cart">
+                                    <span id="cart__total">{quantityOfBasket}</span>
+                                </i>
+                            </Link>
+                            <Link to="/basket" className="icon__item">
+                                <i class="fas fa-history"></i>
+                            </Link>
+                            <Link to="/basket" className="icon__item">
+                                <i class="fas fa-heart"></i>
+                            </Link>
+                            {
+                                isSignIn ? <a className="icon__item" onClick={() => signout()}>
+                                                <i className="fa fa-sign-out-alt"></i>
+                                            </a> : ''
+                            }
                         </div>
                     </nav>
                 </div>

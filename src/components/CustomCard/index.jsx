@@ -31,6 +31,7 @@ const CustomCard = ({product}) => {
         let itemAdd = {
             id: item.id,
             quantity: 1,
+            unitPrice: item.price.raw,
             total: item.price.raw,
         }
 
