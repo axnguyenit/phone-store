@@ -133,33 +133,21 @@
       "password": "yma",
       "phone": "0337965469",
       "role": "user",
-      "address": "Binh Dinh"
+      "address": "Binh Dinh",
+      "status": false
     },
     {
       "name": "aa",
-      "email": "kha.nguyen22@student.passerellesnumeriques.org",
+      "email": "a@gmail.com",
       "password": "a",
       "phone": "",
       "address": "",
       "active": false,
-      "code": 329045,
-      "status": false,
+      "code": 0,
+      "status": true,
       "role": "user",
-      "createdAt": 1621613484502,
+      "createdAt": 1621871001511,
       "id": 16
-    },
-    {
-      "name": "aa",
-      "email": "kha.nguyen22@student.passerellesnumeriques.org",
-      "password": "a",
-      "phone": "",
-      "address": "",
-      "active": false,
-      "code": 880273,
-      "status": false,
-      "role": "user",
-      "createdAt": 1621613503363,
-      "id": 17
     }
   ],
   "products": [

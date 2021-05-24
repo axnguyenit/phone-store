@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import NavBar from '../Header/NavBar';
 
 const ResetPassword = () => {
@@ -27,7 +28,12 @@ const ResetPassword = () => {
                             </div>
                             {/* <div className="error-txt">Error text</div> */}
                             <div><button className="btn-signin" type="submit">Continue</button></div>
-                            <div className="link">Already a member? <a href="#">Signin here</a></div>
+                            <div className="link">
+                                Already a member?
+                                <Link to='/sign-in'>
+                                    <a href="#">Signin here</a>
+                                </Link>
+                            </div>
                             </form>
                         </div>
                         </div>

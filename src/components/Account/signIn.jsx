@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import NavBar from '../Header/NavBar';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const API_USERS_URL = `http://localhost:4000/api/users`;
 
@@ -20,20 +21,25 @@ const SignIn = () => {
 
     const signin = (e) => {
         e.preventDefault();
-        console.log(users);
         const user = users.find( user => user.email === email 
                                         && user.password === password);
-        console.log(user);
         if(user) {
-            localStorage.setItem('userAccessToken', user.id);
-            setErrorText('');
-            history.replace('/');
+            if(!user.status) {
+                setErrorText('Your account is not verified!');
+                //show modal to confirm go to verify form and save verifyUser to localStorage with user ID
+            }
+            else if(!user.active) {
+                setErrorText('Your account has been locked!')
+            }
+            else {
+                localStorage.setItem('user', user.id);
+                setErrorText('');
+                history.replace('/');
+            }
         }
         else {
             setErrorText('Email or password incorrect! Try again.');
         }
-        console.log(email);
-        console.log(password);
     }
 
     useEffect(() => {
@@ -54,19 +60,26 @@ const SignIn = () => {
                             </div>
                             <form className="wrapper">
                             <div className="input-data">
-                                <input type="text" required onChange={(e) => setEmail(e.target.value)}/>
+                                <input type="text" required onChange={(e) => { setEmail(e.target.value); setErrorText(''); }}/>
                                 <div className="underline" />
                                 <label>Email address</label>
                             </div>
                             <div className="input-data">
-                                <input type="password" required onChange={(e) => setPassword(e.target.value)}/>
+                                <input type="password" required onChange={(e) => { setPassword(e.target.value); setErrorText(''); }}/>
                                 <div className="underline" />
                                 <label>Password</label>
                             </div>
                             <div className="error-txt">{errorText}</div>
-                            <a href="#">Forgot password?</a>
+                            <Link to="/forgot-password">
+                                <a href="#">Forgot password?</a>
+                            </Link>
                             <div><button className="btn-signin" type="submit">Signin</button></div>
-                            <div className="link">Not yet a member? <a href="#">Signup now</a></div>
+                            <div className="link">
+                                Not yet a member?
+                                <Link to="/sign-up">
+                                    <a href="#">Signup now</a>
+                                </Link>
+                            </div>
                             </form>
                         </div>
                         </div>

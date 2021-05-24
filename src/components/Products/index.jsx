@@ -21,7 +21,6 @@ export const Products = ({products}) => {
                             products.filter(product => {
                                 if(searchTerm == '') {
                                     return product;
-                                    
                                 }
                                 else if(product.name.toLowerCase().includes(searchTerm.toLowerCase())) {
                                     return product;

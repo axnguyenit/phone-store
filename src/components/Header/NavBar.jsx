@@ -14,7 +14,7 @@ const NavBar = () =>{
             let quantity = basket.length;
             setQuantityOfBasket(quantity);
         }
-        if(localStorage.getItem('userAccessToken')) {
+        if(localStorage.getItem('userID')) {
             setIsSignIn(true);
         }
         else {
@@ -28,7 +28,7 @@ const NavBar = () =>{
 
     const signout = () => {
         setIsSignIn(false);
-        localStorage.removeItem('userAccessToken');
+        localStorage.removeItem('userID');
     }
 
     return (

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import emailjs from 'emailjs-com';
 import NavBar from '../Header/NavBar';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 const API_USERS_URL = `http://localhost:4000/api/users`;
 
@@ -25,11 +26,11 @@ const SignUp = () => {
         e.preventDefault();
     
         emailjs.sendForm('default_service', 'template_yomost', e.target, `user_eGZkjyOWcdrxHJK1InigS`)
-          .then((result) => {
-              console.log(result.text);
-          }, (error) => {
-              console.log(error.text);
-          });
+            .then((result) => {
+                console.log(result.text);
+            }, (error) => {
+                console.log(error.text);
+            });
       }
 
     const rand = () => {
@@ -37,26 +38,50 @@ const SignUp = () => {
         const max = 999999;
         const rand = min + Math.random() * (max - min);
         setCode(Math.round(rand));
-        // console.log(code);
     }
 
     const handleSignup = (e) => {
         e.preventDefault();
-        // confirm that email not already exist??????????
-        users.find(user => {
-            if(user.email === to_email && !user.status) {
-                console.log("1");
-                history.replace('/code-verification');
-            }
-            if(user.email === to_email) {
-                setErrorText('Email that you have entered is already exist!');
-            }
-        })
-        
-            if(password != cfpassword) {
-                setErrorText('Your password not match! Try again.');
-            }
-            else {
+
+        //check confirm password match?
+        if(password != cfpassword) {
+            setErrorText('Confirm password not matched! Try again.');
+        }
+        else {
+            let checkUser = false;
+
+            // check user's status 
+            users.find(user => {
+                if(user.email === to_email && !user.status) {
+                    checkUser = true;
+                    console.log("1");
+                    rand();
+                    const userUpdate = {
+                        name: to_name,
+                        email: to_email,
+                        password: password,
+                        phone: '',
+                        address: '',
+                        active: false,
+                        code: code,
+                        status: false,
+                        role: 'user',
+                    }
+    
+                    axios.put(API_USERS_URL + '/' + user.id, userUpdate).then( res => {
+                        console.log(res.data);
+                    })
+
+                    // call send mail function here and update code
+                    localStorage.setItem('verifyUser', JSON.stringify(user.id));
+                    history.replace('/code-verification');
+                }
+                if(user.email === to_email && user.status) {
+                    checkUser = true;
+                    setErrorText('Email that you have entered is already exist!');
+                }
+            })
+            if(!checkUser) {
                 const user = {
                     name: to_name,
                     email: to_email,
@@ -70,10 +95,11 @@ const SignUp = () => {
                 }
                 axios.post(API_USERS_URL, user).then( res => {
                     console.log(res.data);
-                    localStorage.setItem('userID', res.data.id);
+                    localStorage.setItem('verifyUser', JSON.stringify(res.data.id));
                     history.replace('/code-verification');
                 })
             }
+        }
     }
 
     useEffect(() => {
@@ -95,29 +121,34 @@ const SignUp = () => {
                                 </div>
                                 <form className="wrapper" onSubmit={handleSignup}>
                                     <div className="input-data">
-                                        <input type="text" name="to_name" onChange={e => setName(e.target.value)} required />
+                                        <input type="text" name="to_name" onChange={e => { setName(e.target.value); setErrorText(''); }} required />
                                         <div className="underline" />
                                         <label>Fullname</label>
                                     </div>
                                     <div className="input-data">
-                                        <input type="email" name="to_email" onChange={e => setEmail(e.target.value)} required />
+                                        <input type="email" name="to_email" onChange={e => { setEmail(e.target.value); setErrorText(''); }} required />
                                         <div className="underline" />
                                         <label>Email address</label>
                                     </div>
                                     <div className="input-data">
-                                        <input type="password" name="password" onChange={e => setPassword(e.target.value)} required />
+                                        <input type="password" name="password" onChange={e => { setPassword(e.target.value); setErrorText(''); }} required />
                                         <div className="underline" />
                                         <label>Password</label>
                                     </div>
                                     <div className="input-data">
-                                        <input type="password" name="cfpassword" onChange={e => setCfpassword(e.target.value)} required />
+                                        <input type="password" name="cfpassword" onChange={e => { setCfpassword(e.target.value); setErrorText(''); }} required />
                                         <div className="underline" />
                                         <label>Confirm Password</label>
                                     </div>
                                     <input value={code} name="code" disabled hidden/>
                                     <div className="error-txt">{errorText}</div>
                                     <div><button className="btn-signin" type="submit">Signup</button></div>
-                                    <div className="link">Already a member? <a href="#">Signin here</a></div>
+                                    <div className="link">
+                                        Already a member?
+                                        <Link to='/sign-in'>
+                                            <a href="#">Signin here</a>
+                                        </Link>
+                                    </div>
                                 </form>
                             </div>
                         </div>

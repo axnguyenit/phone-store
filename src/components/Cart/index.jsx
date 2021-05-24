@@ -8,6 +8,7 @@ const Cart = () => {
     const fetchBasket = () => {
         if(localStorage.getItem('basket')) {
             let basket = JSON.parse(localStorage.getItem('basket'));
+            console.log(basket);
             if(localStorage.getItem('products')) {
                 let products = JSON.parse(localStorage.getItem('products'))
                 basket.map( item => {
@@ -25,13 +26,18 @@ const Cart = () => {
                         }
                     })
                 })
+                console.log(items.length);
             }
+            setIsValidBasket(true);
         }
         else {
             setIsValidBasket(false);
         }
     }
-    fetchBasket();
+    
+    useEffect(() => {
+        fetchBasket();
+    }, [])
 
     // remove item from basket
     const removeItem = (itemDelete) => {
@@ -69,7 +75,7 @@ const Cart = () => {
         }
     }
 
-    const reduceQuantity = (item) => {
+    const decreaseQuantity = (item) => {
         let itemIncrease = {
             id: item.id,
             quantity: item.quantity,
@@ -117,8 +123,9 @@ const Cart = () => {
                                     </thead>
                                     <tbody>
                                         {
-                                            items.map((item, index) => 
-                                                <tr>
+                                            items.map((item, index) => {    
+                                                console.log(item);
+                                                <tr key={index}>
                                                     <td className="product__thumbnail">
                                                         <img src={item.img} alt="" />
                                                     </td>
@@ -129,7 +136,7 @@ const Cart = () => {
                                                         <span >${item.unitPrice}</span>
                                                     </td>
                                                     <td className="product__content">
-                                                        <a className="minus-btn" onClick={() => reduceQuantity(item)}>
+                                                        <a className="minus-btn" onClick={() => decreaseQuantity(item)}>
                                                             <i class="fas fa-minus"></i>
                                                         </a>
                                                         <input type="text" min={1} value={item.quantity} max={10} className="counter-btn" />
@@ -143,10 +150,10 @@ const Cart = () => {
                                                             <i class="fas fa-trash-alt"></i>
                                                         </a>
                                                     </td>
-                                                </tr>
+                                                </tr> }
                                             )
                                         }
-                                    </tbody>
+                                        </tbody>
                                     </table>
                                 </div>
                                 <div className="cart-btns">
@@ -162,7 +169,14 @@ const Cart = () => {
                                 </form>
                             </div>
                         </div>
-                    </section> : ''
+                    </section> : <section className="section">
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <br />
+                            AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</section>
             }
         </>
     )

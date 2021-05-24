@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 const SignIn = React.lazy(() => import('./components/Account/signIn'));
@@ -12,7 +12,9 @@ const Checkout = React.lazy(() => import('./components/Checkout'));
 const Basket = React.lazy(() => import('./Views/Home/Basket'));
 const ViewProfile = React.lazy(() => import('./Views/Home/ViewProfile'));
 // const ViewProfile = React.lazy(() => import('./components/Account/Profile'));
-const CodeVerification = React.lazy(() => import('./components/Account/codeVerification'))
+const CodeVerification = React.lazy(() => import('./components/Account/codeVerification'));
+const WishList = React.lazy(() => import('./Views/Home/WishList'));
+const OrderHistory = React.lazy(() => import('./Views/Home/OrderHistoty'));
 const Admin = React.lazy(() => import('./components/Admin/App'));
 const loading = (
   <div className="pt-3 text-center">
@@ -42,6 +44,8 @@ function App() {
                 <Route path = "/detail/:id/:slug" exact component = { ProductDetail } />
                 <Route path = "/checkout" exact component = { Checkout } />
                 <Route path = "/basket" exact component = { Basket } />
+                <Route path = "/wish-list" exact component = { WishList } />
+                <Route path = "/order-history" exact component = { OrderHistory } />
                 <Route path = "/" exact component = { Home } /> 
                 <Route path = "" exact component = { ErrorPage }/> 
                 { /* add redirect for first page */ } 
