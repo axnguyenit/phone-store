@@ -1,8 +1,60 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import NavBar from '../Header/NavBar';
+const API_USERS_URL = `http://localhost:4000/api/users`;
 
 const ResetPassword = () => {
+    const history = useHistory();
+    const [users, setUsers] = useState();
+    const [password, setPassword] = useState();
+    const [cfPassword, setCfPassword] = useState();
+    const [errorText, setErrorText] = useState('');
+
+    const fetchUsers = () => {
+        axios.get(API_USERS_URL).then( res => {
+            setUsers(res.data);
+        })
+    }
+
+    const checkUserIDSetPass = () => {
+        if(!localStorage.getItem('userIDSetPass')) {
+            history.goBack();
+        }
+    }
+
+    const handleResetPass = (e) => {
+        e.preventDefault();
+        if(localStorage.getItem('userIDSetPass')) {
+            const userIDSetPass = JSON.parse(localStorage.getItem('userIDSetPass'));
+
+            const user = users.find(user => user.id === userIDSetPass);
+
+            if(user) {
+                if(password === cfPassword) {
+                    let userTerm = user;
+                    userTerm.password = password;
+                    axios.put(API_USERS_URL + '/' + userIDSetPass, userTerm).then( res => {
+                        console.log(res.data);
+                        localStorage.removeItem('userIDSetPass');
+                        history.replace('/sign-in');
+                    })
+                }
+                else {
+                    setErrorText('Confirm password not matched! Try again.');
+                }
+            }
+        }
+        else {
+            console.log("-1");
+        }
+    }
+
+    useEffect(() => {
+        checkUserIDSetPass();
+        fetchUsers();
+    }, [])
+
     return (
         <>
             <NavBar/>
@@ -15,21 +67,22 @@ const ResetPassword = () => {
                                 <h2>New Password</h2>
                                 <p>Create new password</p>
                             </div>
-                            <form className="wrapper">
+                            <form className="wrapper" onSubmit={handleResetPass}>
                             <div className="input-data">
-                                <input type="text" required />
+                                <input type="password" onChange={ e => {setPassword(e.target.value); setErrorText('');}} required />
                                 <div className="underline" />
                                 <label>New password</label>
                             </div>
                             <div className="input-data">
-                                <input type="text" required />
+                                <input type="password" onChange={ e => {setCfPassword(e.target.value); setErrorText('');}} required />
                                 <div className="underline" />
                                 <label>Confirm password</label>
                             </div>
-                            {/* <div className="error-txt">Error text</div> */}
+                            <div className="error-txt">{errorText}</div>
                             <div><button className="btn-signin" type="submit">Continue</button></div>
                             <div className="link">
                                 Already a member?
+                                &nbsp;
                                 <Link to='/sign-in'>
                                     <a href="#">Signin here</a>
                                 </Link>

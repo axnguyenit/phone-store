@@ -152,9 +152,9 @@ Navigation
     width: 50%;
 }
 
-.nav__item:not(:last-child) {
-    margin-right: 1.6rem;
-}
+/* .nav__item:not(:last-child) {
+    margin-right: 1rem;
+} */
 
 .nav__list .nav__link:link,
 .nav__list .nav__link:visited {
@@ -166,18 +166,18 @@ Navigation
 }
 
 .nav__list .nav__link:hover {
-    color: var(--orange);
+    color: var(--green);
 }
 
-.nav__icons {
+.nav__logo {
     display: flex;
     position: relative;
 }
 
-.nav__icons .icon__item i{
-    color: red;
+.nav__logo .icon__item i{
+    color: var(--green);
     cursor: pointer;
-    font-size: 24px;
+    font-size: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -187,30 +187,30 @@ Navigation
     opacity: 1;
 }
 
-.nav__icons .icon__item:link,
-.nav__icons .icon__item:visited {
+/* .nav__logo .icon__item:link,
+.nav__logo .icon__item:visited {
     color: var(--black);
-}
+} */
 
-.nav__icons .icon__item:hover {
-    opacity: 0.5;
+.nav__logo .icon__item i:hover {
+    opacity: 0.8;
     transition: all 0.3s ease-in-out;
 }
 
-.nav__icons .icon__item:not(:last-child) {
+.nav__logo .icon__item:not(:last-child) {
     margin-right: 1rem;
 }
 
-.nav__icons .shopping-cart {
+.nav__logo .shopping-cart {
     position: relative;
 }
 
-.nav__icons #cart__total {
+.nav__logo #cart__total {
     font-size: 1rem;
     position: absolute;
     top: 2px;
     right: -6px;
-    background-color: var(--orange);
+    background-color: var(--green);
     padding: 0.2rem 0.4rem;
     border-radius: 100%;
     color: var(--primaryColor);
@@ -329,11 +329,11 @@ Navigation Media Query
 }
 
 @media only screen and (max-width: 568px) {
-    .nav__icons .icon__item svg {
+    .nav__logo .icon__item svg {
         width: 1.4rem;
         height: 1.4rem;
     }
-    .nav__icons .icon__item {
+    .nav__logo .icon__item {
         padding: 0.4rem;
     }
 }
@@ -421,6 +421,10 @@ Sign In
     text-align: center;
     justify-content: center;
     line-height: 3rem;
+}
+
+.signin__form .header h2 {
+    text-transform: uppercase;
 }
 
 .signin__form .error-txt {
@@ -2532,4 +2536,59 @@ Cart Area Media Query
         width: 1.5rem;
         height: 1.5rem;
     }
+}
+
+/*
+======================
+Check out
+======================
+*/
+
+.checkout {
+    margin-top: 150px;
+    padding-bottom: 15px;
+}
+  
+.checkout .paper {
+    max-width: 600px;
+    padding: 20px 15px;
+    margin: 0 auto;
+    background-color: #c9d1d9;
+}
+  
+.checkout .paper h6 {
+    margin: 20px 0;
+}
+  
+.checkout .paper .actions.payment-actions {
+    margin-top: 25px;
+}
+.checkout .paper .actions {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+  
+.checkout .paper .actions a {
+    margin-right: 15px;
+    margin-left: 0;
+}
+  
+.checkout .paper .stepper {
+    background-color: #c8d1d9;
+}
+  
+.products-spinner {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+}
+  
+.confirmation h5 {
+    margin: 20px 0;
+}
+  
+.confirmation a {
+    color: #000000;
+    background-color: #03dac5;
 }

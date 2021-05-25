@@ -1,5 +1,6 @@
 import React, { lazy } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+// import "./css/styles.css";
 
 const SignIn = React.lazy(() => import('./components/Account/signIn'));
 const SignUp = React.lazy(() => import('./components/Account/signUp'));

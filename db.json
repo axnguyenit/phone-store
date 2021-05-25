@@ -137,17 +137,20 @@
       "status": false
     },
     {
-      "name": "aa",
-      "email": "a@gmail.com",
+      "id": 16
+    },
+    {
+      "name": "Nguyen Dinh Kha",
+      "email": "nguyendinhkha1812@gmail.com",
       "password": "a",
       "phone": "",
       "address": "",
-      "active": false,
+      "active": true,
       "code": 0,
       "status": true,
       "role": "user",
-      "createdAt": 1621871001511,
-      "id": 16
+      "createdAt": 1621957622772,
+      "id": 17
     }
   ],
   "products": [
@@ -211,18 +214,35 @@
   "orders": [
     {
       "id": 1,
-      "user_id": 15,
+      "userID": 15,
       "total": 840,
       "status": "pending",
       "details": [
         {
-          "detail_id": 1,
-          "prod_id": "prod_kd6Ll28YEoV2mj",
+          "detailID": 1,
+          "prodID": "prod_kd6Ll28YEoV2mj",
           "quantity": 1
         },
         {
-          "detail_id": 2,
-          "prod_id": "prod_eN1ql99pplz3ym",
+          "detailID": 2,
+          "prodID": "prod_eN1ql99pplz3ym",
+          "quantity": 1
+        }
+      ]
+    }
+  ],
+  "baskets": [
+    {
+      "id": 1,
+      "userId": 17,
+      "details": []
+    },
+    {
+      "id": 2,
+      "userId": 20,
+      "details": [
+        {
+          "id": "prod_4OANwRpDY5vYL8",
           "quantity": 1
         }
       ]

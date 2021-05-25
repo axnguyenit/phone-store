@@ -1,19 +1,34 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import emailjs from 'emailjs-com';
 import NavBar from '../Header/NavBar';
 const API_USERS_URL = `http://localhost:4000/api/users`;
 
 const ForgotPassword = () => {
-    const [users, setUsers] = useState()
+    const [users, setUsers] = useState();
     const [email, setEmail] = useState();
     const [code, setCode] = useState(0);
+    const [name, setName] = useState();
     const [errorText, setErrorText] = useState('');
+    const history = useHistory();
 
     const fetchUsers = () => {
         axios.get(API_USERS_URL).then( res => {
             setUsers(res.data);
         })
+    }
+
+    const sendEmail = (e) => {
+        e.preventDefault();
+        console.log(e);
+    
+        emailjs.sendForm('default_service', 'template_yomost', e.target, `user_eGZkjyOWcdrxHJK1InigS`)
+            .then((result) => {
+                console.log(result.text);
+            }, (error) => {
+                console.log(error.text);
+            });
     }
 
     const rand = () => {
@@ -27,9 +42,19 @@ const ForgotPassword = () => {
         e.preventDefault();
 
         const user = users.find(user => user.email === email);
-
+        
         if(user) {
-            //update code verify in user account & go to send password reset OTP to user's email 
+            //update code verify in user account & go to send password reset OTP to user's email
+            setName(user.name);
+            let userTerm = user;
+            userTerm.code = code;
+
+            axios.put(API_USERS_URL + '/' + user.id, userTerm).then( res => {
+                console.log(res.data);
+                sendEmail(e);
+                localStorage.setItem('userIDForgot', JSON.stringify(user.id));
+                history.replace('/code-verification');
+            });
         }
         else {
             //display error message that user's email is not already exist.
@@ -59,12 +84,16 @@ const ForgotPassword = () => {
                                 <input type="email" name="to_email" onChange={(e) => { setEmail(e.target.value); setErrorText('');}} required />
                                 <div className="underline" />
                                 <label>Email address</label>
-                                <input value={code} name="code" disabled hidden/>
+
+                                <input value={name} name="to_name" hidden/>
+                                <input value={code} name="code" hidden/>
+                                <input value="[Yomost Store] - Email Verification Code" name="subject" hidden/>
                             </div>
                             <div className="error-txt">{errorText}</div>
                             <div><button className="btn-signin" type="submit">Continue</button></div>
                             <div className="link">
                                 Already a member?
+                                &nbsp;
                                 <Link to='/sign-in'>
                                     <a href="#">Signin here</a>
                                 </Link>

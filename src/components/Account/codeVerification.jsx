@@ -17,9 +17,9 @@ const CodeVerification = () => {
 
             axios.get(API_USERS_URL + '/' + userLocal).then( res => {
                 console.log(res.data);
-                setCode(parseInt(code))
-                console.log(typeof code);
-                console.log(typeof res.data.code);
+                // setCode(code);
+                // console.log(typeof code);
+                // console.log(typeof res.data.code);
 
                 if(code === res.data.code) {
                     let userTerm = res.data;
@@ -32,6 +32,27 @@ const CodeVerification = () => {
                         localStorage.removeItem('verifyUser');
                         localStorage.setItem('userID', JSON.stringify(res.data.id));
                         history.replace('/');
+                    })
+                }
+                else {
+                    setErrorText('Code verify is invalid!');
+                }
+            })
+        }
+        else if(localStorage.getItem('userIDForgot')) {
+            const userIDForgot = JSON.parse(localStorage.getItem('userIDForgot'));
+
+            axios.get(API_USERS_URL + '/' + userIDForgot).then( res => {
+                console.log(res.data);
+
+                if(code === res.data.code) {
+                    let userTerm = res.data;
+                    userTerm.code = 0;
+                    axios.put(API_USERS_URL + '/' + userIDForgot, userTerm).then( res => {
+                        console.log(res.data);
+                        localStorage.removeItem('userIDForgot');
+                        localStorage.setItem('userIDSetPass', JSON.stringify(res.data.id));
+                        history.replace('/reset-password');
                     })
                 }
                 else {
@@ -66,6 +87,7 @@ const CodeVerification = () => {
                             <div><button className="btn-signin" type="submit">Continue</button></div>
                             <div className="link">
                                 Already a member? 
+                                &nbsp;
                                 <Link to='/sign-in'>
                                     <a href="#">Signin here</a>
                                 </Link>

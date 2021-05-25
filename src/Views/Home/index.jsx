@@ -17,7 +17,7 @@ function Home() {
   }
 
   const saveProducts = (data) => {
-    localStorage.setItem('products', JSON.stringify(products));
+    localStorage.setItem('products', JSON.stringify(data));
   }
 
   useEffect(() => {

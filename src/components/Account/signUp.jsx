@@ -24,6 +24,7 @@ const SignUp = () => {
 
     const sendEmail = (e) => {
         e.preventDefault();
+        console.log(e);
     
         emailjs.sendForm('default_service', 'template_yomost', e.target, `user_eGZkjyOWcdrxHJK1InigS`)
             .then((result) => {
@@ -31,7 +32,7 @@ const SignUp = () => {
             }, (error) => {
                 console.log(error.text);
             });
-      }
+    }
 
     const rand = () => {
         const min = 111111;
@@ -49,8 +50,7 @@ const SignUp = () => {
         }
         else {
             let checkUser = false;
-
-            // check user's status 
+            // check user's status
             users.find(user => {
                 if(user.email === to_email && !user.status) {
                     checkUser = true;
@@ -66,15 +66,15 @@ const SignUp = () => {
                         code: code,
                         status: false,
                         role: 'user',
-                    }
-    
+                    };
+                    
+                    // call send mail function here and update code
                     axios.put(API_USERS_URL + '/' + user.id, userUpdate).then( res => {
                         console.log(res.data);
-                    })
-
-                    // call send mail function here and update code
-                    localStorage.setItem('verifyUser', JSON.stringify(user.id));
-                    history.replace('/code-verification');
+                        sendEmail(e);
+                        localStorage.setItem('verifyUser', JSON.stringify(user.id));
+                        history.replace('/code-verification');
+                    });
                 }
                 if(user.email === to_email && user.status) {
                     checkUser = true;
@@ -95,6 +95,7 @@ const SignUp = () => {
                 }
                 axios.post(API_USERS_URL, user).then( res => {
                     console.log(res.data);
+                    sendEmail(e);
                     localStorage.setItem('verifyUser', JSON.stringify(res.data.id));
                     history.replace('/code-verification');
                 })
@@ -140,11 +141,13 @@ const SignUp = () => {
                                         <div className="underline" />
                                         <label>Confirm Password</label>
                                     </div>
-                                    <input value={code} name="code" disabled hidden/>
+                                    <input value={code} name="code" hidden/>
+                                    <input value="[Yomost Store] - Email Verification Code" name="subject" hidden/>
                                     <div className="error-txt">{errorText}</div>
                                     <div><button className="btn-signin" type="submit">Signup</button></div>
                                     <div className="link">
                                         Already a member?
+                                        &nbsp;
                                         <Link to='/sign-in'>
                                             <a href="#">Signin here</a>
                                         </Link>

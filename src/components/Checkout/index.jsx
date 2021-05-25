@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Step,
   Paper,
@@ -6,28 +6,17 @@ import {
   StepLabel,
   Container,
   Typography,
-  CircularProgress,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { renderRelatedComponent } from "./helpers";
 import "./style.css";
 
-// import NavBar from '../Header/NavBar';
+// const NavBar = React.lazy(() => import('../Header/NavBar'));
+// import NavBar from '';
 
 const steps = ["Address", "Details", "Payment"];
 
-const convertObjectToArray = (countries) =>
-  Object.entries(countries || {}).map(([code, name]) => ({ code, name }));
-
-const usePreviousState = (value) => {
-  const ref = useRef();
-  useEffect(() => {
-    ref.current = value;
-  });
-  return ref.current;
-};
-
-const Checkout = ({ basketData, orderInfo, orderError, handleCheckout }) => {
+const Checkout = () => {
   const [user, setUser] = useState({
     city: "",
     email: "",
@@ -43,15 +32,10 @@ const Checkout = ({ basketData, orderInfo, orderError, handleCheckout }) => {
     shippingSubdivisions: [],
   });
   const [bookingStep, setBookingStep] = useState("Address");
-  const [checkoutData, setCheckoutData] = useState("");
-
-  const previousShippingCountry = usePreviousState(user.shippingCountry);
-  const previousShippingSubdivision = usePreviousState(
-    user.shippingSubdivision
-  );
 
   const history = useHistory();
-
+  // history.replace('/checkout');
+  // console.log(history);
   const handleSubmit = (e) => {
     e.preventDefault();
     setBookingStep("Details");
@@ -115,15 +99,11 @@ const Checkout = ({ basketData, orderInfo, orderError, handleCheckout }) => {
             )}
             {renderRelatedComponent({
               user,
-              orderInfo,
-              orderError,
               bookingStep,
               handleChange,
               handleSubmit,
-              checkoutData,
               handleBackStep,
               handleNextStep,
-              handleCheckout,
               handleSelectChange,
             })}
           </Paper>

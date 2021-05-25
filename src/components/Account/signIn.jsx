@@ -15,7 +15,7 @@ const SignIn = () => {
 
     const fetchUsers = async() => {
         axios.get(API_USERS_URL).then( res => {
-          setUsers(res.data);
+            setUsers(res.data);
         })
     }
 
@@ -29,12 +29,12 @@ const SignIn = () => {
                 //show modal to confirm go to verify form and save verifyUser to localStorage with user ID
             }
             else if(!user.active) {
-                setErrorText('Your account has been locked!')
+                setErrorText('Your account has been locked!');
             }
             else {
-                localStorage.setItem('user', user.id);
+                localStorage.setItem('userID', user.id);
                 setErrorText('');
-                history.replace('/');
+                history.goBack();
             }
         }
         else {
@@ -60,7 +60,7 @@ const SignIn = () => {
                             </div>
                             <form className="wrapper">
                             <div className="input-data">
-                                <input type="text" required onChange={(e) => { setEmail(e.target.value); setErrorText(''); }}/>
+                                <input type="email" required onChange={(e) => { setEmail(e.target.value); setErrorText(''); }}/>
                                 <div className="underline" />
                                 <label>Email address</label>
                             </div>
@@ -73,11 +73,12 @@ const SignIn = () => {
                             <Link to="/forgot-password">
                                 <a href="#">Forgot password?</a>
                             </Link>
-                            <div><button className="btn-signin" type="submit">Signin</button></div>
+                            <div><button className="btn-signin" type="submit"> Signin</button></div>
                             <div className="link">
                                 Not yet a member?
+                                &nbsp;
                                 <Link to="/sign-up">
-                                    <a href="#">Signup now</a>
+                                    <a href="#"> Signup now</a>
                                 </Link>
                             </div>
                             </form>

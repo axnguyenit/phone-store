@@ -1,44 +1,35 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 
 const Cart = () => {
+    const history = useHistory();
+    const [basket, setBasket] = useState();
     const [isRender, setIsRender] = useState(false);
     const [isValidBasket, setIsValidBasket] = useState(false);
     let items = [];
 
-    const fetchBasket = () => {
-        if(localStorage.getItem('basket')) {
-            let basket = JSON.parse(localStorage.getItem('basket'));
-            console.log(basket);
-            if(localStorage.getItem('products')) {
-                let products = JSON.parse(localStorage.getItem('products'))
-                basket.map( item => {
-                    products.find( product => {
-                        if(product.id === item.id) {
-                            let itemTerm = {
-                                id: product.id,
-                                name: product.name,
-                                img: product.media.source,
-                                unitPrice: product.price.raw,
-                                quantity: item.quantity,
-                                total: item.total,
-                            }
-                            items.push(itemTerm);
+    if(localStorage.getItem('basket')) {
+        let basket = JSON.parse(localStorage.getItem('basket'));
+        if(localStorage.getItem('products')) {
+            let products = JSON.parse(localStorage.getItem('products'))
+            basket.map( item => {
+                products.find( product => {
+                    if(product.id === item.id) {
+                        let itemTerm = {
+                            id: product.id,
+                            name: product.name,
+                            img: product.media.source,
+                            unitPrice: product.price.raw,
+                            quantity: item.quantity,
+                            total: item.total,
                         }
-                    })
+                        items.push(itemTerm);
+                    }
                 })
-                console.log(items.length);
-            }
-            setIsValidBasket(true);
-        }
-        else {
-            setIsValidBasket(false);
+            })
         }
     }
-    
-    useEffect(() => {
-        fetchBasket();
-    }, [])
-
+        
     // remove item from basket
     const removeItem = (itemDelete) => {
         if(localStorage.getItem('basket')) {
@@ -102,10 +93,19 @@ const Cart = () => {
         }
     }
 
+    const handleCheckout = () => {
+        if(localStorage.getItem('userID')) {
+            history.replace('/checkout');
+        }
+        else {
+            history.replace('/sign-in');
+        }
+    }
+
     return (
         <>
             {
-                isValidBasket ? 
+                ( items.length > 0 ) ? 
                     <section className="section cart__area">
                         <div className="container">
                             <div className="responsive__cart-area">
@@ -123,9 +123,8 @@ const Cart = () => {
                                     </thead>
                                     <tbody>
                                         {
-                                            items.map((item, index) => {    
-                                                console.log(item);
-                                                <tr key={index}>
+                                            items.map((item, index) => {
+                                                return <tr key={index}>
                                                     <td className="product__thumbnail">
                                                         <img src={item.img} alt="" />
                                                     </td>
@@ -162,14 +161,15 @@ const Cart = () => {
                                     </div>
                                     <div className="check__shipping">
                                     <div className="continue__shopping">
-                                    <a href="/">Checkout</a>
+                                    <a href="#" onClick={handleCheckout}>Checkout</a>
                                     </div>
                                     </div>
                                 </div>
                                 </form>
                             </div>
                         </div>
-                    </section> : <section className="section">
+                    </section> 
+                    : <section className="section">
                                         <br />
                                         <br />
                                         <br />
