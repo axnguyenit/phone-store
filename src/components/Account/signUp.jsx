@@ -117,7 +117,7 @@ const SignUp = () => {
                         <div className="responsive__cart-area">
                             <div className="signin__form">
                                 <div className="header">
-                                    <h2>Sign Up</h2>
+                                    <h2>Register</h2>
                                     <p>Sign up with your information</p>
                                 </div>
                                 <form className="wrapper" onSubmit={handleSignup}>
@@ -144,12 +144,12 @@ const SignUp = () => {
                                     <input value={code} name="code" hidden/>
                                     <input value="[Yomost Store] - Email Verification Code" name="subject" hidden/>
                                     <div className="error-txt">{errorText}</div>
-                                    <div><button className="btn-signin" type="submit">Signup</button></div>
+                                    <div><button className="btn-signin" type="submit">Register</button></div>
                                     <div className="link">
                                         Already a member?
                                         &nbsp;
-                                        <Link to='/sign-in'>
-                                            <a href="#">Signin here</a>
+                                        <Link to='/login'>
+                                            <a href="#">Login here</a>
                                         </Link>
                                     </div>
                                 </form>

@@ -1,9 +1,10 @@
-import React from 'react';
-
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 const NavBar = React.lazy(() => import('../../components/Header/NavBar'));
 const Cart = React.lazy(() => import('../../components/Cart'));
 const Facility = React.lazy(() => import('../../components/Facility'));
 const Footer = React.lazy(() => import('../../components/Footer'));
+
 
 const Basket = () => {
     return (

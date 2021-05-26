@@ -35,18 +35,14 @@ const ResetPassword = () => {
                     let userTerm = user;
                     userTerm.password = password;
                     axios.put(API_USERS_URL + '/' + userIDSetPass, userTerm).then( res => {
-                        console.log(res.data);
                         localStorage.removeItem('userIDSetPass');
-                        history.replace('/sign-in');
+                        history.replace('/login');
                     })
                 }
                 else {
                     setErrorText('Confirm password not matched! Try again.');
                 }
             }
-        }
-        else {
-            console.log("-1");
         }
     }
 
@@ -83,8 +79,8 @@ const ResetPassword = () => {
                             <div className="link">
                                 Already a member?
                                 &nbsp;
-                                <Link to='/sign-in'>
-                                    <a href="#">Signin here</a>
+                                <Link to='/login'>
+                                    <a href="#">Login here</a>
                                 </Link>
                             </div>
                             </form>

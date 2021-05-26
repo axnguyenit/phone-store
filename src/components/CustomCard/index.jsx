@@ -1,5 +1,8 @@
+import axios from 'axios';
 import React from 'react';
 import {Link} from 'react-router-dom';
+const API_USERS_URL = `http://localhost:4000/api/users`;
+const API_WISHLIST_URL = `http://localhost:4000/api/wishList`;
 
 const CustomCard = ({product}) => {
     
@@ -63,6 +66,35 @@ const CustomCard = ({product}) => {
         }
     }
 
+    const addToWishList = (item) => {
+        if(localStorage.getItem('userID')) {
+            const userID = JSON.parse(localStorage.getItem('userID'));
+            axios.get(API_USERS_URL + '/' + userID + '/wishList').then(res => {
+                let wishList = res.data[0].details;
+                if(wishList.length > 0) {
+                    console.log(wishList);
+                    wishList.map(wish => {
+                        // if(wish.id === item.id) {
+                        //     wishList.push({
+                        //         id: item.id,
+                        //     })
+                        //     // axios.put(API_WISHLIST_URL)
+                        // }
+                    })
+                }
+                else {
+
+                }
+                // console.log(item);
+                // console.log(wishList);
+
+            })
+        }
+        else {
+            console.log("please login before");
+        }
+    }
+
     return (
         <>
             <div className="product category__products">
@@ -84,7 +116,7 @@ const CustomCard = ({product}) => {
                     </Link>
                     </li>
                     <li>
-                    <a data-tip="Add To Wishlist" data-place="left" href="#">
+                    <a data-tip="Add To Wishlist" data-place="left" onClick={ () => addToWishList(product)}>
                         <svg>
                         <use xlinkHref="./images/sprite.svg#icon-heart-o"/>
                         </svg>

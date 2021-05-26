@@ -4,6 +4,7 @@ import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import NavBar from '../Header/NavBar';
 const API_USERS_URL = `http://localhost:4000/api/users`;
+const API_BASKETS_URL = `http://localhost:4000/api/baskets`;
 
 const CodeVerification = () => {
     const [errorText, setErrorText] = useState('');
@@ -31,6 +32,11 @@ const CodeVerification = () => {
                         console.log(res.data);
                         localStorage.removeItem('verifyUser');
                         localStorage.setItem('userID', JSON.stringify(res.data.id));
+                        let newBasket = {
+                            userId: userLocal,
+                            details: [],
+                        }
+                        axios.post(API_BASKETS_URL, newBasket);
                         history.replace('/');
                     })
                 }
@@ -88,8 +94,8 @@ const CodeVerification = () => {
                             <div className="link">
                                 Already a member? 
                                 &nbsp;
-                                <Link to='/sign-in'>
-                                    <a href="#">Signin here</a>
+                                <Link to='/login'>
+                                    <a href="#">Login here</a>
                                 </Link>
                             </div>
                             </form>

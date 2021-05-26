@@ -13,8 +13,8 @@ const ViewProfile = React.lazy(() => import('./Views/Home/ViewProfile'));
 
 const routes = [
   { path: '/', exact: true, component: Home},
-  { path: '/sign-in', exact: true, component: SignIn },
-  { path: '/sign-up', exact: true, component: SignUp },
+  { path: '/login', exact: true, component: SignIn },
+  { path: '/register', exact: true, component: SignUp },
   { path: '/reset-password', exact: true, component: ResetPassword },
   { path: '/forgot-password', exact: true, component: ForgotPassword },
   { path: '/profile',  exact: true, component: ViewProfile },

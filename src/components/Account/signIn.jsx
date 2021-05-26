@@ -5,6 +5,7 @@ import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 
 const API_USERS_URL = `http://localhost:4000/api/users`;
+const API_BASKETS_URL = `http://localhost:4000/api/baskets`;
 
 const SignIn = () => {
     const history = useHistory();
@@ -18,6 +19,113 @@ const SignIn = () => {
             setUsers(res.data);
         })
     }
+
+    const fetchBasket = () => {
+        // localStorage contain userID
+        if(localStorage.getItem('userID')) {
+            const userID = JSON.parse(localStorage.getItem('userID'));
+
+            axios.get(API_USERS_URL + '/' + userID + '/baskets').then( res => {
+                let basketUser = res.data[0].details;
+
+                // localStorage contain basket
+                if(localStorage.getItem('basket')) {
+                    let basketLocal = JSON.parse(localStorage.getItem('basket'));
+                    let basket = [];
+
+                    if(basketUser.length > 0) {
+                        basketUser.map(itemBasketUser => {
+                            basketLocal.map(itemBasketLocal => {
+                                if(itemBasketUser.id === itemBasketLocal.id) {
+                                    // set quantity, total & remove item basket user, local
+                                    let item = {
+                                        id: itemBasketLocal.id,
+                                        quantity: itemBasketLocal.quantity + itemBasketUser.quantity,
+                                        unitPrice: itemBasketLocal.unitPrice,
+                                        total: (itemBasketLocal.quantity + itemBasketUser.quantity) * itemBasketLocal.unitPrice,
+                                    }
+
+                                    basket.push(item);
+                                    
+                                    let indexItemLocal = basketLocal.indexOf(itemBasketLocal);
+                                    basketLocal.splice(indexItemLocal, 1);
+                                    
+                                    let indexItemUser = basketUser.indexOf(itemBasketUser);
+                                    basketUser.splice(indexItemUser, 1);
+                                }
+                            })
+                        })
+
+                        if(basketUser.length > 0) {
+                            if(localStorage.getItem('products')) {
+                                let products = JSON.parse(localStorage.getItem('products'));
+                                products.map(product => {
+                                    basketUser.map(itemBasketUser => {
+                                        if(product.id === itemBasketUser.id) {
+                                            let item = {
+                                                id: itemBasketUser.id,
+                                                quantity: itemBasketUser.quantity,
+                                                unitPrice: product.price.raw,
+                                                total: itemBasketUser.quantity * product.price.raw,
+                                            }
+                                            basket.push(item);
+                                        }
+                                    })
+                                })
+                            }
+                        }
+
+                        if(basketLocal.length > 0) {
+                            basketLocal.map(itemBasketLocal => {
+                                basket.push(itemBasketLocal);
+                            })
+                        }
+                        let basketTerm = res.data[0];
+                        basketTerm.details = [];
+                        axios.put(API_BASKETS_URL + '/' + basketTerm.id, basketTerm).then( res => {
+                            // update basket User;
+                            localStorage.setItem('basket', JSON.stringify(basket));
+                        })
+                    }
+                    else {
+                        let basket = JSON.parse(localStorage.getItem('basket'));
+                    }
+                }
+                // localStorage don't contain basket
+                else {
+                    let basket = [];
+                    if(basketUser.length > 0) {
+                        if(localStorage.getItem('products')) {
+                            let products = JSON.parse(localStorage.getItem('products'));
+                            products.map(product => {
+                                basketUser.map(itemBasketUser => {
+                                    if(product.id === itemBasketUser.id) {
+                                        let item = {
+                                            id: itemBasketUser.id,
+                                            quantity: itemBasketUser.quantity,
+                                            unitPrice: product.price.raw,
+                                            total: itemBasketUser.quantity * product.price.raw,
+                                        }
+                                        basket.push(item);
+                                    }
+                                })
+                            })
+                            let basketTerm = res.data[0];
+                            basketTerm.details = [];
+                            axios.put(API_BASKETS_URL + '/' + basketTerm.id, basketTerm).then( res => {
+                                // update basket User;
+                                localStorage.setItem('basket', JSON.stringify(basket));
+                            })
+                        }
+                    }
+                }
+            })
+        }
+    }
+
+    useEffect(() => {
+        fetchBasket();
+    });
 
     const signin = (e) => {
         e.preventDefault();
@@ -34,7 +142,8 @@ const SignIn = () => {
             else {
                 localStorage.setItem('userID', user.id);
                 setErrorText('');
-                history.goBack();
+                fetchBasket();
+                history.replace('/');
             }
         }
         else {
@@ -55,7 +164,7 @@ const SignIn = () => {
                         <div className="responsive__cart-area">
                         <div className="signin__form" onSubmit={(e) => signin(e)}>
                             <div className="header">
-                                <h2>Sign In</h2>
+                                <h2>Login</h2>
                                 <p>Sign in with your email address and password</p>
                             </div>
                             <form className="wrapper">
@@ -73,12 +182,12 @@ const SignIn = () => {
                             <Link to="/forgot-password">
                                 <a href="#">Forgot password?</a>
                             </Link>
-                            <div><button className="btn-signin" type="submit"> Signin</button></div>
+                            <div><button className="btn-signin" type="submit"> Login</button></div>
                             <div className="link">
                                 Not yet a member?
                                 &nbsp;
-                                <Link to="/sign-up">
-                                    <a href="#"> Signup now</a>
+                                <Link to="/register">
+                                    <a href="#"> Register now</a>
                                 </Link>
                             </div>
                             </form>

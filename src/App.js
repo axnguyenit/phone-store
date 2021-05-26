@@ -36,8 +36,8 @@ function App() {
                 { /* add routes without layouts */ }
 
                 <Route path = "/admin" exact component = { Admin }/> 
-                <Route path = "/sign-in" exact component = { SignIn }/>
-                <Route path = "/sign-up" exact component = { SignUp }/>
+                <Route path = "/login" exact component = { SignIn }/>
+                <Route path = "/register" exact component = { SignUp }/>
                 <Route path = "/reset-password" exact component = { ResetPassword }/>
                 <Route path = "/forgot-password" exact component = { ForgotPassword }/>
                 <Route path = "/code-verification" exact component = { CodeVerification }/>

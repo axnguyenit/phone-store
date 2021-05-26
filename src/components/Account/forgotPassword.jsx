@@ -94,8 +94,8 @@ const ForgotPassword = () => {
                             <div className="link">
                                 Already a member?
                                 &nbsp;
-                                <Link to='/sign-in'>
-                                    <a href="#">Signin here</a>
+                                <Link to='/login'>
+                                    <a href="#">Login here</a>
                                 </Link>
                                 </div>
                             </form>

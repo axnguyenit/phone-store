@@ -1,15 +1,6 @@
 {
   "users": [
     {
-      "id": 1,
-      "name": "Nguyen Dinh Kha ",
-      "email": "kha.nguyen22@student.passerellesnumeriques.org",
-      "password": "admin",
-      "phone": "0337965469",
-      "role": "admin",
-      "address": "Binh Dinh"
-    },
-    {
       "id": 2,
       "name": "Thai Tran Hung Vuong",
       "email": "vuong.thai22@student.passerellesnumeriques.org",
@@ -142,7 +133,7 @@
     {
       "name": "Nguyen Dinh Kha",
       "email": "nguyendinhkha1812@gmail.com",
-      "password": "a",
+      "password": "aaa",
       "phone": "",
       "address": "",
       "active": true,
@@ -151,6 +142,19 @@
       "role": "user",
       "createdAt": 1621957622772,
       "id": 17
+    },
+    {
+      "name": "Nguyen Dinh Kha",
+      "email": "kha.nguyen22@student.passerellesnumeriques.org",
+      "password": "aa",
+      "phone": "",
+      "address": "",
+      "active": true,
+      "code": 0,
+      "status": true,
+      "role": "user",
+      "createdAt": 1622022481360,
+      "id": 18
     }
   ],
   "products": [
@@ -244,6 +248,39 @@
         {
           "id": "prod_4OANwRpDY5vYL8",
           "quantity": 1
+        }
+      ]
+    },
+    {
+      "userId": 18,
+      "details": [
+        {
+          "id": "prod_kd6Ll28YEoV2mj",
+          "quantity": 1
+        },
+        {
+          "id": "prod_4OANwRpDY5vYL8",
+          "quantity": 1
+        },
+        {
+          "id": "prod_yA6nldj93oEWbz",
+          "quantity": 1
+        }
+      ],
+      "createdAt": 1622022527369,
+      "id": 3
+    }
+  ],
+  "wishList": [
+    {
+      "id": 1,
+      "userId": 17,
+      "details": [
+        {
+          "id": "prod_yA6nldj93oEWbz"
+        },
+        {
+          "id": "prod_kd6Ll28YEoV2mj"
         }
       ]
     }
