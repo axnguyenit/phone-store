@@ -57,7 +57,6 @@ const NavBar = () =>{
                     history.replace('/login');
                 })
             })
-
         }
         else {
             localStorage.removeItem('userID');

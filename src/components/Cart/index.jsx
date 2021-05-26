@@ -98,7 +98,7 @@ const Cart = () => {
             history.replace('/checkout');
         }
         else {
-            history.replace('/sign-in');
+            history.replace('/login');
         }
     }
 

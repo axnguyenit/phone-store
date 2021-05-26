@@ -10,32 +10,69 @@ import {
 import { useHistory } from "react-router-dom";
 import { renderRelatedComponent } from "./helpers";
 import "./style.css";
+import axios from "axios";
 
-// const NavBar = React.lazy(() => import('../Header/NavBar'));
-// import NavBar from '';
-
+const API_BASKETS_URL = `http://localhost:4000/api/baskets`;
+const API_USERS_URL = `http://localhost:4000/api/users`;
 const steps = ["Address", "Details", "Payment"];
 
 const Checkout = () => {
-  const [user, setUser] = useState({
-    city: "",
-    email: "",
-    address: "",
-    postCode: "",
-    lastName: "",
-    firstName: "",
-    shippingOption: {},
-    shippingOptions: [],
-    shippingCountry: {},
-    shippingCountries: [],
-    shippingSubdivision: {},
-    shippingSubdivisions: [],
-  });
+  const [user, setUser] = useState();
   const [bookingStep, setBookingStep] = useState("Address");
-
+  // const [orderInfo, setOrderInfo] = useState();
+  const [checkoutData, setCheckoutData] = useState();
+  const [totalPrice, setTotalPrice] = useState(0);
   const history = useHistory();
-  // history.replace('/checkout');
-  // console.log(history);
+
+  // const fetchUserID = () => {
+  //   if (localStorage.getItem('userID')) {
+  //     const userID = JSON.parse(localStorage.getItem('userID'));
+  //     setOrderInfo(userID);
+  //   } 
+  //   else {
+  //     history.goBack();
+  //   }
+  // }
+
+  const fetchUser = () => {
+    if(localStorage.getItem('userID')) {
+      const userID = JSON.parse(localStorage.getItem('userID'));
+      axios.get(API_USERS_URL + '/' + userID).then(res => {
+        setUser(res.data);
+        console.log(res.data);
+      })
+    }
+    else {
+      history.goBack();
+    }
+  }
+
+  const fetchCheckoutData = () => {
+    if(localStorage.getItem('basket')) {
+      let basket = JSON.parse(localStorage.getItem('basket'));
+      let total = 0;
+
+      basket.map(item => total += item.total);
+      if(localStorage.getItem('products')) {
+        let products = JSON.parse(localStorage.getItem('products'));
+        let checkoutData = [];
+        products.map(product => {
+          basket.map(item => {
+            
+            if(product.id === item.id) {
+              let itemTerm = item;
+              itemTerm.name = product.name;
+
+              checkoutData.push(itemTerm);
+            }
+          })
+        })
+        setTotalPrice(total);
+        setCheckoutData(checkoutData);
+      }
+    }
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setBookingStep("Details");
@@ -56,29 +93,13 @@ const Checkout = () => {
     setUser({ ...user, [name]: value });
   };
 
-  const handleSelectChange = (e, state) => {
-    const { name, value } = e.target;
-    if (state === "shippingOptions") {
-      setUser({
-        ...user,
-        [name]: {
-          id: value,
-        },
-      });
-    } else {
-      setUser({
-        ...user,
-        [name]: {
-          name: user[state].find((country) => country.code === value).name,
-          code: value,
-        },
-      });
-    }
-  };
+  useEffect(() => {
+    fetchUser();
+    fetchCheckoutData();
+  }, []);
 
   return (
     <>
-      {/* <NavBar/> */}
       <div className="checkout">
         <Container>
           <Paper className="paper" elevation={3}>
@@ -100,11 +121,12 @@ const Checkout = () => {
             {renderRelatedComponent({
               user,
               bookingStep,
+              checkoutData,
+              totalPrice,
               handleChange,
               handleSubmit,
               handleBackStep,
               handleNextStep,
-              handleSelectChange,
             })}
           </Paper>
         </Container>

@@ -10,6 +10,7 @@ const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 const Payment = ({
   user,
   checkoutData,
+  totalPrice,
   handleBackStep,
   handleNextStep,
   handleCheckout,
@@ -26,34 +27,7 @@ const Payment = ({
       card: cardElement,
     });
 
-    if (error) {
-      console.log("Error ======>>>>", error);
-    } else {
-      const orderData = {
-        payment: {
-          gateway: "stripe",
-          stripe: {
-            payment_method_id: paymentMethod.id,
-          },
-        },
-        shipping: {
-          name: "stander",
-          street: user.address,
-          town_city: user.city,
-          county_state: user.shippingSubdivision,
-          postal_zip_code: user.postcode,
-          country: user.shippingCountry,
-        },
-        customer: {
-          firstname: user.firstName,
-          lastname: user.lastName,
-          email: user.email,
-        },
-        // line_items: checkoutData.live.line_items,
-        fulfillment: { shipping_method: user.shippingOptions },
-      };
-
-      // handleCheckout(checkoutData.id, orderData);
+    if (!error) {
       handleNextStep(e, "confirmation");
     }
   };
@@ -68,10 +42,10 @@ const Payment = ({
               <div className="actions payment-actions">
                 <Button
                   variant="contained"
-                  color="primary"
+                  color="secondary"
                   onClick={(e) => handleBackStep(e, "Details")}
                 >
-                  Back
+                  Previous
                 </Button>
                 <Button
                   type="submit"
@@ -79,8 +53,7 @@ const Payment = ({
                   disabled={!stripe}
                   color="primary"
                 >
-                  {/* Pay {checkoutData.live.subtotal.formatted_with_symbol} */}
-                  Pay 500
+                  Pay ${totalPrice}
                 </Button>
               </div>
             </form>

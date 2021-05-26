@@ -134,10 +134,10 @@
       "name": "Nguyen Dinh Kha",
       "email": "nguyendinhkha1812@gmail.com",
       "password": "aaa",
-      "phone": "",
-      "address": "",
+      "phone": "0337965469",
+      "address": "Binh Dinh",
       "active": true,
-      "code": 0,
+      "code": 473373,
       "status": true,
       "role": "user",
       "createdAt": 1621957622772,
@@ -218,21 +218,82 @@
   "orders": [
     {
       "id": 1,
-      "userID": 15,
-      "total": 840,
+      "userId": 15,
       "status": "pending",
       "details": [
         {
-          "detailID": 1,
-          "prodID": "prod_kd6Ll28YEoV2mj",
+          "prodId": "prod_kd6Ll28YEoV2mj",
           "quantity": 1
         },
         {
-          "detailID": 2,
-          "prodID": "prod_eN1ql99pplz3ym",
+          "prodId": "prod_eN1ql99pplz3ym",
           "quantity": 1
         }
       ]
+    },
+    {
+      "userId": 17,
+      "status": "pending",
+      "details": [
+        {
+          "prodId": "prod_yA6nldj93oEWbz",
+          "quantity": 3
+        },
+        {
+          "prodId": "prod_kd6Ll28YEoV2mj",
+          "quantity": 2
+        }
+      ],
+      "createdAt": 1622060614634,
+      "id": 2
+    },
+    {
+      "userId": 17,
+      "status": "pending",
+      "details": [
+        {
+          "prodId": "prod_yA6nldj93oEWbz",
+          "quantity": 3
+        },
+        {
+          "prodId": "prod_kd6Ll28YEoV2mj",
+          "quantity": 2
+        }
+      ],
+      "createdAt": 1622060746188,
+      "id": 3
+    },
+    {
+      "userId": 17,
+      "status": "pending",
+      "details": [
+        {
+          "prodId": "prod_4OANwRpDY5vYL8",
+          "quantity": 1
+        },
+        {
+          "prodId": "prod_yA6nldj93oEWbz",
+          "quantity": 1
+        },
+        {
+          "prodId": "prod_gnZO5kNOvo7MNq",
+          "quantity": 1
+        }
+      ],
+      "createdAt": 1622060820185,
+      "id": 4
+    },
+    {
+      "userId": 17,
+      "status": "pending",
+      "details": [
+        {
+          "prodId": "prod_gnZO5kNOvo7MNq",
+          "quantity": 1
+        }
+      ],
+      "createdAt": 1622061061662,
+      "id": 5
     }
   ],
   "baskets": [
