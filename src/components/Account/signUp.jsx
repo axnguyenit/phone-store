@@ -24,7 +24,6 @@ const SignUp = () => {
 
     const sendEmail = (e) => {
         e.preventDefault();
-        console.log(e);
     
         emailjs.sendForm('default_service', 'template_yomost', e.target, `user_eGZkjyOWcdrxHJK1InigS`)
             .then((result) => {
@@ -54,8 +53,6 @@ const SignUp = () => {
             users.find(user => {
                 if(user.email === to_email && !user.status) {
                     checkUser = true;
-                    console.log("1");
-                    rand();
                     const userUpdate = {
                         name: to_name,
                         email: to_email,
@@ -67,10 +64,10 @@ const SignUp = () => {
                         status: false,
                         role: 'user',
                     };
+                    console.log("1");
                     
                     // call send mail function here and update code
                     axios.put(API_USERS_URL + '/' + user.id, userUpdate).then( res => {
-                        console.log(res.data);
                         sendEmail(e);
                         localStorage.setItem('verifyUser', JSON.stringify(user.id));
                         history.replace('/code-verification');
@@ -93,6 +90,7 @@ const SignUp = () => {
                     status: false,
                     role: 'user',
                 }
+                console.log("2");
                 axios.post(API_USERS_URL, user).then( res => {
                     console.log(res.data);
                     sendEmail(e);
@@ -142,7 +140,6 @@ const SignUp = () => {
                                         <label>Confirm Password</label>
                                     </div>
                                     <input value={code} name="code" hidden/>
-                                    <input value="[Yomost Store] - Email Verification Code" name="subject" hidden/>
                                     <div className="error-txt">{errorText}</div>
                                     <div><button className="btn-signin" type="submit">Register</button></div>
                                     <div className="link">

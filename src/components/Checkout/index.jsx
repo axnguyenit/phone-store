@@ -9,8 +9,8 @@ import {
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { renderRelatedComponent } from "./helpers";
-import "./style.css";
 import axios from "axios";
+import "./style.css";
 
 const API_BASKETS_URL = `http://localhost:4000/api/baskets`;
 const API_USERS_URL = `http://localhost:4000/api/users`;
@@ -19,27 +19,15 @@ const steps = ["Address", "Details", "Payment"];
 const Checkout = () => {
   const [user, setUser] = useState();
   const [bookingStep, setBookingStep] = useState("Address");
-  // const [orderInfo, setOrderInfo] = useState();
   const [checkoutData, setCheckoutData] = useState();
   const [totalPrice, setTotalPrice] = useState(0);
   const history = useHistory();
-
-  // const fetchUserID = () => {
-  //   if (localStorage.getItem('userID')) {
-  //     const userID = JSON.parse(localStorage.getItem('userID'));
-  //     setOrderInfo(userID);
-  //   } 
-  //   else {
-  //     history.goBack();
-  //   }
-  // }
 
   const fetchUser = () => {
     if(localStorage.getItem('userID')) {
       const userID = JSON.parse(localStorage.getItem('userID'));
       axios.get(API_USERS_URL + '/' + userID).then(res => {
         setUser(res.data);
-        console.log(res.data);
       })
     }
     else {
@@ -58,7 +46,6 @@ const Checkout = () => {
         let checkoutData = [];
         products.map(product => {
           basket.map(item => {
-            
             if(product.id === item.id) {
               let itemTerm = item;
               itemTerm.name = product.name;
@@ -67,8 +54,8 @@ const Checkout = () => {
             }
           })
         })
-        setTotalPrice(total);
-        setCheckoutData(checkoutData);
+        // setTotalPrice(total);
+        // setCheckoutData(checkoutData);
       }
     }
   }

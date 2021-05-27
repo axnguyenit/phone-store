@@ -87,7 +87,6 @@ const ForgotPassword = () => {
 
                                 <input value={name} name="to_name" hidden/>
                                 <input value={code} name="code" hidden/>
-                                <input value="[Yomost Store] - Email Verification Code" name="subject" hidden/>
                             </div>
                             <div className="error-txt">{errorText}</div>
                             <div><button className="btn-signin" type="submit">Continue</button></div>

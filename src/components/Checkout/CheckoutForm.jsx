@@ -15,11 +15,7 @@ const CheckoutForm = ({
   handleSubmit,
   checkoutData,
   totalPrice,
-}) => {
-  console.log(user);
-  console.log(checkoutData);
-  return (
-    <>
+}) => (
       <form onSubmit={handleSubmit} autoComplete="off">
         <Grid container spacing={4}>
           <Grid item xs={12} sm={6}>
@@ -64,7 +60,7 @@ const CheckoutForm = ({
               name="address"
               placeholder="Address"
               value={user.address}
-              onChange={handleChange}
+              onChange={(e) => {console.log(e.target.value);}}
             />
           </Grid>
         </Grid>
@@ -89,7 +85,6 @@ const CheckoutForm = ({
           </Button>
         </div>
       </form>
-    </>
-)};
+)
 
 export default CheckoutForm;
