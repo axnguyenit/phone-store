@@ -1,11 +1,14 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
 import {Link} from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const API_USERS_URL = `http://localhost:4000/api/users`;
-const API_WISHLIST_URL = `http://localhost:4000/api/wishList`;
+const API_WISHLIST_URL = `http://localhost:4000/api/wishlist`;
 
+toast.configure();
 const CustomCard = ({product}) => {
-    
+    // const [isRender, setIsRender] = useState(false);
     const to_slug = (str) => {
         str = str.toLowerCase();
         str = str.replace(/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/g, 'a');
@@ -15,21 +18,14 @@ const CustomCard = ({product}) => {
         str = str.replace(/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/g, 'u');
         str = str.replace(/(ỳ|ý|ỵ|ỷ|ỹ)/g, 'y');
         str = str.replace(/(đ)/g, 'd');
-     
-        // Xóa ký tự đặc biệt
         str = str.replace(/([^0-9a-z-\s])/g, '');
-     
-        // Xóa khoảng trắng thay bằng ký tự -
         str = str.replace(/(\s+)/g, '-');
-     
-        // xóa phần dự - ở đầu
         str = str.replace(/^-+/g, '');
-     
-        // xóa phần dư - ở cuối
         str = str.replace(/-+$/g, '');
         return str;
     }
 
+    // function add an item to the basket
     const addToBasket = (item) => {
         let itemAdd = {
             id: item.id,
@@ -38,6 +34,8 @@ const CustomCard = ({product}) => {
             total: item.price.raw,
         }
 
+        const nameItem = item.name;
+
         if(localStorage.getItem('basket')) {
             //add to basket
             let basket = JSON.parse(localStorage.getItem('basket'));
@@ -45,6 +43,15 @@ const CustomCard = ({product}) => {
 
             //if basket contain item => item quantity =+ 1
             if(item) {
+                toast.success(`Add ${nameItem} to the basket successfully!`, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
                 let itemTerm = item;
                 itemTerm.quantity += 1;
                 let totalPrice = itemTerm.quantity * itemTerm.total;
@@ -55,44 +62,116 @@ const CustomCard = ({product}) => {
                 localStorage.setItem('basket', JSON.stringify(basket));
             }
             else {
+                toast.success(`Add ${nameItem} to the basket successfully!`, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
                 basket.push(itemAdd);
                 localStorage.setItem('basket', JSON.stringify(basket));
             }
         }
         else {
             let basket = new Array();
+
+            toast.success(`Add ${nameItem} to the basket successfully!`, {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
             basket.push(itemAdd);
             localStorage.setItem('basket', JSON.stringify(basket));
         }
     }
 
-    const addToWishList = (item) => {
+    // function add an item to the wishlist
+    const addToWishlist = (item) => {
         if(localStorage.getItem('userID')) {
             const userID = JSON.parse(localStorage.getItem('userID'));
-            axios.get(API_USERS_URL + '/' + userID + '/wishList').then(res => {
-                let wishList = res.data[0].details;
-                if(wishList.length > 0) {
-                    console.log(wishList);
-                    wishList.map(wish => {
-                        // if(wish.id === item.id) {
-                        //     wishList.push({
-                        //         id: item.id,
-                        //     })
-                        //     // axios.put(API_WISHLIST_URL)
-                        // }
+            axios.get(API_USERS_URL + '/' + userID + '/wishlist').then(res => {
+                let wishlist = res.data[0].details;
+
+                let nameItem = '';
+                if(localStorage.getItem('products')) {
+                    let products = JSON.parse(localStorage.getItem('products'));
+                    nameItem = products.find(product => product.id === item.id).name;
+                }
+
+                // the wishlist isn't empty
+                if(wishlist.length > 0) {
+                    console.log(wishlist);
+                    const wishlistItem = wishlist.find(wishlistItem => wishlistItem.id === item.id);
+
+                    if(wishlistItem) {
+                        const index = wishlist.indexOf(wishlistItem);
+                        wishlist.splice(index, 1);
+                        toast.warn(`Remove ${nameItem} from the wishlist successfully!`, {
+                            position: "top-center",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
+                    }
+                    else {
+                        wishlist.push({
+                            id: item.id,
+                        });
+                        toast.success(`Add ${nameItem} to the wishlist successfully!`, {
+                            position: "top-center",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
+                    }
+                    let wishlistTerm = res.data[0];
+                    axios.put(API_WISHLIST_URL + '/' + wishlistTerm.id, wishlistTerm).then(res => {});
+                }
+                // the wishlist is empty => create new wishlist => add the item to the wishlist
+                else {
+                    wishlist.push({
+                        id: item.id,
+                    });
+                    let wishlistTerm = res.data[0];
+                    axios.put(API_WISHLIST_URL + '/' + wishlistTerm.id, wishlistTerm).then(res => {
+                        toast.success(`Add ${nameItem} to the wishlist successfully!`, {
+                            position: "top-center",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
                     })
                 }
-                else {
-
-                }
-                // console.log(item);
-                // console.log(wishList);
-
             })
         }
         else {
-            console.log("please login before");
+            toast.warn('Please, log in before adding the item to your wishlist!', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         }
+        // setIsRender(!isRender);
     }
 
     return (
@@ -116,7 +195,7 @@ const CustomCard = ({product}) => {
                     </Link>
                     </li>
                     <li>
-                    <a data-tip="Add To Wishlist" data-place="left" onClick={ () => addToWishList(product)}>
+                    <a data-tip="Add To Wishlist" data-place="left" onClick={ () => addToWishlist(product)}>
                         <svg>
                         <use xlinkHref="./images/sprite.svg#icon-heart-o"/>
                         </svg>

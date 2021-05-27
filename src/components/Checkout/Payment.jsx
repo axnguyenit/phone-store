@@ -34,10 +34,10 @@ const Payment = ({
       emailjs.sendForm('default_service', 'template_order', e.target, `user_eGZkjyOWcdrxHJK1InigS`)
         .then((result) => {
             console.log(result.text);
+            handleNextStep(e, "confirmation");
         }, (error) => {
             console.log(error.text);
         });
-      handleNextStep(e, "confirmation");
     }
   };
   console.log(user);

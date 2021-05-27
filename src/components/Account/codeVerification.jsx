@@ -3,11 +3,14 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import NavBar from '../Header/NavBar';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure();
 const API_USERS_URL = `http://localhost:4000/api/users`;
 const API_BASKETS_URL = `http://localhost:4000/api/baskets`;
+const API_WISHLIST_URL = `http://localhost:4000/api/wishlist`;
 
 const CodeVerification = () => {
-    const [errorText, setErrorText] = useState('');
     const [code, setCode] = useState(0);
     const history = useHistory();
 
@@ -17,11 +20,6 @@ const CodeVerification = () => {
             const userLocal = JSON.parse(localStorage.getItem('verifyUser'));
 
             axios.get(API_USERS_URL + '/' + userLocal).then( res => {
-                console.log(res.data);
-                // setCode(code);
-                // console.log(typeof code);
-                // console.log(typeof res.data.code);
-
                 if(code === res.data.code) {
                     let userTerm = res.data;
                     userTerm.active = true;
@@ -32,16 +30,42 @@ const CodeVerification = () => {
                         console.log(res.data);
                         localStorage.removeItem('verifyUser');
                         localStorage.setItem('userID', JSON.stringify(res.data.id));
+
+                        toast.success('Register successfully!', {
+                            position: "top-center",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
+
                         let newBasket = {
                             userId: userLocal,
                             details: [],
                         }
                         axios.post(API_BASKETS_URL, newBasket);
+
+                        let newWishList = {
+                            userId: userLocal,
+                            details: [],
+                        }
+                        axios.post(API_WISHLIST_URL, newWishList);
+
                         history.replace('/');
                     })
                 }
                 else {
-                    setErrorText('Code verify is invalid!');
+                    toast.error('Code verify is invalid!', {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
                 }
             })
         }
@@ -62,12 +86,29 @@ const CodeVerification = () => {
                     })
                 }
                 else {
-                    setErrorText('Code verify is invalid!');
+                    toast.error('Code verify is invalid!', {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
                 }
             })
         }
         else {
             //toast a message to notice that something went wrong! Please try again.
+            toast.error('Something went wrong! Please try again.', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         }
     }
 
@@ -85,11 +126,10 @@ const CodeVerification = () => {
                             </div>
                             <form className="wrapper" onSubmit={handleVerifyCode}>
                             <div className="input-data">
-                                <input type="text" required onChange={(e) => {setCode(parseInt(e.target.value)); setErrorText('')}}/>
+                                <input type="text" required onChange={(e) => setCode(parseInt(e.target.value))}/>
                                 <div className="underline" />
                                 <label>OTP</label>
                             </div>
-                            <div className="error-txt">{errorText}</div>
                             <div><button className="btn-signin" type="submit">Continue</button></div>
                             <div className="link">
                                 Already a member? 

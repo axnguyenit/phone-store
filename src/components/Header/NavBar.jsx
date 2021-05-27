@@ -3,9 +3,13 @@ import axios from 'axios';
 import React, {useState, useEffect} from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import '../../css/styles.css';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const API_BASKETS_URL = `http://localhost:4000/api/baskets`;
 const API_USERS_URL = `http://localhost:4000/api/users`;
 
+toast.configure();
 
 const NavBar = () =>{
     const history = useHistory();
@@ -53,6 +57,15 @@ const NavBar = () =>{
                     console.log(res.data);
                     localStorage.removeItem('userID');
                     localStorage.removeItem('basket');
+                    toast.success('Sign out successfully!', {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
                     setIsSignIn(false);
                     history.replace('/login');
                 })
@@ -60,6 +73,15 @@ const NavBar = () =>{
         }
         else {
             localStorage.removeItem('userID');
+            toast.success('Sign out successfully!', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
             setIsSignIn(false);
         }
     }
@@ -87,7 +109,7 @@ const NavBar = () =>{
                                     {
                                         <Link to={isSignIn ? "/wish-list" : "/register"} className="nav__link scroll-link">
                                             { 
-                                                isSignIn ? "Wish" : "Register"
+                                                isSignIn ? "Wishlist" : "Register"
                                             }
                                         </Link>
                                     }

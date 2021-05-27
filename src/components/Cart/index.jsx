@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+toast.configure();
 const Cart = () => {
     const history = useHistory();
     const [basket, setBasket] = useState();
     const [isRender, setIsRender] = useState(false);
-    const [isValidBasket, setIsValidBasket] = useState(false);
     let items = [];
 
     if(localStorage.getItem('basket')) {
@@ -32,6 +34,7 @@ const Cart = () => {
         
     // remove item from basket
     const removeItem = (itemDelete) => {
+        const nameItem = items.find( item => itemDelete.id === item.id).name;
         if(localStorage.getItem('basket')) {
             let basket = JSON.parse(localStorage.getItem('basket'));
             const item = basket.find( item => item.id === itemDelete.id);
@@ -39,6 +42,15 @@ const Cart = () => {
                 let index = basket.indexOf(item);
                 basket.splice(index, 1);
                 localStorage.setItem('basket', JSON.stringify(basket));
+                toast.success(`Remove ${nameItem} from the basket successfully!`, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
                 setIsRender(!isRender);
             }
         }
@@ -114,6 +126,16 @@ const Cart = () => {
                                     <table width="100%" className="table">
                                     <thead>
                                         <tr>
+                                            <th>
+                                            <label className="label">
+                                                <input className="label__checkbox" type="checkbox"/>
+                                                <span className="label__text">
+                                                <span className="label__check">
+                                                    <i className="fa fa-check icon" />
+                                                </span>
+                                                </span>
+                                            </label>
+                                            </th>
                                         <th>PRODUCT</th>
                                         <th>NAME</th>
                                         <th>UNIT PRICE</th>
@@ -125,6 +147,16 @@ const Cart = () => {
                                         {
                                             items.map((item, index) => {
                                                 return <tr key={index}>
+                                                    <td>
+                                                        <label className="label">
+                                                            <input className="label__checkbox" type="checkbox" onClick={e => console.log(e.target.checked)}/>
+                                                            <span className="label__text">
+                                                            <span className="label__check">
+                                                                <i className="fa fa-check icon" />
+                                                            </span>
+                                                            </span>
+                                                        </label>
+                                                    </td>
                                                     <td className="product__thumbnail">
                                                         <img src={item.img} alt="" />
                                                     </td>
@@ -149,7 +181,7 @@ const Cart = () => {
                                                             <i class="fas fa-trash-alt"></i>
                                                         </a>
                                                     </td>
-                                                </tr> }
+                                                </tr>}
                                             )
                                         }
                                         </tbody>

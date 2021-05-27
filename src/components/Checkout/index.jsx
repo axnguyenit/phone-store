@@ -54,8 +54,8 @@ const Checkout = () => {
             }
           })
         })
-        // setTotalPrice(total);
-        // setCheckoutData(checkoutData);
+        setTotalPrice(total);
+        setCheckoutData(checkoutData);
       }
     }
   }
