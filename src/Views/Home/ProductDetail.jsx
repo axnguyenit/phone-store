@@ -20,7 +20,7 @@ function ProductDetail(props) {
 
   useEffect(() => {
     fetchProducts();
-  });
+  }, []);
   
   return (
     <>
@@ -35,7 +35,7 @@ function ProductDetail(props) {
               }
             })
           }
-          <Contact/>
+          {/* <Contact/> */}
           <Facility/>
         </ main>
         <Footer/>

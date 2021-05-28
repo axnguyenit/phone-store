@@ -8,14 +8,14 @@ const ForgotPassword = React.lazy(() => import('./components/Account/forgotPassw
 const ResetPassword = React.lazy(() => import('./components/Account/resetPassword'));
 const Home = React.lazy(() => import('./Views/Home'));
 const ProductDetail = React.lazy(() => import('./Views/Home/ProductDetail'));
-const ErrorPage = React.lazy(() => import('./components/Account/404'));
 const Checkout = React.lazy(() => import('./components/Checkout'));
 const Basket = React.lazy(() => import('./Views/Home/Basket'));
 const ViewProfile = React.lazy(() => import('./Views/Home/ViewProfile'));
 // const ViewProfile = React.lazy(() => import('./components/Account/Profile'));
 const CodeVerification = React.lazy(() => import('./components/Account/codeVerification'));
-const WishList = React.lazy(() => import('./Views/Home/WishList'));
-const OrderHistory = React.lazy(() => import('./Views/Home/OrderHistoty'));
+const Wishlist = React.lazy(() => import('./Views/Home/Wishlist'));
+const Orders = React.lazy(() => import('./Views/Home/Orders'));
+const Order = React.lazy(() => import('./Views/Home/Order'));
 const Admin = React.lazy(() => import('./components/Admin/App'));
 const loading = (
   <div className="pt-3 text-center">
@@ -30,11 +30,6 @@ function App() {
     <BrowserRouter>
         <React.Suspense fallback={loading}>
             <Switch >
-                { /* add routes with layouts */ } 
-                { /* <Route path="/admin" component={Admin} /> */ }
-                { /* <Route path="/auth" component={Auth} /> */ }
-                { /* add routes without layouts */ }
-
                 <Route path = "/admin" exact component = { Admin }/> 
                 <Route path = "/login" exact component = { SignIn }/>
                 <Route path = "/register" exact component = { SignUp }/>
@@ -45,11 +40,10 @@ function App() {
                 <Route path = "/detail/:id/:slug" exact component = { ProductDetail } />
                 <Route path = "/checkout" exact component = { Checkout } />
                 <Route path = "/basket" exact component = { Basket } />
-                <Route path = "/wish-list" exact component = { WishList } />
-                <Route path = "/order-history" exact component = { OrderHistory } />
-                <Route path = "/" exact component = { Home } /> 
-                <Route path = "" exact component = { ErrorPage }/> 
-                { /* add redirect for first page */ } 
+                <Route path = "/wishlist" exact component = { Wishlist } />
+                <Route path = "/orders" exact component = { Orders } />
+                <Route path = "/orders/:id" exact component = { Order } />
+                <Route path = "/" exact component = { Home } />
                 <Redirect from = "*" to = "/" />
             </Switch> 
         </React.Suspense> 

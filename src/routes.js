@@ -6,7 +6,6 @@ const ResetPassword = React.lazy(() => import('./components/Account/resetPasswor
 const Home = React.lazy(() => import('./Views/Home'));
 const ProductDetail = React.lazy(() => import('./Views/Home/ProductDetail'));
 const ForgotPassword = React.lazy(() => import('./components/Account/forgotPassword'));
-const ErrorPage = React.lazy(() => import('./components/Account/404'));
 const Checkout = React.lazy(() => import('./components/Checkout'));
 const Basket = React.lazy(() => import('./Views/Home/Basket'));
 const ViewProfile = React.lazy(() => import('./Views/Home/ViewProfile'));
@@ -21,7 +20,6 @@ const routes = [
   { path: '/detail/:id/:slug', exact: true, component: ProductDetail },
   { path: '/basket', exact: true, component: Basket },
   { path: '/checkout', exact: true, component: Checkout },
-  { path: '', exact: true, component: ErrorPage },
   
 ];
 

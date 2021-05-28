@@ -1,7 +1,158 @@
 import React from 'react';
-import commerce from '../../lib/commerce';
+import { toast } from 'react-toastify';
+import axios from 'axios';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure();
+const API_USERS_URL = `http://localhost:4000/api/users`;
+const API_WISHLIST_URL = `http://localhost:4000/api/wishlist`;
 
 export const ProDetail = ({product}) => {
+  const addToBasket = (item) => {
+    let itemAdd = {
+        id: item.id,
+        quantity: 1,
+        unitPrice: item.price.raw,
+        total: item.price.raw,
+    }
+
+    const nameItem = item.name;
+
+    if(localStorage.getItem('basket')) {
+        //add to basket
+        let basket = JSON.parse(localStorage.getItem('basket'));
+        const item = basket.find( item => item.id === itemAdd.id );
+
+        //if basket contain item => item quantity =+ 1
+        if(item) {
+            toast.success(`Add ${nameItem} to the basket successfully!`, {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+            let itemTerm = item;
+            itemTerm.quantity += 1;
+            let totalPrice = itemTerm.quantity * itemTerm.total;
+            itemTerm.total = totalPrice;
+            //find index of add item in basket to change quantity
+            let index = basket.indexOf(item);
+            basket[index] = itemTerm;
+            localStorage.setItem('basket', JSON.stringify(basket));
+        }
+        else {
+            toast.success(`Add ${nameItem} to the basket successfully!`, {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+            basket.push(itemAdd);
+            localStorage.setItem('basket', JSON.stringify(basket));
+        }
+    }
+    else {
+        let basket = new Array();
+
+        toast.success(`Add ${nameItem} to the basket successfully!`, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
+        basket.push(itemAdd);
+        localStorage.setItem('basket', JSON.stringify(basket));
+    }
+  }
+
+  const addToWishlist = (item) => {
+    if(localStorage.getItem('userID')) {
+        const userID = JSON.parse(localStorage.getItem('userID'));
+        axios.get(API_USERS_URL + '/' + userID + '/wishlist').then(res => {
+            let wishlist = res.data[0].details;
+
+            let nameItem = '';
+            if(localStorage.getItem('products')) {
+                let products = JSON.parse(localStorage.getItem('products'));
+                nameItem = products.find(product => product.id === item.id).name;
+            }
+
+            // the wishlist isn't empty
+            if(wishlist.length > 0) {
+                console.log(wishlist);
+                const wishlistItem = wishlist.find(wishlistItem => wishlistItem.id === item.id);
+
+                if(wishlistItem) {
+                    const index = wishlist.indexOf(wishlistItem);
+                    wishlist.splice(index, 1);
+                    toast.warn(`Remove ${nameItem} from the wishlist successfully!`, {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                }
+                else {
+                    wishlist.push({
+                        id: item.id,
+                    });
+                    toast.success(`Add ${nameItem} to the wishlist successfully!`, {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                }
+                let wishlistTerm = res.data[0];
+                axios.put(API_WISHLIST_URL + '/' + wishlistTerm.id, wishlistTerm).then(res => {});
+            }
+            // the wishlist is empty => create new wishlist => add the item to the wishlist
+            else {
+                wishlist.push({
+                    id: item.id,
+                });
+                let wishlistTerm = res.data[0];
+                axios.put(API_WISHLIST_URL + '/' + wishlistTerm.id, wishlistTerm).then(res => {
+                    toast.success(`Add ${nameItem} to the wishlist successfully!`, {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                })
+            }
+        })
+    }
+    else {
+        toast.warn('Please, log in before adding the item to your wishlist!', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
+    }
+  }
+
     return (
       <div className="container">
         <section className="mt-70 section product-details__section">
@@ -17,18 +168,14 @@ export const ProDetail = ({product}) => {
               <div className="zoom" id="zoom" />
             </div>
             <div className="product-details__btn">
-              <a className="add" href="#">
+              <a className="add" onClick={() => addToBasket(product)}>
                 <span>
-                  <svg>
-                    <use xlinkHref="./images/sprite.svg#icon-cart-plus" />
-                  </svg>
+                  <i class="fas fa-cart-plus"></i>
                 </span> ADD TO CART</a>
-              <a className="buy" href="#">
+              <a className="wishlist" onClick={() => addToWishlist(product)}>
                 <span>
-                  <svg>
-                    <use xlinkHref="./images/sprite.svg#icon-credit-card" />
-                  </svg>
-                </span> BUY NOW
+                  <i class="far fa-heart"></i>
+                </span> ADD TO WISHLIST
               </a>
             </div>
           </div>
@@ -38,105 +185,21 @@ export const ProDetail = ({product}) => {
               <div className="price">
                 <span className="new__price">{product.price.formatted_with_symbol}</span>
               </div>
-              <div className="product__review">
-                <div className="rating">
-                  <svg>
-                    <use xlinkHref="./images/sprite.svg#icon-star-full" />
-                  </svg>
-                  <svg>
-                    <use xlinkHref="./images/sprite.svg#icon-star-full" />
-                  </svg>
-                  <svg>
-                    <use xlinkHref="./images/sprite.svg#icon-star-full" />
-                  </svg>
-                  <svg>
-                    <use xlinkHref="./images/sprite.svg#icon-star-full" />
-                  </svg>
-                  <svg>
-                    <use xlinkHref="./images/sprite.svg#icon-star-empty" />
-                  </svg>
-                </div>
-                <a href="#" className="rating__quatity">3 reviews</a>
-              </div>
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt a doloribus iste natus et facere? dolor sit amet consectetur adipisicing elit. Sunt a doloribus iste natus et facere?
               </p>
               <div className="product__info-container">
                 <ul className="product__info">
-                  <li className="select">
-                    <div className="select__option">
-                      <label htmlFor="colors">Color</label>
-                      <select name="colors" id="colors" className="select-box">
-                        <option value="blue">blue</option>
-                        <option value="red">red</option>
-                      </select>
-                    </div>
-                    <div className="select__option">
-                      <label htmlFor="size">Inches</label>
-                      <select name="size" id="size" className="select-box">
-                        <option value="6.65">6.65</option>
-                        <option value="7.50">7.50</option>
-                      </select>
-                    </div>
+                  <li>
+                    <span>Subtotal: {product.price.formatted_with_symbol}</span>
                   </li>
                   <li>
-                    <div className="input-counter">
-                      <span>Quantity:</span>
-                      <div>
-                        <span className="minus-btn">
-                          <svg>
-                            <use xlinkHref="./images/sprite.svg#icon-minus" />
-                          </svg>
-                        </span>
-                        <input type="text" min={1} defaultValue={1} max={10} className="counter-btn" />
-                        <span className="plus-btn">
-                          <svg>
-                            <use xlinkHref="./images/sprite.svg#icon-plus" />
-                          </svg>
-                        </span>
-                      </div>
-                    </div>
+                    <span>Brand: {product.categories[0].name}</span>
                   </li>
                   <li>
-                    <span>Subtotal:</span>
-                    <a href="#" className="new__price">$250.99</a>
-                  </li>
-                  <li>
-                    <span>Brand:</span>
-                    <a href="#">Apple</a>
-                  </li>
-                  <li>
-                    <span>Product Type:</span>
-                    <a href="#">Phone</a>
-                  </li>
-                  <li>
-                    <span>Availability:</span>
-                    <a href="#" className="in-stock">In Stock (7 Items)</a>
+                    <span>Availability: In Stock (7 Items)</span>
                   </li>
                 </ul>
-                <div className="product-info__btn">
-                  <a href="#">
-                    <span>
-                      <svg>
-                        <use xlinkHref="./images/sprite.svg#icon-crop" />
-                      </svg>
-                    </span>&nbsp; SIZE GUIDE
-                  </a>
-                  <a href="#">
-                    <span>
-                      <svg>
-                        <use xlinkHref="./images/sprite.svg#icon-truck" />
-                      </svg>
-                    </span>&nbsp; SHIPPING
-                  </a>
-                  <a href="#">
-                    <span>
-                      <svg>
-                        <use xlinkHref="./images/sprite.svg#icon-envelope-o" />
-                      </svg>&nbsp;
-                    </span> ASK ABOUT THIS PRODUCT
-                  </a>
-                </div>
               </div>
             </div>
           </div>

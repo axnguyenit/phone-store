@@ -99,7 +99,7 @@ const NavBar = () =>{
                         <div className="nav__logo">
                             <ul className="nav__list">
                                 <li className="nav__item">
-                                    <Link to={isSignIn ? "/profile" : "/login"} className="nav__link scroll-link">
+                                    <Link to={isSignIn ? "/orders" : "/login"} className="nav__link scroll-link">
                                         {
                                             isSignIn ? "Orders" : "login"
                                         }
@@ -107,7 +107,7 @@ const NavBar = () =>{
                                 </li>
                                 <li className="nav__item">
                                     {
-                                        <Link to={isSignIn ? "/wish-list" : "/register"} className="nav__link scroll-link">
+                                        <Link to={isSignIn ? "/wishlist" : "/register"} className="nav__link scroll-link">
                                             { 
                                                 isSignIn ? "Wishlist" : "Register"
                                             }
@@ -118,7 +118,7 @@ const NavBar = () =>{
                                     {
                                         !isSignIn ? '' : 
                                         <Link className="nav__link scroll-link" onClick={() => signout()}>
-                                            Signout
+                                            Logout
                                         </Link>
                                     }
                                 </li>

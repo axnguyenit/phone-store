@@ -25,6 +25,18 @@ const API_ORDERS_URL = `http://localhost:4000/api/orders`;
 
 const fields = [
   {
+    key: 'name',
+    _style: { width: '25%' }
+  },
+  {
+    key: 'phone',
+    _style: { width: '35%' }
+  },
+  {
+    key: 'status',
+    _style: { width: '15%' }
+  },
+  {
     key: 'user_id',
     _style: { width: '25%' }
   },

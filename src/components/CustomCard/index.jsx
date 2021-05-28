@@ -8,7 +8,6 @@ const API_WISHLIST_URL = `http://localhost:4000/api/wishlist`;
 
 toast.configure();
 const CustomCard = ({product}) => {
-    // const [isRender, setIsRender] = useState(false);
     const to_slug = (str) => {
         str = str.toLowerCase();
         str = str.replace(/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/g, 'a');
@@ -171,7 +170,6 @@ const CustomCard = ({product}) => {
                 progress: undefined,
             });
         }
-        // setIsRender(!isRender);
     }
 
     return (
@@ -195,14 +193,14 @@ const CustomCard = ({product}) => {
                     </Link>
                     </li>
                     <li>
-                    <a data-tip="Add To Wishlist" data-place="left" onClick={ () => addToWishlist(product)}>
+                    <a data-tip="Add To Wishlist" data-place="left" onClick={() => addToWishlist(product)}>
                         <svg>
                         <use xlinkHref="./images/sprite.svg#icon-heart-o"/>
                         </svg>
                     </a>
                     </li>
                     <li>
-                    <a data-tip="Add To Compare" data-place="left" onClick={ () => addToBasket(product) }>
+                    <a data-tip="Add To Compare" data-place="left" onClick={() => addToBasket(product)}>
                         <svg>
                             <use xlinkHref="./images/sprite.svg#icon-cart-plus" />
                         </svg>

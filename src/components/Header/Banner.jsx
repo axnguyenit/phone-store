@@ -13,11 +13,11 @@ import React from 'react';
                                 <span className>New Inspiration 2021</span>
                                 <h1 className>PHONES MADE FOR YOU!</h1>
                                 <p>Trending from mobile and headphone style collection</p>
-                                <a href="#"><button className="hero__btn">SHOP NOW</button></a>
+                                {/* <a href="#"><button className="hero__btn">SHOP NOW</button></a> */}
                             </div>
                             <div className="hero__right">
                                 <div className="hero__img-container">
-                                <img className="banner_01" src="./images/banner_02.png" alt="banner2" />
+                                <img className="banner_02" src="./images/banner_02.png" alt="banner2" />
                                 </div>
                             </div>
                             </div>
