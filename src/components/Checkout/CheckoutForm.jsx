@@ -25,6 +25,7 @@ const CheckoutForm = ({
               id="name"
               name="name"
               placeholder="Name"
+              multiline
               value={user.name}
               onChange={handleChange}
             />
@@ -37,6 +38,7 @@ const CheckoutForm = ({
               name="email"
               type="email"
               placeholder="Email"
+              multiline
               value={user.email}
               onChange={handleChange}
             />
@@ -48,6 +50,7 @@ const CheckoutForm = ({
               id="phone"
               name="phone"
               placeholder="Phone"
+              multiline
               value={user.phone}
               onChange={handleChange}
             />
@@ -59,8 +62,9 @@ const CheckoutForm = ({
               id="address"
               name="address"
               placeholder="Address"
+              multiline
               value={user.address}
-              onChange={(e) => {console.log(e.target.value);}}
+              onChange={handleChange}
             />
           </Grid>
         </Grid>

@@ -27,6 +27,7 @@ const API_USERS_URL = `http://localhost:4000/api/users`;
 const fields = [
   {
     key: 'receiver',
+    label: 'Test',
     _style: { width: '25%' }
   },
   {
@@ -50,11 +51,11 @@ const fields = [
     key: 'status',
     _style: { width: '15%' }
   },
-  // {
-  //   key: 'action',
-  //   _style: { width: '15%' },
-  //   filter: false
-  // }
+  {
+    key: 'action',
+    _style: { width: '15%' },
+    filter: false
+  }
   // {
   //   key: 'address',
   //   _style: { width: '10%' }
@@ -64,12 +65,12 @@ const fields = [
   //   _style: { width: '10%' }
   // },
 
-  {
-    key: 'show_details',
-    label: 'Action',
-    _style: { width: '1%' },
-    filter: false
-  }
+  // {
+  //   key: 'show_details',
+  //   label: 'Action',
+  //   _style: { width: '1%' },
+  //   filter: false
+  // }
 ]
 
 
@@ -88,7 +89,7 @@ const Orders = () => {
 
       let ordersTerm = [];
 
-      orders.map(order => {
+      orders.map(order =>{
         let orderTerm = order;
         let quantity = 0;
         let total = 0;
@@ -141,35 +142,21 @@ const Orders = () => {
                       columnFilter
                       itemsPerPage={7}
                       hover
-                      sorter
                       pagination
                       onRowClick={(item) => history.push(`/orders/${item.id}`)}
                       scopedSlots = {{
-                        'status':
-                        (item)=>(
-                          <td>
-                            <CBadge color={item.status === "pending" ? "warning" : "danger"}>
-                              {item.status}
-                            </CBadge>
-                          </td>
-                        ),
                         'show_details':
-                          (item, index) => {
-                            // if(item.status === 'pending') {
-                              return (
-                                <td key={index} className="py-2">
-                                  {
-                                    item.status === "pending" ? 
-                                      <CButton
-                                        color="primary"
-                                        variant="outline"
-                                        shape="square"
-                                        size="sm"
-                                        onClick={()=>{handleUpdate(item)}}
-                                        >
-                                        Approve
-                                      </CButton> : ""
-                                  }
+                          (item, index)=>{
+                            return (
+                              <td className="py-2">
+                                <CButton
+                                  color="primary"
+                                  shape="square"
+                                  size="sm"
+                                  onClick={()=>{setUpdate(!isUpdate)}}
+                                >
+                                  Update Quantity
+                                </CButton>
                               </td>
                               )
                           }

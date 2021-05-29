@@ -13,9 +13,8 @@ const OrdersDetail = ({orders}) => (
                                 <thead>
                                     <tr>
                                         <th>NO</th>
-                                        <th>DATE</th>
-                                        <th>PRODUCT</th>
                                         <th>QUANTITY</th>
+                                        <th>DATE</th>
                                         <th>STATUS</th>
                                         <th>SUB TOTAL</th>
                                         <th>ACTION</th>
@@ -33,15 +32,12 @@ const OrdersDetail = ({orders}) => (
                                                     {index + 1}
                                                 </td>
                                                 <td className="product__content">
+                                                    <span>{order.quantity}</span>
+                                                </td>
+                                                <td className="product__content">
                                                     <span>
                                                         {new Intl.DateTimeFormat(['ban', 'id']).format(order.createdAt)}
                                                     </span>
-                                                </td>
-                                                <td className="product__content">
-                                                    <span>{order.details.length}</span>
-                                                </td>
-                                                <td className="product__content">
-                                                    <span>{order.quantity}</span>
                                                 </td>
                                                 <td className="product__content">
                                                     <span>{order.status}</span>

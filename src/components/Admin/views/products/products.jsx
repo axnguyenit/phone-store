@@ -136,14 +136,16 @@ const Products = () => {
                       columnFilter
                       itemsPerPage={6}
                       hover
+                      sorter
                       pagination
                       scopedSlots = {{
                         'show_details':
                           (item, index)=>{
                             return (
-                              <td className="py-2">
+                              <td key={index} className="py-2">
                                 <CButton
                                   color="primary"
+                                  variant="outline"
                                   shape="square"
                                   size="sm"
                                   onClick={()=>{handleUpdate(item)}}

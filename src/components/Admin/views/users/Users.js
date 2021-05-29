@@ -172,6 +172,7 @@ const Users = () => {
                       columnFilter
                       itemsPerPage={6}
                       hover
+                      sorter
                       pagination
                       scopedSlots = {{
                         'show_details':
@@ -181,6 +182,7 @@ const Users = () => {
                                 <CButton
                                   color="primary"
                                   shape="square"
+                                  variant="outline"
                                   size="sm"
                                   onClick={() => handleUpdate(userTerm)}
                                 >

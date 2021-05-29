@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom';
 import {
   CButton,
   CCard,
@@ -56,7 +56,7 @@ const Login = (props) => {
             <CCardGroup>
               <CCard className="p-4">
                 <CCardBody>
-                  <CForm >
+                  <CForm onSubmit={login}>
                     <h1>Login</h1>
                     <p className="text-muted">Sign In to your account</p>
                     <CInputGroup className="mb-3">
@@ -75,7 +75,7 @@ const Login = (props) => {
                     </CInputGroup>
                     <CRow>
                       <CCol xs="6">
-                        <CButton color="primary" className="px-4" onClick={() => login()}>Login</CButton>
+                        <CButton type="submit" color="primary" className="px-4">Login</CButton>
                       </CCol>
                       <CCol xs="6" className="text-right">
                         <CButton color="link" className="px-0">Forgot password?</CButton>

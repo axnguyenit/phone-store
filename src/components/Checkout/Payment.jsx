@@ -6,6 +6,8 @@ import {
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import emailjs from 'emailjs-com';
+import axios from "axios";
+const API_ORDERS_URL = `http://localhost:4000/api/orders`;
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 const Payment = ({
@@ -14,12 +16,10 @@ const Payment = ({
   totalPrice,
   handleBackStep,
   handleNextStep,
-  handleCheckout,
 }) => {
   const handleSubmit = async (e, elements, stripe) => {
     e.preventDefault();
 
-    console.log(e.target);
     if (!stripe || !elements) return;
 
     const cardElement = elements.getElement(CardElement);
@@ -33,14 +33,38 @@ const Payment = ({
       //send email about order details to user
       emailjs.sendForm('default_service', 'template_order', e.target, `user_eGZkjyOWcdrxHJK1InigS`)
         .then((result) => {
-            console.log(result.text);
+          console.log(result.text);
+            // add order to user account
+            if(localStorage.getItem('basket')) {
+              let basket = JSON.parse(localStorage.getItem('basket'));
+              let orderDetails = [];
+              basket.map(item => {
+                let orderItem = {
+                  prodId: item.id,
+                  quantity: item.quantity,
+                }
+                orderDetails.push(orderItem);
+              })
+              let order = {
+                userId: user.id,
+                status: 'pending',
+                receiver: user.name,
+                email: user.email,
+                phone: user.phone,
+                address: user.address,
+                details: orderDetails,
+              }
+        
+              axios.post(API_ORDERS_URL, order).then(res => {
+                localStorage.removeItem('basket');
+              })
+            }
             handleNextStep(e, "confirmation");
-        }, (error) => {
+          }, (error) => {
             console.log(error.text);
         });
     }
   };
-  console.log(user);
   return (
     <>
       <Elements stripe={stripePromise}>

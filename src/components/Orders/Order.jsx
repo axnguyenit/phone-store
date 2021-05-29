@@ -13,8 +13,8 @@ const OrderDetail = ({order}) => (
                                 <thead>
                                     <tr>
                                         <th>NO</th>
-                                        <th>PRODUCT</th>
                                         <th>NAME</th>
+                                        <th>PRODUCT</th>
                                         <th>UNIT PRICE</th>
                                         <th>QUANTITY</th>
                                         <th>TOTAL</th>
@@ -27,11 +27,11 @@ const OrderDetail = ({order}) => (
                                                 <td className="product__thumbnail">
                                                     {index + 1}
                                                 </td>
-                                                <td className="product__thumbnail">
-                                                    <img src={item.img} alt="" />
-                                                </td>
                                                 <td className="product__content">
                                                     <span>{item.name}</span>
+                                                </td>
+                                                <td className="product__thumbnail">
+                                                    <img src={item.img} alt="" />
                                                 </td>
                                                 <td className="product__content">
                                                     <span>$ {item.unitPrice}</span>

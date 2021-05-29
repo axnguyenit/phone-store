@@ -9,18 +9,20 @@ export const renderRelatedComponent = ({
   handleSubmit,
   checkoutData,
   totalPrice,
+  handleChange,
+  orderInfo,
   handleBackStep,
   handleNextStep,
-  handleCheckout,
 }) => {
   switch (bookingStep) {
     case "Address":
       return (
         <CheckoutForm
-          user={user}
-          checkoutData={checkoutData}
-          totalPrice={totalPrice}
-          handleSubmit={handleSubmit}
+        user={user}
+        orderInfo={orderInfo}
+        checkoutData={checkoutData}
+        handleSubmit={handleSubmit}
+        handleChange={handleChange}
         />
       );
     case "Details":
@@ -31,7 +33,6 @@ export const renderRelatedComponent = ({
           totalPrice={totalPrice}
           handleBackStep={handleBackStep}
           handleNextStep={handleNextStep}
-          handleCheckout={handleCheckout}
         />
       );
     case "Payment":
@@ -42,7 +43,6 @@ export const renderRelatedComponent = ({
           totalPrice={totalPrice}
           handleBackStep={handleBackStep}
           handleNextStep={handleNextStep}
-          handleCheckout={handleCheckout}
         />
       );
     case "confirmation":

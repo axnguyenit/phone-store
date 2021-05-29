@@ -7,7 +7,13 @@ import {
   ListItemText,
 } from "@material-ui/core";
 
-const BookingDetails = ({ checkoutData, handleBackStep, handleNextStep, totalPrice }) => {
+const BookingDetails = ({
+  user,
+  checkoutData,
+  handleBackStep,
+  handleNextStep,
+  totalPrice 
+}) => {
   return (
     <>
       <List>

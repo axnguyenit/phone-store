@@ -136,7 +136,7 @@ const SignIn = () => {
         if(user) {
             if(!user.status) {
                 toast.error('Your account is not verified!', {
-                    position: "top-center",
+                    position: "bottom-left",
                     autoClose: 5000,
                     hideProgressBar: false,
                     closeOnClick: true,
@@ -148,7 +148,7 @@ const SignIn = () => {
             }
             else if(!user.active) {
                 toast.error('Your account has been locked!', {
-                    position: "top-center",
+                    position: "bottom-left",
                     autoClose: 5000,
                     hideProgressBar: false,
                     closeOnClick: true,
@@ -160,7 +160,7 @@ const SignIn = () => {
             else {
                 localStorage.setItem('userID', user.id);
                 toast.success('Login successfully!', {
-                    position: "top-center",
+                    position: "bottom-left",
                     autoClose: 5000,
                     hideProgressBar: false,
                     closeOnClick: true,
@@ -174,7 +174,7 @@ const SignIn = () => {
         }
         else {
             toast.error('Email or password incorrect!', {
-                position: "top-center",
+                position: "bottom-left",
                 autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,

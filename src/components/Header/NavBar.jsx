@@ -98,6 +98,14 @@ const NavBar = () =>{
                         </div>
                         <div className="nav__logo">
                             <ul className="nav__list">
+                                {
+                                    !isSignIn ? '' : 
+                                        <li className="nav__item">
+                                            <Link to="/profile" className="nav__link scroll-link">
+                                                Profile
+                                            </Link>
+                                        </li>
+                                }
                                 <li className="nav__item">
                                     <Link to={isSignIn ? "/orders" : "/login"} className="nav__link scroll-link">
                                         {
@@ -114,14 +122,14 @@ const NavBar = () =>{
                                         </Link>
                                     }
                                 </li>
-                                <li className="nav__item">
-                                    {
-                                        !isSignIn ? '' : 
-                                        <Link className="nav__link scroll-link" onClick={() => signout()}>
-                                            Logout
-                                        </Link>
-                                    }
-                                </li>
+                                {
+                                    !isSignIn ? '' : 
+                                        <li className="nav__item">
+                                            <Link className="nav__link scroll-link" onClick={() => signout()}>
+                                                Logout
+                                            </Link>
+                                        </li>
+                                }
                                 <li className="nav__item">
                                     <Link to="/basket" className="icon__item">
                                         <i className="fa fa-shopping-cart shopping-cart">

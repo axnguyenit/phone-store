@@ -135,17 +135,13 @@
       "id": 19
     },
     {
-      "name": "YMA",
+      "id": 20,
+      "name": "Hùng Vương",
       "email": "vuong.thai22@student.passerellesnumeriques.org",
-      "password": "aaa",
-      "phone": "",
-      "address": "",
-      "active": true,
-      "code": 0,
-      "status": true,
-      "role": "user",
-      "createdAt": 1622207267155,
-      "id": 20
+      "password": "admin",
+      "phone": "0123456789",
+      "role": "admin",
+      "address": "Phù Mỹ - Bình Định"
     },
     {
       "name": "YMA",
@@ -439,6 +435,58 @@
       ],
       "createdAt": 1622231529536,
       "id": 14
+    },
+    {
+      "userId": 22,
+      "status": "pending",
+      "details": [
+        {
+          "prodId": "prod_yA6nldj93oEWbz",
+          "quantity": 1
+        },
+        {
+          "prodId": "prod_gnZO5kNOvo7MNq",
+          "quantity": 1
+        },
+        {
+          "prodId": "prod_4OANwRpDY5vYL8",
+          "quantity": 1
+        }
+      ],
+      "createdAt": 1622315753743,
+      "id": 15
+    },
+    {
+      "userId": 22,
+      "status": "pending",
+      "receiver": "Thu Dieu",
+      "email": "kha.nguyen01.it@gmail.com",
+      "phone": "0379579697",
+      "address": "Tay An - Tay Son - Binh Dinh",
+      "details": [
+        {
+          "prodId": "prod_4OANwRpDY5vYL8",
+          "quantity": 1
+        }
+      ],
+      "createdAt": 1622316723441,
+      "id": 16
+    },
+    {
+      "userId": 22,
+      "status": "pending",
+      "receiver": "Le Thi Thu Dieu",
+      "email": "kha.nguyen01.it@gmail.com",
+      "phone": "0379579697",
+      "address": "Tay An - Tay Son - Binh Dinh",
+      "details": [
+        {
+          "prodId": "prod_gnZO5kNOvo7MNq",
+          "quantity": 1
+        }
+      ],
+      "createdAt": 1622317255486,
+      "id": 17
     }
   ],
   "baskets": [
@@ -448,7 +496,7 @@
       "details": [
         {
           "id": "prod_kd6Ll28YEoV2mj",
-          "quantity": 1
+          "quantity": 2
         },
         {
           "id": "prod_4OANwRpDY5vYL8",
@@ -528,16 +576,7 @@
     },
     {
       "userId": 22,
-      "details": [
-        {
-          "id": "prod_yA6nldj93oEWbz",
-          "quantity": 1
-        },
-        {
-          "id": "prod_gnZO5kNOvo7MNq",
-          "quantity": 1
-        }
-      ],
+      "details": [],
       "createdAt": 1622230673249,
       "id": 10
     }

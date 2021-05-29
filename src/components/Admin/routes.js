@@ -17,6 +17,7 @@ const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'));
 const Modals = React.lazy(() => import('./views/notifications/modals/Modals'));
 const Users = React.lazy(() => import('./views/users/Users'));
 const Orders = React.lazy(() => import('./views/orders/orders'));
+const Order = React.lazy(() => import('./views/orders/order'));
 const Products = React.lazy(() => import('./views/products/products'));
 
 const routes = [
@@ -24,7 +25,7 @@ const routes = [
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/theme', name: 'Theme', component: Orders, exact: true },
   { path: '/orders', name: 'Orders', component: Orders },
-  // { path: '/orders/:id', name: 'Orders', component: Order },
+  { path: '/orders/:id', name: 'Order', component: Order },
   { path: '/products', name: 'Products', component: Products },
   { path: '/base', name: 'Base', component: Cards, exact: true },
   { path: '/base/cards', name: 'Cards', component: Cards },
