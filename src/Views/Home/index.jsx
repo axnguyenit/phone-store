@@ -13,11 +13,7 @@ function Home() {
   const fetchProducts = async() => {
     const res = await commerce.products.list();
     setProducts((res && res.data) || []);
-    saveProducts(res.data);
-  }
-
-  const saveProducts = (data) => {
-    localStorage.setItem('products', JSON.stringify(data));
+    localStorage.setItem('products', JSON.stringify(res.data));
   }
 
   useEffect(() => {

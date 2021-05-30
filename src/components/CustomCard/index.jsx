@@ -31,6 +31,7 @@ const CustomCard = ({product}) => {
             quantity: 1,
             unitPrice: item.price.raw,
             total: item.price.raw,
+            isCheck: false,
         }
 
         const nameItem = item.name;
@@ -43,7 +44,7 @@ const CustomCard = ({product}) => {
             //if basket contain item => item quantity =+ 1
             if(item) {
                 toast.success(`Add ${nameItem} to the basket successfully!`, {
-                    position: "top-center",
+                    position: "bottom-left",
                     autoClose: 5000,
                     hideProgressBar: false,
                     closeOnClick: true,
@@ -62,7 +63,7 @@ const CustomCard = ({product}) => {
             }
             else {
                 toast.success(`Add ${nameItem} to the basket successfully!`, {
-                    position: "top-center",
+                    position: "bottom-left",
                     autoClose: 5000,
                     hideProgressBar: false,
                     closeOnClick: true,
@@ -78,7 +79,7 @@ const CustomCard = ({product}) => {
             let basket = new Array();
 
             toast.success(`Add ${nameItem} to the basket successfully!`, {
-                position: "top-center",
+                position: "bottom-left",
                 autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,
@@ -113,7 +114,7 @@ const CustomCard = ({product}) => {
                         const index = wishlist.indexOf(wishlistItem);
                         wishlist.splice(index, 1);
                         toast.warn(`Remove ${nameItem} from the wishlist successfully!`, {
-                            position: "top-center",
+                            position: "bottom-left",
                             autoClose: 5000,
                             hideProgressBar: false,
                             closeOnClick: true,
@@ -127,7 +128,7 @@ const CustomCard = ({product}) => {
                             id: item.id,
                         });
                         toast.success(`Add ${nameItem} to the wishlist successfully!`, {
-                            position: "top-center",
+                            position: "bottom-left",
                             autoClose: 5000,
                             hideProgressBar: false,
                             closeOnClick: true,
@@ -147,7 +148,7 @@ const CustomCard = ({product}) => {
                     let wishlistTerm = res.data[0];
                     axios.put(API_WISHLIST_URL + '/' + wishlistTerm.id, wishlistTerm).then(res => {
                         toast.success(`Add ${nameItem} to the wishlist successfully!`, {
-                            position: "top-center",
+                            position: "bottom-left",
                             autoClose: 5000,
                             hideProgressBar: false,
                             closeOnClick: true,
@@ -161,7 +162,7 @@ const CustomCard = ({product}) => {
         }
         else {
             toast.warn('Please, log in before adding the item to your wishlist!', {
-                position: "top-center",
+                position: "bottom-left",
                 autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,

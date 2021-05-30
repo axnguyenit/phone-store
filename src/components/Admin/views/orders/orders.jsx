@@ -31,43 +31,29 @@ const fields = [
   },
   {
     key: 'phone',
-    _style: { width: '35%' }
+    _style: { width: '15%' }
   },
   {
     key: 'date',
-    _style: { width: '25%' }
+    _style: { width: '15%' }
   },
   {
     key: 'quantity',
-    _style: { width: '25%' }
+    _style: { width: '10%' }
   },
   {
     key: 'total',
     label: 'Total($)',
-    _style: { width: '35%' }
+    _style: { width: '10%' }
   },
   {
     key: 'status',
-    _style: { width: '15%' }
+    _style: { width: '10%' }
   },
-  // {
-  //   key: 'action',
-  //   _style: { width: '15%' },
-  //   filter: false
-  // }
-  // {
-  //   key: 'address',
-  //   _style: { width: '10%' }
-  // },
-  // {
-  //   key: 'role',
-  //   _style: { width: '10%' }
-  // },
-
   {
     key: 'show_details',
     label: 'Action',
-    _style: { width: '1%' },
+    _style: { width: '15%' },
     filter: false
   }
 ]
@@ -75,20 +61,21 @@ const fields = [
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
+  const [orders1, setOrders1] = useState([]);
   const history = useHistory();
 
   const fetchOrders = async() => {
-    axios.get(API_ORDERS_URL).then( res => {
-      let orders = res.data;
+    axios.get(API_ORDERS_URL).then(res => {
+      setOrders1(res.data);
+      let orders = new Array(res.data);
       let products;
-
       if(localStorage.getItem('products')) {
         products = JSON.parse(localStorage.getItem('products'));
       }
 
       let ordersTerm = [];
 
-      orders.map(order => {
+      orders[0].map(order => {
         let orderTerm = order;
         let quantity = 0;
         let total = 0;
@@ -115,18 +102,41 @@ const Orders = () => {
     fetchOrders();
   }, []);
 
-  const [products, setProducts] = useState([]);
-  const [products2, setProducts2] = useState([]);
-  const [isUpdate, setUpdate] = useState(false);
-  const [quantity, setQuantity] = useState(0);
+  const handleApproveOrder = (item) => {
+    if(orders1) {
+      let order = orders1.find(order => item.id === order.id);
+      if(order) {
+        order.status = "approved";
+        delete order.date;
+        delete order.quantity;
+        delete order.total;
 
-  const handleUpdate = () => {
-    setUpdate(!isUpdate);
+        axios.put(API_ORDERS_URL + '/' + order.id, order).then(res => {
+          console.log(res.data);
+        })
+      }
+    }
+    
   }
 
-  const handleUpdateOnChange = (e) => {
-    console.log(e.target.value);
-    setQuantity(e.target.value);
+  const handleCancelOrder = (item) => {
+    console.log(orders);
+    if(orders) {
+      const order = orders.find(order => item.id === order.id);
+      if(order) {
+        console.log(order);
+      }
+    }
+  }
+
+  const getBadge = (status)=>{
+    switch (status) {
+      case 'approved': return 'success'
+      case 'Inactive': return 'secondary'
+      case 'pending': return 'warning'
+      case 'cancel': return 'secondary'
+      default: return 'primary'
+    }
   }
 
   return (
@@ -148,26 +158,39 @@ const Orders = () => {
                         'status':
                         (item)=>(
                           <td>
-                            <CBadge color={item.status === "pending" ? "warning" : "danger"}>
+                            <CBadge color={getBadge(item.status)}>
                               {item.status}
                             </CBadge>
                           </td>
                         ),
                         'show_details':
                           (item, index) => {
-                            // if(item.status === 'pending') {
                               return (
                                 <td key={index} className="py-2">
                                   {
-                                    item.status === "pending" ? 
+                                    item.status === "pending" ?
                                       <CButton
                                         color="primary"
                                         variant="outline"
                                         shape="square"
                                         size="sm"
-                                        onClick={()=>{handleUpdate(item)}}
+                                        onClick={() => handleApproveOrder(item)}
                                         >
                                         Approve
+                                      </CButton> : ""
+                                  } 
+                                    &nbsp;
+                                    &nbsp;
+                                  {
+                                    item.status === "pending" ?
+                                      <CButton
+                                        color="primary"
+                                        variant="outline"
+                                        shape="square"
+                                        size="sm"
+                                        onClick={() => handleCancelOrder(item)}
+                                        >
+                                        Cancel
                                       </CButton> : ""
                                   }
                               </td>
@@ -177,23 +200,6 @@ const Orders = () => {
                     />
                   </CCard>
               </CCardBody>
-              <CModal 
-                show={isUpdate}
-                onClose={() => setUpdate(!isUpdate)}
-                color="primary"
-              >
-              <CModalHeader closeButton>
-                <CModalTitle>Modal title</CModalTitle>
-              </CModalHeader>
-              <CModalBody>
-                <CLabel>Quantity</CLabel>
-                <CInput size="sm" onChange={handleUpdateOnChange}/>
-              </CModalBody>
-              <CModalFooter>
-                <CButton color="success" onClick={() => {handleUpdate()}}>Update</CButton>
-                <CButton color="danger" onClick={() => setUpdate(!isUpdate)}>Cancel</CButton>
-              </CModalFooter>
-            </CModal>
           </CCard>
       </CCol>
     </>

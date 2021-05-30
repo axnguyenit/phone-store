@@ -6,6 +6,8 @@ import '../../css/styles.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+// import SearchBar from './searchBar'; 
+
 const API_BASKETS_URL = `http://localhost:4000/api/baskets`;
 const API_USERS_URL = `http://localhost:4000/api/users`;
 
@@ -37,7 +39,7 @@ const NavBar = () =>{
         fetchQuantityOfBasket();
     });
 
-    const signout = () => {
+    const logout = () => {
         if(localStorage.getItem('basket')) {
             const basket = JSON.parse(localStorage.getItem('basket'));
             let basketTerm = [];
@@ -45,6 +47,7 @@ const NavBar = () =>{
                 let item = {
                     id: itemBasket.id,
                     quantity: itemBasket.quantity,
+                    isCheck: itemBasket.isCheck,
                 }
                 basketTerm.push(item);
             })
@@ -54,7 +57,6 @@ const NavBar = () =>{
                 basket.details = basketTerm;
     
                 axios.put(API_BASKETS_URL + '/' + basket.id, basket).then( res => {
-                    console.log(res.data);
                     localStorage.removeItem('userID');
                     localStorage.removeItem('basket');
                     toast.success('Sign out successfully!', {
@@ -73,7 +75,7 @@ const NavBar = () =>{
         }
         else {
             localStorage.removeItem('userID');
-            toast.success('Sign out successfully!', {
+            toast.success('Log out successfully!', {
                 position: "top-center",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -96,6 +98,8 @@ const NavBar = () =>{
                                 LOGO PHONE
                             </Link>
                         </div>
+                        {/* <div>
+                        </div> */}
                         <div className="nav__logo">
                             <ul className="nav__list">
                                 {
@@ -125,7 +129,7 @@ const NavBar = () =>{
                                 {
                                     !isSignIn ? '' : 
                                         <li className="nav__item">
-                                            <Link className="nav__link scroll-link" onClick={() => signout()}>
+                                            <Link className="nav__link scroll-link" onClick={() => logout()}>
                                                 Logout
                                             </Link>
                                         </li>

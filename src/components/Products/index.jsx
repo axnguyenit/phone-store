@@ -20,11 +20,9 @@ export const Products = ({products}) => {
                         {
                             products.filter(product => {
                                 if(searchTerm === '') {
-                                    console.log(product);
                                     return product;
                                 }
                                 else if(product.name.toLowerCase().includes(searchTerm.toLowerCase())) {
-                                    console.log(product);
                                     return product;
                                 }
                             }).map( (product, index) => <CustomCard key={index}  product={product} /> )

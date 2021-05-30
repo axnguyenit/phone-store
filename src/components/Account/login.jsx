@@ -10,7 +10,7 @@ toast.configure();
 const API_USERS_URL = `http://localhost:4000/api/users`;
 const API_BASKETS_URL = `http://localhost:4000/api/baskets`;
 
-const SignIn = () => {
+const Login = () => {
     const history = useHistory();
     const [users, setUsers] = useState([]);
     const [email, setEmail] = useState('');
@@ -45,6 +45,7 @@ const SignIn = () => {
                                         quantity: itemBasketLocal.quantity + itemBasketUser.quantity,
                                         unitPrice: itemBasketLocal.unitPrice,
                                         total: (itemBasketLocal.quantity + itemBasketUser.quantity) * itemBasketLocal.unitPrice,
+                                        isCheck: itemBasketUser.isCheck,
                                     }
 
                                     basket.push(item);
@@ -69,6 +70,7 @@ const SignIn = () => {
                                                 quantity: itemBasketUser.quantity,
                                                 unitPrice: product.price.raw,
                                                 total: itemBasketUser.quantity * product.price.raw,
+                                                isCheck: itemBasketUser.isCheck,
                                             }
                                             basket.push(item);
                                         }
@@ -107,6 +109,7 @@ const SignIn = () => {
                                             quantity: itemBasketUser.quantity,
                                             unitPrice: product.price.raw,
                                             total: itemBasketUser.quantity * product.price.raw,
+                                            isCheck: itemBasketUser.isCheck,
                                         }
                                         basket.push(item);
                                     }
@@ -129,7 +132,7 @@ const SignIn = () => {
         fetchBasket();
     });
 
-    const signin = (e) => {
+    const login = (e) => {
         e.preventDefault();
         const user = users.find( user => user.email === email 
                                         && user.password === password);
@@ -196,7 +199,7 @@ const SignIn = () => {
                 <section className="section cart__area">
                     <div className="container">
                         <div className="responsive__cart-area">
-                        <div className="signin__form" onSubmit={(e) => signin(e)}>
+                        <div className="signin__form" onSubmit={(e) => login(e)}>
                             <div className="header">
                                 <h2>Login</h2>
                                 <p>Sign in with your email address and password</p>
@@ -233,4 +236,4 @@ const SignIn = () => {
     )
 }
 
-export default SignIn;
+export default Login;

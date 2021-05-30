@@ -40,17 +40,23 @@ const Checkout = () => {
       let basket = JSON.parse(localStorage.getItem('basket'));
       let total = 0;
 
-      basket.map(item => total += item.total);
+      basket.map(item => {
+        if(item.isCheck) {
+          total += item.total;
+        }
+      });
       if(localStorage.getItem('products')) {
         let products = JSON.parse(localStorage.getItem('products'));
         let checkoutData = [];
         products.map(product => {
           basket.map(item => {
-            if(product.id === item.id) {
-              let itemTerm = item;
-              itemTerm.name = product.name;
+            if(item.isCheck) {
+              if(product.id === item.id) {
+                let itemTerm = item;
+                itemTerm.name = product.name;
 
-              checkoutData.push(itemTerm);
+                checkoutData.push(itemTerm);
+              }
             }
           })
         })

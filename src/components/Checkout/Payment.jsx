@@ -39,11 +39,13 @@ const Payment = ({
               let basket = JSON.parse(localStorage.getItem('basket'));
               let orderDetails = [];
               basket.map(item => {
-                let orderItem = {
-                  prodId: item.id,
-                  quantity: item.quantity,
+                if(item.isCheck) {
+                  let orderItem = {
+                    prodId: item.id,
+                    quantity: item.quantity,
+                  }
+                  orderDetails.push(orderItem);
                 }
-                orderDetails.push(orderItem);
               })
               let order = {
                 userId: user.id,
@@ -56,7 +58,12 @@ const Payment = ({
               }
         
               axios.post(API_ORDERS_URL, order).then(res => {
-                localStorage.removeItem('basket');
+                basket.map((item, index) => {
+                  if(item.isCheck) {
+                    basket.splice(index, 1);
+                  }
+                })
+                localStorage.setItem('basket', JSON.stringify(basket));
               })
             }
             handleNextStep(e, "confirmation");

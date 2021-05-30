@@ -12,10 +12,15 @@ const Cart = () => {
 
     if(localStorage.getItem('basket')) {
         let basket = JSON.parse(localStorage.getItem('basket'));
+        basket.map(item => {
+            item.isCheck = false;
+        })
+
+        localStorage.setItem('basket', JSON.stringify(basket));
         if(localStorage.getItem('products')) {
             let products = JSON.parse(localStorage.getItem('products'))
-            basket.map( item => {
-                products.find( product => {
+            basket.map(item => {
+                products.find(product => {
                     if(product.id === item.id) {
                         let itemTerm = {
                             id: product.id,
@@ -24,6 +29,7 @@ const Cart = () => {
                             unitPrice: product.price.raw,
                             quantity: item.quantity,
                             total: item.total,
+                            isCheck: item.isCheck,
                         }
                         items.push(itemTerm);
                     }
@@ -43,7 +49,7 @@ const Cart = () => {
                 basket.splice(index, 1);
                 localStorage.setItem('basket', JSON.stringify(basket));
                 toast.success(`Remove ${nameItem} from the basket successfully!`, {
-                    position: "top-center",
+                    position: "bottom-left",
                     autoClose: 5000,
                     hideProgressBar: false,
                     closeOnClick: true,
@@ -51,54 +57,39 @@ const Cart = () => {
                     draggable: true,
                     progress: undefined,
                 });
-                setIsRender(!isRender);
             }
         }
+        setIsRender(!isRender);
     }
 
-    const increaseQuantity = (item) => {
+    //  increase, decrease quantity
+    const updateQuantity = (type, item) => {
         let itemIncrease = {
             id: item.id,
             quantity: item.quantity,
             unitPrice: item.unitPrice,
             total: item.total,
+            isCheck: item.isCheck,
         }
 
         if(localStorage.getItem('basket')) {
-            let arr = JSON.parse(localStorage.getItem('basket'));
-            const item = arr.find( item => item.id === itemIncrease.id);
+            let basket = JSON.parse(localStorage.getItem('basket'));
+            const item = basket.find( item => item.id === itemIncrease.id);
             if(item) {
-                let index = arr.indexOf(item);
-                itemIncrease.quantity += 1;
-                itemIncrease.total = itemIncrease.quantity * itemIncrease.unitPrice;
-                arr[index] = itemIncrease;
-                localStorage.setItem('basket', JSON.stringify(arr));
-                setIsRender(!isRender);
-            }
-        }
-    }
-
-    const decreaseQuantity = (item) => {
-        let itemIncrease = {
-            id: item.id,
-            quantity: item.quantity,
-            unitPrice: item.unitPrice,
-            total: item.total,
-        }
-
-        if(localStorage.getItem('basket')) {
-            let arr = JSON.parse(localStorage.getItem('basket'));
-            const item = arr.find( item => item.id === itemIncrease.id);
-            if(item) {
-                if(item.quantity === 1) {
+                if(item.quantity === 1 && type === 'decrease') {
                     removeItem(item);
                 }
                 else {
-                    let index = arr.indexOf(item);
-                    itemIncrease.quantity -= 1;
+                    let index = basket.indexOf(item);
+                    if(type === 'increase') {
+                        itemIncrease.quantity += 1;
+                    }
+                    if(type === 'decrease') {
+                        itemIncrease.quantity -= 1;
+                    }
                     itemIncrease.total = itemIncrease.quantity * itemIncrease.unitPrice;
-                    arr[index] = itemIncrease;
-                    localStorage.setItem('basket', JSON.stringify(arr));
+                    basket[index] = itemIncrease;
+                    localStorage.setItem('basket', JSON.stringify(basket));
                     setIsRender(!isRender);
                 }
             }
@@ -107,11 +98,47 @@ const Cart = () => {
 
     const handleCheckout = () => {
         if(localStorage.getItem('userID')) {
-            history.replace('/checkout');
+            if(localStorage.getItem('basket')) {
+                let basket = JSON.parse(localStorage.getItem('basket'));
+                const item = basket.find(item => item.isCheck === true);
+                if(item) {
+                    history.replace('/checkout');
+                }
+                else {
+                    toast.warn(`Please, choose at least an item to checkout!`, {
+                        position: "bottom-left",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                }
+            }
         }
         else {
             history.replace('/login');
         }
+    }
+
+    const updateChecked = (e, item) => {
+        console.log(e.target);
+        if(localStorage.getItem('basket')) {
+            let basket = JSON.parse(localStorage.getItem('basket'));
+
+            basket.map((itemBasket) => {
+                if(itemBasket.id === item.id) {
+                    console.log(e.target.checked);
+                    itemBasket.isCheck = e.target.checked;
+                    localStorage.setItem('basket', JSON.stringify(basket));
+                }
+            })
+        }
+    }
+
+    const checkedItem = (e) => {
+        console.log(e.target);
     }
 
     return (
@@ -128,7 +155,7 @@ const Cart = () => {
                                         <tr>
                                             <th>
                                             <label className="label">
-                                                <input className="label__checkbox" type="checkbox"/>
+                                                <input className="label__checkbox" type="checkbox" onClick={e => checkedItem(e)}/>
                                                 <span className="label__text">
                                                 <span className="label__check">
                                                     <i className="fa fa-check icon" />
@@ -136,11 +163,12 @@ const Cart = () => {
                                                 </span>
                                             </label>
                                             </th>
-                                        <th>PRODUCT</th>
                                         <th>NAME</th>
+                                        <th>PRODUCT</th>
                                         <th>UNIT PRICE</th>
                                         <th>QUANTITY</th>
                                         <th>TOTAL</th>
+                                        <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -149,35 +177,37 @@ const Cart = () => {
                                                 return <tr key={index}>
                                                     <td>
                                                         <label className="label">
-                                                            <input className="label__checkbox" type="checkbox" onClick={e => console.log(e.target.checked)}/>
+                                                            <input className="label__checkbox" name="checkedItem" value="test" type="checkbox" onClick={e => updateChecked(e, item)}/>
                                                             <span className="label__text">
                                                             <span className="label__check">
-                                                                <i className="fa fa-check icon" />
+                                                                <i className="fa fa-check icon"/>
                                                             </span>
                                                             </span>
                                                         </label>
+                                                    </td>
+                                                    <td className="product__content">
+                                                        <span >{item.name}</span>
                                                     </td>
                                                     <td className="product__thumbnail">
                                                         <img src={item.img} alt="" />
                                                     </td>
                                                     <td className="product__content">
-                                                        <span >{item.name}</span>
-                                                    </td>
-                                                    <td className="product__content">
                                                         <span >${item.unitPrice}</span>
                                                     </td>
                                                     <td className="product__content">
-                                                        <a className="minus-btn" onClick={() => decreaseQuantity(item)}>
+                                                        <a className="minus-btn" onClick={() => updateQuantity('decrease', item)}>
                                                             <i class="fas fa-minus"></i>
                                                         </a>
                                                         <input type="text" min={1} value={item.quantity} max={10} className="counter-btn" />
-                                                        <a className="plus-btn" onClick={() => increaseQuantity(item)}>
+                                                        <a className="plus-btn" onClick={() => updateQuantity('increase', item)}>
                                                             <i class="fas fa-plus"></i>
                                                         </a>
                                                     </td>
                                                     <td className="product__content">
                                                         <span>${item.total}</span>
-                                                        <a href="#" className="remove__cart-item" onClick={ () => removeItem(item) }>
+                                                    </td>
+                                                    <td className="product__content">
+                                                        <a href="#" className="remove__cart-item" onClick={() => removeItem(item) }>
                                                             <i class="fas fa-trash-alt"></i>
                                                         </a>
                                                     </td>
@@ -208,7 +238,7 @@ const Cart = () => {
                                         <br />
                                         <br />
                                         <br />
-                            AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</section>
+                            Your basket is empty!</section>
             }
         </>
     )

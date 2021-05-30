@@ -2,8 +2,8 @@ import React from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 // import "./css/styles.css";
 
-const SignIn = React.lazy(() => import('./components/Account/signIn'));
-const SignUp = React.lazy(() => import('./components/Account/signUp'));
+const Login = React.lazy(() => import('./components/Account/login'));
+const Register = React.lazy(() => import('./components/Account/register'));
 const ForgotPassword = React.lazy(() => import('./components/Account/forgotPassword'));
 const ResetPassword = React.lazy(() => import('./components/Account/resetPassword'));
 const Home = React.lazy(() => import('./Views/Home'));
@@ -17,6 +17,7 @@ const Wishlist = React.lazy(() => import('./Views/Home/Wishlist'));
 const Orders = React.lazy(() => import('./Views/Home/Orders'));
 const Order = React.lazy(() => import('./Views/Home/Order'));
 const Admin = React.lazy(() => import('./components/Admin/App'));
+// const SearchBar = React.lazy(() => import('./components/Header/searchBar'));
 const loading = (
   <div className="pt-3 text-center">
     <div className="sk-spinner sk-spinner-pulse">Loading...</div>
@@ -31,8 +32,8 @@ function App() {
         <React.Suspense fallback={loading}>
             <Switch >
                 <Route path = "/admin" exact component = { Admin }/> 
-                <Route path = "/login" exact component = { SignIn }/>
-                <Route path = "/register" exact component = { SignUp }/>
+                <Route path = "/login" exact component = { Login }/>
+                <Route path = "/register" exact component = { Register }/>
                 <Route path = "/reset-password" exact component = { ResetPassword }/>
                 <Route path = "/forgot-password" exact component = { ForgotPassword }/>
                 <Route path = "/code-verification" exact component = { CodeVerification }/>
@@ -43,6 +44,8 @@ function App() {
                 <Route path = "/wishlist" exact component = { Wishlist } />
                 <Route path = "/orders" exact component = { Orders } />
                 <Route path = "/orders/:id" exact component = { Order } />
+                {/* <Route path = "/search-bar" exact component = { SearchBar } /> */}
+
                 <Route path = "/" exact component = { Home } />
                 <Redirect from = "*" to = "/" />
             </Switch> 

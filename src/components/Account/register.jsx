@@ -10,7 +10,7 @@ toast.configure();
 const API_USERS_URL = `http://localhost:4000/api/users`;
 
 // field send mail: to_name, to_email, code
-const SignUp = () => {
+const Register = () => {
     const history = useHistory();
     const [code, setCode] = useState(0);
     const [to_name, setName] = useState();
@@ -175,4 +175,4 @@ const SignUp = () => {
     )
 }
 
-export default SignUp;
+export default Register;
