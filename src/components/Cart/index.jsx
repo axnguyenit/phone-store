@@ -211,8 +211,8 @@ const Cart = () => {
                                                             <i class="fas fa-trash-alt"></i>
                                                         </a>
                                                     </td>
-                                                </tr>}
-                                            )
+                                                </tr>
+                                            })
                                         }
                                         </tbody>
                                     </table>

@@ -19,11 +19,11 @@ const Payment = ({
 }) => {
   const handleSubmit = async (e, elements, stripe) => {
     e.preventDefault();
+    e.target[e.target.length-1].innerHTML = 'paying...';
 
     if (!stripe || !elements) return;
 
     const cardElement = elements.getElement(CardElement);
-
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card: cardElement,
@@ -34,7 +34,7 @@ const Payment = ({
       emailjs.sendForm('default_service', 'template_order', e.target, `user_eGZkjyOWcdrxHJK1InigS`)
         .then((result) => {
           console.log(result.text);
-            // add order to user account
+          // add order to user account
             if(localStorage.getItem('basket')) {
               let basket = JSON.parse(localStorage.getItem('basket'));
               let orderDetails = [];
@@ -57,10 +57,10 @@ const Payment = ({
                 details: orderDetails,
               }
         
-              axios.post(API_ORDERS_URL, order).then(res => {
-                basket.map((item, index) => {
-                  if(item.isCheck) {
-                    basket.splice(index, 1);
+              axios.post(API_ORDERS_URL, order).then(() => {
+                basket = basket.filter(item => {
+                  if(!item.isCheck) {
+                    return item;
                   }
                 })
                 localStorage.setItem('basket', JSON.stringify(basket));

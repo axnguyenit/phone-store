@@ -91,7 +91,7 @@ Navigation
 */
 
 .navigation {
-    /* position: relative; */
+    position: relative;
     position: fixed;
     height: 7rem;
     background-color: var(--white);
@@ -250,6 +250,40 @@ Navigation
     content: "/";
     top: 0;
     left: -1rem;
+}
+
+/* .navigation .searchBar {
+    position: relative;
+} */
+
+.navigation .searchBar .searchField input{
+    position: absolute;
+    top: 19px;
+    left: 30%;
+    width: 400px;
+    padding: 8px 12px;
+    height: 32px;
+    outline: none;
+    border-radius: 2px;
+    border: 1px solid var(--green);
+}
+
+.navigation .searchBar .searchField input:focus {
+    box-shadow: 0 0 4px var(--green);
+    transition: all 0.2s ease-in-out;
+}
+.navigation .searchBar .searchContent {
+    padding-top: 500px;
+    width: 400px;
+    border: 1px solid var(--green);
+    background-color: #ccc;
+    min-height: 500px;
+    /* display: none; */
+}
+
+.navigation .searchBar:focus ~ .navigation .searchBar .searchContent {
+    display: block;
+    background-color: #000;
 }
 
 

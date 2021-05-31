@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 const OrdersDetail = ({orders}) => (
     <>
         {
-            ( orders.length > 0 ) ?
+            (orders.length > 0) ?
                 <section className="section cart__area">
                     <div className="container">
                         <div className="responsive__cart-area">
@@ -22,7 +22,7 @@ const OrdersDetail = ({orders}) => (
                                 </thead>
                                 <tbody>
                                     {
-                                        orders.map((order, index) => {
+                                        orders.reverse().map((order, index) => {
                                             let quantity = 0;
                                             order.details.map(item => {
                                                 quantity += item.quantity;
@@ -36,7 +36,7 @@ const OrdersDetail = ({orders}) => (
                                                 </td>
                                                 <td className="product__content">
                                                     <span>
-                                                        {new Intl.DateTimeFormat(['ban', 'id']).format(order.createdAt)}
+                                                        {new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(order.createdAt)}
                                                     </span>
                                                 </td>
                                                 <td className="product__content">
@@ -50,8 +50,8 @@ const OrdersDetail = ({orders}) => (
                                                         <i className="fas fa-info-circle"></i>
                                                     </Link>
                                                 </td>
-                                            </tr>}
-                                        )
+                                            </tr>
+                                        })
                                     }
                                     </tbody>
                                 </table>

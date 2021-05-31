@@ -6,8 +6,6 @@ import '../../css/styles.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-// import SearchBar from './searchBar'; 
-
 const API_BASKETS_URL = `http://localhost:4000/api/baskets`;
 const API_USERS_URL = `http://localhost:4000/api/users`;
 
@@ -98,8 +96,6 @@ const NavBar = () =>{
                                 LOGO PHONE
                             </Link>
                         </div>
-                        {/* <div>
-                        </div> */}
                         <div className="nav__logo">
                             <ul className="nav__list">
                                 {

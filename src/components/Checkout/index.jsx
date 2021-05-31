@@ -12,7 +12,6 @@ import { renderRelatedComponent } from "./helpers";
 import axios from "axios";
 import "./style.css";
 
-const API_BASKETS_URL = `http://localhost:4000/api/baskets`;
 const API_USERS_URL = `http://localhost:4000/api/users`;
 const steps = ["Address", "Details", "Payment"];
 
@@ -28,6 +27,19 @@ const Checkout = () => {
       const userID = JSON.parse(localStorage.getItem('userID'));
       axios.get(API_USERS_URL + '/' + userID).then(res => {
         setUser(res.data);
+        if(localStorage.getItem('basket')) {
+          let basket = JSON.parse(localStorage.getItem('basket'));
+          let basketTerm = [];
+          basketTerm = basket.filter(item => {
+            if(item.isCheck) {
+              return item;
+            }
+          })
+          console.log(basketTerm.length);
+          if(basketTerm.length < 1) {
+            history.push('/basket');
+          }
+        }
       })
     }
     else {
@@ -54,7 +66,6 @@ const Checkout = () => {
               if(product.id === item.id) {
                 let itemTerm = item;
                 itemTerm.name = product.name;
-
                 checkoutData.push(itemTerm);
               }
             }
