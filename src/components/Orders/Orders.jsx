@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 const OrdersDetail = ({orders}) => (
-    <>
+    <main id="main">
         {
             (orders.length > 0) ?
                 <section className="section cart__area">
@@ -60,16 +60,21 @@ const OrdersDetail = ({orders}) => (
                         </div>
                     </div>
                 </section> 
-                : <section className="section">
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</section>
+            : 
+                <div className="container mt-70">
+                    <div className="profile">
+                        <form className="profile__form">
+                            <div className="header">You don't have any orders!</div>
+                            <div>
+                                <Link to="/">
+                                <button type="button" className="btn__update">Go to shoping</button>
+                                </Link>
+                            </div>
+                        </form>
+                    </div>
+                </div>
         }
-    </>
+    </main>
 )
 
 export default OrdersDetail;

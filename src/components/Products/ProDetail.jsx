@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.css';
 toast.configure();
 const API_USERS_URL = `http://localhost:4000/api/users`;
 const API_WISHLIST_URL = `http://localhost:4000/api/wishlist`;
+const API_PRODUCTS_URL = `http://localhost:4000/api/products`;
 
 export const ProDetail = ({product}) => {
   const addToBasket = (item) => {
@@ -14,37 +15,63 @@ export const ProDetail = ({product}) => {
         unitPrice: item.price.raw,
         total: item.price.raw,
     }
-
     const nameItem = item.name;
+    console.log(item.quantity);
+    console.log(typeof item.quantity);
 
     if(localStorage.getItem('basket')) {
         //add to basket
         let basket = JSON.parse(localStorage.getItem('basket'));
-        const item = basket.find( item => item.id === itemAdd.id );
+        const itemBasket = basket.find( item => item.id === itemAdd.id );
 
         //if basket contain item => item quantity =+ 1
-        if(item) {
-            toast.success(`Add ${nameItem} to the basket successfully!`, {
-                position: "top-center",
+        if(itemBasket) {
+            if(item.quantity === 0) {
+              toast.info(`Sorry, item ${nameItem} is currently out of stock!`, {
+                position: "bottom-left",
                 autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
-            });
-            let itemTerm = item;
-            itemTerm.quantity += 1;
-            let totalPrice = itemTerm.quantity * itemTerm.total;
-            itemTerm.total = totalPrice;
-            //find index of add item in basket to change quantity
-            let index = basket.indexOf(item);
-            basket[index] = itemTerm;
-            localStorage.setItem('basket', JSON.stringify(basket));
+              });
+            }
+            else {
+              toast.success(`Add ${nameItem} to the basket successfully!`, {
+                position: "bottom-left",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              });
+              let itemTerm = itemBasket;
+              itemTerm.quantity += 1;
+              let totalPrice = itemTerm.quantity * itemTerm.total;
+              itemTerm.total = totalPrice;
+              //find index of add item in basket to change quantity
+              let index = basket.indexOf(itemBasket);
+              basket[index] = itemTerm;
+              localStorage.setItem('basket', JSON.stringify(basket));
+            }
         }
         else {
+          if(item.quantity === 0) {
+            toast.info(`Sorry, item ${nameItem} is currently out of stock!`, {
+              position: "bottom-left",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+          }
+          else {
             toast.success(`Add ${nameItem} to the basket successfully!`, {
-                position: "top-center",
+                position: "bottom-left",
                 autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,
@@ -54,13 +81,25 @@ export const ProDetail = ({product}) => {
             });
             basket.push(itemAdd);
             localStorage.setItem('basket', JSON.stringify(basket));
+          }
         }
     }
     else {
+      if(item.quantity === 0) {
+        toast.info(`Sorry, item ${nameItem} is currently out of stock!`, {
+          position: "bottom-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+      else {
         let basket = new Array();
-
         toast.success(`Add ${nameItem} to the basket successfully!`, {
-            position: "top-center",
+            position: "bottom-left",
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -70,6 +109,7 @@ export const ProDetail = ({product}) => {
         });
         basket.push(itemAdd);
         localStorage.setItem('basket', JSON.stringify(basket));
+      }
     }
   }
 
@@ -87,14 +127,13 @@ export const ProDetail = ({product}) => {
 
             // the wishlist isn't empty
             if(wishlist.length > 0) {
-                console.log(wishlist);
                 const wishlistItem = wishlist.find(wishlistItem => wishlistItem.id === item.id);
 
                 if(wishlistItem) {
                     const index = wishlist.indexOf(wishlistItem);
                     wishlist.splice(index, 1);
                     toast.warn(`Remove ${nameItem} from the wishlist successfully!`, {
-                        position: "top-center",
+                        position: "bottom-left",
                         autoClose: 5000,
                         hideProgressBar: false,
                         closeOnClick: true,
@@ -108,7 +147,7 @@ export const ProDetail = ({product}) => {
                         id: item.id,
                     });
                     toast.success(`Add ${nameItem} to the wishlist successfully!`, {
-                        position: "top-center",
+                        position: "bottom-left",
                         autoClose: 5000,
                         hideProgressBar: false,
                         closeOnClick: true,
@@ -128,7 +167,7 @@ export const ProDetail = ({product}) => {
                 let wishlistTerm = res.data[0];
                 axios.put(API_WISHLIST_URL + '/' + wishlistTerm.id, wishlistTerm).then(res => {
                     toast.success(`Add ${nameItem} to the wishlist successfully!`, {
-                        position: "top-center",
+                        position: "bottom-left",
                         autoClose: 5000,
                         hideProgressBar: false,
                         closeOnClick: true,
@@ -142,7 +181,7 @@ export const ProDetail = ({product}) => {
     }
     else {
         toast.warn('Please, log in before adding the item to your wishlist!', {
-            position: "top-center",
+            position: "bottom-left",
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -152,6 +191,16 @@ export const ProDetail = ({product}) => {
         });
     }
   }
+
+  const fetchProduct = async() => {
+    axios.get(API_PRODUCTS_URL + `/${product.id}`).then(res => {
+      product.quantity = res.data.quantity;
+    })
+  }
+
+  useEffect(() => {
+    fetchProduct();
+  });
 
     return (
       <div className="container">
@@ -197,7 +246,7 @@ export const ProDetail = ({product}) => {
                     <span>Brand: {product.categories[0].name}</span>
                   </li>
                   <li>
-                    <span>Availability: In Stock (7 Items)</span>
+                    <span>Availability: {product.quantity != 0 ? `In Stock` : "Out of Stock"} ({product.quantity} Items)</span>
                   </li>
                 </ul>
               </div>

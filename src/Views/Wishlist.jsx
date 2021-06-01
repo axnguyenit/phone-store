@@ -2,12 +2,11 @@
 import axios from 'axios';
 import React from 'react';
 import { useState, useEffect } from "react";
-import { Products } from "../../components/Products";
-import NavBar from '../../components/Header/NavBar';
-// const NavBar = React.lazy(() => import ('../../components/Header/NavBar'));
-const Contact = React.lazy(() => import ('../../components/Contact/index'));
-const Facility = React.lazy(() => import('../../components/Facility'));
-const Footer = React.lazy(() => import('../../components/Footer'));
+import Products from "../components/Products";
+import NavBar from '../components/Header/NavBar';
+import Contact from "../components/Contact";
+import Facility from '../components/Facility';
+import Footer from '../components/Footer';
 const API_USERS_URL = `http://localhost:4000/api/users`;
 
 
@@ -42,15 +41,13 @@ const WishList = () => {
   
   return (
     <>
-        <header id="header" className="header">
-            <NavBar/>
-        </header>
-        <main id="main" className="mt-70">
-            <Products products={wishlist}/>
-            <Contact/>
-            <Facility/>
-        </ main>
-        <Footer/>
+      <NavBar/>
+      <main id="main" className="mt-70">
+        <Products products={wishlist}/>
+      </main>
+      <Facility/>
+      <Contact/>
+      <Footer/>
     </>
   );
 }

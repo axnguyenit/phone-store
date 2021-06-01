@@ -134,14 +134,16 @@
       "id": 17
     },
     {
-      "id": 19,
-      "name": "YMA",
+      "name": "Nguyen Dinh Kha",
       "email": "dinhkhakl01@gmail.com",
-      "password": "aaa",
-      "phone": "0337965469",
-      "role": "user",
+      "password": "aaaa",
+      "phone": "0343498459",
       "address": "Binh Dinh",
-      "active": true
+      "active": true,
+      "code": 0,
+      "status": true,
+      "role": "user",
+      "id": 19
     },
     {
       "id": 20,
@@ -164,7 +166,7 @@
       "active": true
     },
     {
-      "name": "Nguyen Dinh Kha",
+      "name": "Yomost",
       "email": "kha.nguyen01.it@gmail.com",
       "password": "yma",
       "phone": "0337965469",
@@ -180,7 +182,7 @@
   "products": [
     {
       "id": "prod_kd6Ll28YEoV2mj",
-      "quantity": "204"
+      "quantity": 204
     },
     {
       "id": "prod_4OANwRpDY5vYL8",
@@ -212,27 +214,27 @@
     },
     {
       "id": "prod_QG375v68Q5rMOg",
-      "quantity": "204"
+      "quantity": 204
     },
     {
       "id": "prod_0egY5eZXpl3QnA",
-      "quantity": "199"
+      "quantity": 199
     },
     {
       "id": "prod_8XxzoBdeglPQAZ",
-      "quantity": "204"
+      "quantity": 204
     },
     {
       "id": "prod_VKXmwDNBX5rgDA",
-      "quantity": "199"
+      "quantity": 199
     },
     {
       "id": "prod_LvJjoP0Npoe0nO",
-      "quantity": "204"
+      "quantity": 204
     },
     {
       "id": "prod_eN1ql99pplz3ym",
-      "quantity": "199"
+      "quantity": 0
     }
   ],
   "orders": [
@@ -519,6 +521,22 @@
       ],
       "createdAt": 1622477658366,
       "id": 35
+    },
+    {
+      "userId": 19,
+      "status": "pending",
+      "receiver": "Nguyen Dinh Kha",
+      "email": "dinhkhakl01@gmail.com",
+      "phone": "0343498459",
+      "address": "Binh Dinh",
+      "details": [
+        {
+          "prodId": "prod_4OANwRpDY5vYL8",
+          "quantity": 1
+        }
+      ],
+      "createdAt": 1622580324411,
+      "id": 36
     }
   ],
   "baskets": [
@@ -528,11 +546,13 @@
       "details": [
         {
           "id": "prod_kd6Ll28YEoV2mj",
-          "quantity": 2
+          "quantity": 2,
+          "isCheck": false
         },
         {
           "id": "prod_4OANwRpDY5vYL8",
-          "quantity": 1
+          "quantity": 2,
+          "isCheck": false
         }
       ]
     },
@@ -610,7 +630,17 @@
       "userId": 22,
       "details": [
         {
+          "id": "prod_yA6nldj93oEWbz",
+          "quantity": 1,
+          "isCheck": false
+        },
+        {
           "id": "prod_4OANwRpDY5vYL8",
+          "quantity": 3,
+          "isCheck": false
+        },
+        {
+          "id": "prod_kd6Ll28YEoV2mj",
           "quantity": 1,
           "isCheck": false
         },
@@ -622,6 +652,12 @@
       ],
       "createdAt": 1622230673249,
       "id": 10
+    },
+    {
+      "userId": 19,
+      "details": [],
+      "createdAt": 1622577780815,
+      "id": 11
     }
   ],
   "wishlist": [
@@ -630,10 +666,13 @@
       "userId": 17,
       "details": [
         {
-          "id": "prod_4OANwRpDY5vYL8"
+          "id": "prod_kd6Ll28YEoV2mj"
         },
         {
-          "id": "prod_kd6Ll28YEoV2mj"
+          "id": "prod_yA6nldj93oEWbz"
+        },
+        {
+          "id": "prod_gnZO5kNOvo7MNq"
         }
       ]
     },
@@ -667,6 +706,12 @@
       "details": [],
       "createdAt": 1622230673252,
       "id": 5
+    },
+    {
+      "userId": 19,
+      "details": [],
+      "createdAt": 1622577780818,
+      "id": 6
     }
   ]
 }

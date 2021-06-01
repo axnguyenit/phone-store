@@ -2,7 +2,7 @@ import React from 'react';
 
 const Contact = () => {
     return (
-        <>
+        <main id="main">
             <section className="section newsletter" id="contact">
                 <div className="container">
                     <div className="newsletter__content">
@@ -14,12 +14,11 @@ const Contact = () => {
                             <input type="email" placeholder="Enter your email address" className="newsletter__email" required/>
                             {/* <a className="newsletter__link" href="#">SUBSCRIBE</a> */}
                             <input type="submit" className="newsletter__btn" href="#" value="SUBSCRIBE"/>
-
                         </form>
                     </div>
                 </div>
             </section>
-        </>
+        </main>
     )
 }
 

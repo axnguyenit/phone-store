@@ -3,13 +3,9 @@ import axios from 'axios';
 import React, {useState, useEffect} from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import '../../css/styles.css';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 const API_BASKETS_URL = `http://localhost:4000/api/baskets`;
 const API_USERS_URL = `http://localhost:4000/api/users`;
-
-toast.configure();
 
 const NavBar = () =>{
     const history = useHistory();
@@ -33,7 +29,6 @@ const NavBar = () =>{
     };
 
     useEffect(() => {
-        // fetchBasket();
         fetchQuantityOfBasket();
     });
 
@@ -57,15 +52,6 @@ const NavBar = () =>{
                 axios.put(API_BASKETS_URL + '/' + basket.id, basket).then( res => {
                     localStorage.removeItem('userID');
                     localStorage.removeItem('basket');
-                    toast.success('Sign out successfully!', {
-                        position: "top-center",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                    });
                     setIsSignIn(false);
                     history.replace('/login');
                 })
@@ -73,75 +59,68 @@ const NavBar = () =>{
         }
         else {
             localStorage.removeItem('userID');
-            toast.success('Log out successfully!', {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
             setIsSignIn(false);
         }
     }
 
     return (
         <>
-            <div className="navigation">
-                <div className="container">
-                    <nav className="nav">
-                        <div className="nav__logo">
-                            <Link to="/" className="scroll-link">
-                                LOGO PHONE
-                            </Link>
-                        </div>
-                        <div className="nav__logo">
-                            <ul className="nav__list">
-                                {
-                                    !isSignIn ? '' : 
-                                        <li className="nav__item">
-                                            <Link to="/profile" className="nav__link scroll-link">
-                                                Profile
-                                            </Link>
-                                        </li>
-                                }
-                                <li className="nav__item">
-                                    <Link to={isSignIn ? "/orders" : "/login"} className="nav__link scroll-link">
-                                        {
-                                            isSignIn ? "Orders" : "login"
-                                        }
-                                    </Link>
-                                </li>
-                                <li className="nav__item">
+            <header id="header" className="header">
+                <div className="navigation">
+                    <div className="container">
+                        <nav className="nav">
+                            <div className="nav__logo">
+                                <Link to="/" className="scroll-link">
+                                    LOGO PHONE
+                                </Link>
+                            </div>
+                            <div className="nav__logo">
+                                <ul className="nav__list">
                                     {
-                                        <Link to={isSignIn ? "/wishlist" : "/register"} className="nav__link scroll-link">
-                                            { 
-                                                isSignIn ? "Wishlist" : "Register"
+                                        !isSignIn ? '' : 
+                                            <li className="nav__item">
+                                                <Link to="/profile" className="nav__link scroll-link">
+                                                    Account
+                                                </Link>
+                                            </li>
+                                    }
+                                    <li className="nav__item">
+                                        <Link to={isSignIn ? "/orders" : "/login"} className="nav__link scroll-link">
+                                            {
+                                                isSignIn ? "Orders" : "login"
                                             }
                                         </Link>
-                                    }
-                                </li>
-                                {
-                                    !isSignIn ? '' : 
-                                        <li className="nav__item">
-                                            <Link className="nav__link scroll-link" onClick={() => logout()}>
-                                                Logout
+                                    </li>
+                                    <li className="nav__item">
+                                        {
+                                            <Link to={isSignIn ? "/wishlist" : "/register"} className="nav__link scroll-link">
+                                                { 
+                                                    isSignIn ? "Wishlist" : "Register"
+                                                }
                                             </Link>
-                                        </li>
-                                }
-                                <li className="nav__item">
-                                    <Link to="/basket" className="icon__item">
-                                        <i className="fa fa-shopping-cart shopping-cart">
-                                            <span id="cart__total">{quantityOfBasket}</span>
-                                        </i>    
-                                    </Link>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
+                                        }
+                                    </li>
+                                    {
+                                        !isSignIn ? '' : 
+                                            <li className="nav__item">
+                                                <Link className="nav__link scroll-link" onClick={() => logout()}>
+                                                    Logout
+                                                </Link>
+                                            </li>
+                                    }
+                                    <li className="nav__item">
+                                        <Link to="/basket" className="icon__item">
+                                            <i className="fa fa-shopping-cart shopping-cart">
+                                                <span id="cart__total">{quantityOfBasket}</span>
+                                            </i>    
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
                 </div>
-            </div>
+            </header>
         </>
     )
 }

@@ -1,11 +1,11 @@
 import axios from 'axios';
 import React from 'react';
 import { useState, useEffect } from "react";
-import OrdersDetail from '../../components/Orders/Orders';
-const NavBar = React.lazy(() => import ('../../components/Header/NavBar'));
-const Contact = React.lazy(() => import ('../../components/Contact/index'));
-const Facility = React.lazy(() => import('../../components/Facility'));
-const Footer = React.lazy(() => import('../../components/Footer'));
+import OrdersDetail from '../components/Orders/Orders';
+const NavBar = React.lazy(() => import ('../components/Header/NavBar'));
+const Contact = React.lazy(() => import ('../components/Contact'));
+const Facility = React.lazy(() => import('../components/Facility'));
+const Footer = React.lazy(() => import('../components/Footer'));
 const API_USERS_URL = `http://localhost:4000/api/users`;
 
 const Orders = () => {
@@ -48,15 +48,11 @@ const Orders = () => {
   
   return (
     <>
-        <header id="header" className="header">
-            <NavBar/>
-        </header>
-        <main id="main" className="mt-70">
-            <OrdersDetail orders={orders}/>
-            <Contact/>
-            <Facility/>
-        </ main>
-        <Footer/>
+      <NavBar/>
+      <OrdersDetail orders={orders}/>
+      <Facility/>
+      <Contact/>
+      <Footer/>
     </>
   );
 }

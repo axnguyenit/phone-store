@@ -13,6 +13,7 @@ const API_WISHLIST_URL = `http://localhost:4000/api/wishlist`;
 const CodeVerification = () => {
     const [code, setCode] = useState(0);
     const history = useHistory();
+    const [errorText, setErrorText] = useState('');
 
     const handleVerifyCode = (e) => {
         e.preventDefault();
@@ -32,7 +33,7 @@ const CodeVerification = () => {
                         localStorage.setItem('userID', JSON.stringify(res.data.id));
 
                         toast.success('Register successfully!', {
-                            position: "top-center",
+                            position: "bottom-left",
                             autoClose: 5000,
                             hideProgressBar: false,
                             closeOnClick: true,
@@ -57,15 +58,7 @@ const CodeVerification = () => {
                     })
                 }
                 else {
-                    toast.error('Code verify is invalid!', {
-                        position: "top-center",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                    });
+                    setErrorText('Code verify is incorrect!');
                 }
             })
         }
@@ -86,22 +79,14 @@ const CodeVerification = () => {
                     })
                 }
                 else {
-                    toast.error('Code verify is invalid!', {
-                        position: "top-center",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                    });
+                    setErrorText('Code verify is incorrect!');
                 }
             })
         }
         else {
             //toast a message to notice that something went wrong! Please try again.
             toast.error('Something went wrong! Please try again.', {
-                position: "top-center",
+                position: "bottom-left",
                 autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,
@@ -126,10 +111,11 @@ const CodeVerification = () => {
                             </div>
                             <form className="wrapper" onSubmit={handleVerifyCode}>
                             <div className="input-data">
-                                <input type="text" required onChange={(e) => setCode(parseInt(e.target.value))}/>
+                                <input type="text" required onChange={(e) => {setCode(parseInt(e.target.value)); setErrorText('')}}/>
                                 <div className="underline" />
                                 <label>OTP</label>
                             </div>
+                            <div className="error-txt">{errorText}</div>
                             <div><button className="btn-signin" type="submit">Continue</button></div>
                             <div className="link">
                                 Already a member? 

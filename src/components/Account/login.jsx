@@ -15,6 +15,7 @@ const Login = () => {
     const [users, setUsers] = useState([]);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [errorText, setErrorText] = useState('');
 
     const fetchUsers = async() => {
         axios.get(API_USERS_URL).then( res => {
@@ -138,53 +139,29 @@ const Login = () => {
                                         && user.password === password);
         if(user) {
             if(!user.status) {
-                toast.error('Your account is not verified!', {
-                    position: "bottom-left",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
+                // toast.error('Your account is not verified!', {
+                //     position: "bottom-left",
+                //     autoClose: 5000,
+                //     hideProgressBar: false,
+                //     closeOnClick: true,
+                //     pauseOnHover: true,
+                //     draggable: true,
+                //     progress: undefined,
+                // });
+                setErrorText('Your account is not verified!');
                 //show modal to confirm go to verify form and save verifyUser to localStorage with user ID
             }
             else if(!user.active) {
-                toast.error('Your account has been locked!', {
-                    position: "bottom-left",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
+                setErrorText('Your account has been locked!')
             }
             else {
                 localStorage.setItem('userID', user.id);
-                toast.success('Login successfully!', {
-                    position: "bottom-left",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
                 fetchBasket();
                 history.replace('/');
             }
         }
         else {
-            toast.error('Email or password incorrect!', {
-                position: "bottom-left",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            setErrorText('Email or password is incorrect!');
         }
     }
 
@@ -206,15 +183,16 @@ const Login = () => {
                             </div>
                             <form className="wrapper">
                             <div className="input-data">
-                                <input type="email" required onChange={(e) => setEmail(e.target.value)}/>
+                                <input type="email" required onChange={(e) => {setEmail(e.target.value); setErrorText('');}}/>
                                 <div className="underline" />
                                 <label>Email address</label>
                             </div>
                             <div className="input-data">
-                                <input type="password" required onChange={(e) => setPassword(e.target.value)}/>
+                                <input type="password" required onChange={(e) => {setPassword(e.target.value); setErrorText('');}}/>
                                 <div className="underline" />
                                 <label>Password</label>
                             </div>
+                            <div className="error-txt">{errorText}</div>
                             <Link to="/forgot-password">
                                 <a href="#">Forgot password?</a>
                             </Link>

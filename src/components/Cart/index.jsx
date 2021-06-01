@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -142,7 +143,7 @@ const Cart = () => {
     }
 
     return (
-        <>
+        <main id="main">
             {
                 ( items.length > 0 ) ? 
                     <section className="section cart__area">
@@ -218,9 +219,11 @@ const Cart = () => {
                                     </table>
                                 </div>
                                 <div className="cart-btns">
-                                    <div className="continue__shopping">
-                                    <a href="/">Continue Shopping</a>
-                                    </div>
+                                    <Link to="/">
+                                        <div className="continue__shopping">
+                                            <a href="#">Continue Shopping</a>
+                                        </div>
+                                    </Link>
                                     <div className="check__shipping">
                                     <div className="continue__shopping">
                                     <a href="#" onClick={handleCheckout}>Checkout</a>
@@ -231,16 +234,21 @@ const Cart = () => {
                             </div>
                         </div>
                     </section> 
-                    : <section className="section">
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <br />
-                            Your basket is empty!</section>
+                :
+                    <div className="container mt-70">
+                        <div className="profile">
+                            <form className="profile__form">
+                                <div className="header">Your basket is empty!</div>
+                                <div>
+                                    <Link to="/">
+                                    <button type="button" className="btn__update">Go to shoping</button>
+                                    </Link>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
             }
-        </>
+        </main>
     )
 }
 

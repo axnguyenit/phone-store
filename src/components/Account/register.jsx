@@ -4,9 +4,6 @@ import NavBar from '../Header/NavBar';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-toast.configure();
 const API_USERS_URL = `http://localhost:4000/api/users`;
 
 // field send mail: to_name, to_email, code
@@ -18,6 +15,7 @@ const Register = () => {
     const [password, setPassword] = useState();
     const [cfpassword, setCfpassword] = useState();
     const [users, setUsers] = useState([]);
+    const [errorText, setErrorText] = useState('');
 
     const fetchUsers = async () => {
         const res = await axios.get(API_USERS_URL);
@@ -47,15 +45,7 @@ const Register = () => {
 
         //check confirm password match?
         if(password != cfpassword) {
-            toast.error('Confirm password not matched!', {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            setErrorText('Confirm password not matched!');
         }
         else {
             let checkUser = false;
@@ -84,15 +74,7 @@ const Register = () => {
                 }
                 if(user.email === to_email && user.status) {
                     checkUser = true;
-                    toast.warn('Email that you have entered is already exist!', {
-                        position: "top-center",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                    });
+                    setErrorText('Email that you have entered is already exist!');
                 }
             })
             if(!checkUser) {
@@ -137,26 +119,27 @@ const Register = () => {
                                 </div>
                                 <form className="wrapper" onSubmit={handleSignup}>
                                     <div className="input-data">
-                                        <input type="text" name="to_name" onChange={e => setName(e.target.value)} required />
+                                        <input type="text" name="to_name" onChange={e => {setName(e.target.value); setErrorText('');}} required/>
                                         <div className="underline" />
                                         <label>Fullname</label>
                                     </div>
                                     <div className="input-data">
-                                        <input type="email" name="to_email" onChange={e => setEmail(e.target.value)} required />
+                                        <input type="email" name="to_email" onChange={e => {setEmail(e.target.value); setErrorText('');}} required/>
                                         <div className="underline" />
                                         <label>Email address</label>
                                     </div>
                                     <div className="input-data">
-                                        <input type="password" name="password" onChange={e => setPassword(e.target.value)} required />
+                                        <input type="password" name="password" onChange={e => {setPassword(e.target.value); setErrorText('');}} required/>
                                         <div className="underline" />
                                         <label>Password</label>
                                     </div>
                                     <div className="input-data">
-                                        <input type="password" name="cfpassword" onChange={e => setCfpassword(e.target.value)} required />
+                                        <input type="password" name="cfpassword" onChange={e => {setCfpassword(e.target.value); setErrorText('');}} required/>
                                         <div className="underline" />
                                         <label>Confirm Password</label>
                                     </div>
-                                    <input value={code} name="code" hidden/>
+                                    <input value={code} name="code" disabled hidden/>
+                                    <div className="error-txt">{errorText}</div>
                                     <div><button className="btn-signin" type="submit">Register</button></div>
                                     <div className="link">
                                         Already a member?

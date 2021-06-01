@@ -1,7 +1,7 @@
 import React from 'react';
 
 const OrderDetail = ({order}) => (
-    <>
+    <main id="main" className="mt-70">
         {
             ( order.length > 0 ) ?
                 <section className="section cart__area">
@@ -61,7 +61,7 @@ const OrderDetail = ({order}) => (
                                     <br />
                         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</section>
         }
-    </>
+    </main>
 )
 
 export default OrderDetail;

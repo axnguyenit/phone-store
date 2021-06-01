@@ -374,7 +374,7 @@ Navigation Media Query
 
 /*
 ======================
-Sign In
+Login
 ======================
 */
 
@@ -463,7 +463,7 @@ Sign In
 
 .signin__form .error-txt {
     margin-bottom: 2rem;
-    color: var(--orange);
+    color: #f00;
 }
   
   
@@ -1981,7 +1981,99 @@ Footer
     }
 }
 
+/*
+======================
+Profile
+======================
+*/
 
+.profile {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile .header{
+    font-size: 3rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
+    border-bottom: 1px solid var(--green);
+    padding-bottom: 3rem;
+    margin-bottom: 3rem;
+}
+
+.profile .profile__form {
+    margin: 5rem auto;
+    width: 60rem;
+    height: fit-content;
+    color: var(--black5);
+    padding: 4rem 5rem;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0px 2px 30px 10px rgba(0, 0, 0, 0.09);
+    border-radius: 0.5rem;
+}
+
+.profile .profile__form .form-control,
+.profile .profile__form .form-control1 {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.profile .profile__form .form-control input {
+    font-size: 16px;
+    width: 40rem;
+    height: 32px;
+    padding: 10px;
+    outline: none;
+    border: 1px solid #ccc;
+}
+.profile .profile__form .form-control1 input {
+    font-size: 16px;
+    width: 33rem;
+    height: 32px;
+    padding: 10px;
+    outline: none;
+    border: 1px solid #ccc;
+}
+.profile .profile__form .form-control textarea {
+    font-size: 16px;
+    width: 40rem;
+    height: 80px;
+    padding: 10px;
+    outline: none;
+    border: 1px solid #ccc;
+}
+.profile .profile__form .form-control1 input:focus,
+.profile .profile__form .form-control input:focus,
+.profile .profile__form .form-control textarea:focus {
+    border: 1px solid var(--green); 
+}
+
+.profile .profile__form .btn__update {
+    font-size: 1.5rem;
+    padding: 1.2rem 3rem;
+    text-transform: uppercase;
+    float: right;
+    background-color: var(--green);
+    color: var(--white);
+    border: 1px solid var(--green);
+    transition: all 0.4s ease-in-out;
+    margin-top: 2rem;
+    cursor: pointer;
+}
+
+.profile .profile__form .btn__update:hover {
+    border: 1px solid var(--green);
+    color: var(--green);
+    background-color: transparent;
+}
+
+.profile .profile__form .error-text {
+    margin: 2rem 0 0 17rem;
+    color: #f00;
+}
 /*
 ======================
 Product Details

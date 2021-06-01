@@ -1,16 +1,18 @@
 import axios from 'axios';
 import React from 'react';
 import { useState, useEffect } from "react";
-import OrderDetail from '../../components/Orders/Order';
-const NavBar = React.lazy(() => import ('../../components/Header/NavBar'));
-const Contact = React.lazy(() => import ('../../components/Contact/index'));
-const Facility = React.lazy(() => import('../../components/Facility'));
-const Footer = React.lazy(() => import('../../components/Footer'));
+import { useRouteMatch } from 'react-router';
+import OrderDetail from '../components/Orders/Order';
+const NavBar = React.lazy(() => import ('../components/Header/NavBar'));
+const Contact = React.lazy(() => import ('../components/Contact'));
+const Facility = React.lazy(() => import('../components/Facility'));
+const Footer = React.lazy(() => import('../components/Footer'));
 const API_USERS_URL = `http://localhost:4000/api/users`;
 
-const Order = (props) => {
+const Order = () => {
+    const match = useRouteMatch();
     const [order, setOrder] = useState([]);
-    const id_order = props.match.params.id;
+    const id_order = match.params.id;
 
     const fetchOrder = () => {
         if(localStorage.getItem('userID')) {
@@ -49,14 +51,10 @@ const Order = (props) => {
     
     return (
         <>
-            <header id="header" className="header">
-                <NavBar/>
-            </header>
-            <main id="main" className="mt-70">
-                <OrderDetail order={order}/>
-                <Contact/>
-                <Facility/>
-            </ main>
+            <NavBar/>
+            <OrderDetail order={order}/>
+            <Facility/>
+            <Contact/>
             <Footer/>
         </>
     );
