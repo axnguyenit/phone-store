@@ -21,7 +21,6 @@ import {
 } from '@coreui/react';
 import axios from 'axios';
 
-// API URL
 const API_USERS_URL = `http://localhost:4000/api/users`;
 
 const fields = [
@@ -43,13 +42,12 @@ const fields = [
   },
   {
     key: 'role',
-    _style: { width: '7%' }
+    _style: { width: '5%' }
   },
-
   {
     key: 'show_details',
     label: 'Action',
-    _style: { width: '18%' },
+    _style: { width: '20%' },
     filter: false
   }
 ]
@@ -60,15 +58,8 @@ const Users = () => {
   const [isUpdate, setUpdate] = useState(false);
   const [isLock, setLock] = useState(false);
   const [isUnlock, setIsUnlock] = useState(false);
-  const [isInvalid, setIsInvalid] = useState(false);
-  const [name, setName] = useState();
-  const [address, setAddress] = useState();
-  const [email, setEmail] = useState();
-  const [phone, setPhone] = useState();
-  const [password, setPassword] = useState();
+  const [isRender, setIsRender] = useState(false);
   const [role, setRole] = useState();
-  const [validEmail, setValidEmail] = useState(false);
-  const [validPhone, setValidPhone] = useState(false);
 
   const accessToken = localStorage.getItem('accessToken');
   // Function fetch users from JSon Server
@@ -78,78 +69,12 @@ const Users = () => {
     }) 
   }
 
-  // const fetchAccessToken = () => {
-  //   console.log(users);
-  //   if(localStorage.getItem('accessToken')) {
-  //     let userID = JSON.parse(localStorage.getItem('accessToken'));
-  //     let accessTokenUser = users.find(user => user.id === userID);
-  //     console.log(accessTokenUser);
-  //     setAccessToken(accessTokenUser);
-  //   }
-  // }
-
-  // fetchAccessToken();
-
   // Function update user info
   const updateUser = () => {
-    if(name || address || email || phone || password || role) {
-      let nameTerm = '';
-      let addressTerm = '';
-      let emailTerm = '';
-      let phoneTerm = '';
-      let passwordTerm = '';
-      let roleTerm = '';
-      if(name) {
-        nameTerm = name;
-      } else {
-        nameTerm = user.name;
-      }
-
-      if(address) {
-        addressTerm = address;
-      } else {
-        addressTerm = user.address;
-      }
-
-      if(email) {
-        emailTerm = email;
-      } else {
-        emailTerm = user.email;
-      }
-
-      if(phone) {
-        phoneTerm = phone;
-      } else {
-        phoneTerm = user.phone;
-      }
-
-      if(password) {
-        passwordTerm = password;
-      } else {
-        passwordTerm = user.password;
-      }
-
-      if(role) {
-        roleTerm = role;
-      } else {
-        roleTerm = user.role;
-      }
-
-      const userTerm = {
-        id: user.id,
-        name: nameTerm,
-        email: emailTerm,
-        password: passwordTerm,
-        phone: phoneTerm,
-        role: roleTerm,
-        address: addressTerm,
-      }
-
-      axios.put(API_USERS_URL + "/" + user.id, userTerm).then( res => {
-        let usersTerm = users;
-        let index = usersTerm.indexOf(user);
-        usersTerm[index] = userTerm;
-        setUsers(usersTerm);
+    if(role) {
+      user.role = role;
+      axios.put(API_USERS_URL + "/" + user.id, user).then(() => {
+        setIsRender(!isRender);
       })
     }
     setUpdate(!isUpdate);
@@ -157,11 +82,6 @@ const Users = () => {
 
   const cancelUpdate = () => {
     setUser({});
-    setName("");
-    setAddress("");
-    setEmail("");
-    setPhone("");
-    setPassword("");
     setRole("");
     setUpdate(!isUpdate);
   }
@@ -200,13 +120,8 @@ const Users = () => {
   }
 
   const handleLock = (userTerm) => {
-    // if(userTerm.role === 'admin') {
-    //   setIsInvalid(!isInvalid);
-    // }
-    // else {
       setUser(userTerm);
       setLock(!isLock);
-    // }
   }
 
   const handleUnlock = (userTerm) => {
@@ -233,6 +148,8 @@ const Users = () => {
                           (userTerm, index)=>{
                             return (
                               <td key={index} className="py-2">
+                              {
+                                accessToken === 'manager' ?
                                 <CButton
                                   color="primary"
                                   shape="square"
@@ -241,7 +158,9 @@ const Users = () => {
                                   onClick={() => handleUpdate(userTerm)}
                                 >
                                   Update
-                                </CButton>
+                                </CButton> 
+                                : ''
+                              }
                                 &nbsp;
                                 &nbsp;
                                 {
@@ -306,52 +225,19 @@ const Users = () => {
                 color="primary"
               >
                 <CModalHeader closeButton>
-                  <CModalTitle>Update Info User</CModalTitle>
+                  <CModalTitle>Update Role</CModalTitle>
                 </CModalHeader>
                 <CModalBody>
                   <CRow>
-                    <CCol xs="6">
-                      <CFormGroup>
-                        <CLabel htmlFor="name">Name</CLabel>
-                        <CInput name="name" placeholder="Fullname" defaultValue={user.name} onChange={(e) => {setName(e.target.value)}} required />
-                      </CFormGroup>
-                    </CCol>
-                    <CCol xs="6">
-                      <CFormGroup>
-                        <CLabel htmlFor="name">Address</CLabel>
-                        <CInput name="address" placeholder="Address" defaultValue={user.address} onChange={(e) => {setAddress(e.target.value)}} required />
-                      </CFormGroup>
-                    </CCol>
-                  </CRow>
-                  <CRow>
-                    <CCol xs="12">
-                      <CFormGroup>
-                        <CLabel htmlFor="ccnumber">Email</CLabel>
-                        <CInput name="email" type="email" placeholder="Email address" defaultValue={user.email} onChange={(e) => {setEmail(e.target.value)}} required />
-                      </CFormGroup>
-                    </CCol>
-                  </CRow>
-                  <CRow>
-                    <CCol xs={accessToken === 'manager' ? '4' : '6'}>
-                      <CFormGroup>
-                        <CLabel htmlFor="cvv">Phone</CLabel>
-                        <CInput name="phone" placeholder="phone" defaultValue={user.phone} onChange={(e) => {setPhone(e.target.value)}} required/>
-                      </CFormGroup>
-                    </CCol>
-                    <CCol xs={accessToken === 'manager' ? '4' : '6'}>
-                      <CFormGroup>
-                        <CLabel htmlFor="cvv">Password</CLabel>
-                        <CInput name="password" type="password" defaultValue={user.password} placeholder="Password" onChange={(e) => {setPassword(e.target.value)}} required/>
-                      </CFormGroup>
-                    </CCol>
                     {
                       accessToken === 'manager' ?
-                      <CCol xs="4">
+                      <CCol xs="12">
                         <CFormGroup>
                           <CLabel htmlFor="ccmonth">Role</CLabel>
                           <CSelect custom name="ccmonth" name="ccmonth" onChange={(e) => {setRole(e.target.value)}}>
                             <option value="user">User</option>
                             <option value="admin">Admin</option>
+                            <option value="manager">Manager</option>
                           </CSelect>
                         </CFormGroup>
                       </CCol> : ''

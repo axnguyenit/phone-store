@@ -1,6 +1,5 @@
-
 import axios from 'axios';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import '../../css/styles.css';
 
@@ -12,6 +11,9 @@ const NavBar = () =>{
     const [quantityOfBasket, setQuantityOfBasket] = useState(0);
     const [isSignIn, setIsSignIn] = useState(false);
     const [userID, setUserID] = useState();
+    
+    const [timeString, setTimeString] = useState();
+    const intervalVal = useRef(null);
 
     const fetchQuantityOfBasket = () => {
         if(localStorage.getItem('basket')) {
@@ -71,7 +73,7 @@ const NavBar = () =>{
                         <nav className="nav">
                             <div className="nav__logo">
                                 <Link to="/" className="scroll-link">
-                                    LOGO PHONE
+                                    PHONE
                                 </Link>
                             </div>
                             <div className="nav__logo">
@@ -82,6 +84,7 @@ const NavBar = () =>{
                                                 <Link to="/profile" className="nav__link scroll-link">
                                                     Account
                                                 </Link>
+                                                <div className="underline" />
                                             </li>
                                     }
                                     <li className="nav__item">
@@ -90,22 +93,25 @@ const NavBar = () =>{
                                                 isSignIn ? "Orders" : "login"
                                             }
                                         </Link>
+                                        <div className="underline" />
                                     </li>
-                                    <li className="nav__item">
                                         {
+                                    <li className="nav__item">
                                             <Link to={isSignIn ? "/wishlist" : "/register"} className="nav__link scroll-link">
                                                 { 
                                                     isSignIn ? "Wishlist" : "Register"
                                                 }
                                             </Link>
-                                        }
+                                            <div className="underline" />
                                     </li>
+                                        }
                                     {
                                         !isSignIn ? '' : 
                                             <li className="nav__item">
                                                 <Link className="nav__link scroll-link" onClick={() => logout()}>
                                                     Logout
                                                 </Link>
+                                                <div className="underline" />
                                             </li>
                                     }
                                     <li className="nav__item">
@@ -115,6 +121,58 @@ const NavBar = () =>{
                                             </i>    
                                         </Link>
                                     </li>
+                                </ul>
+                                <div className="nav__bars">
+                                    <label htmlFor="nav__mobile-check">
+                                        <i class="fas fa-bars"/>
+                                    </label>
+                                </div>
+
+                                <input type="checkbox" id="nav__mobile-check" hidden/>
+
+                                <label htmlFor="nav__mobile-check" className="nav__overlay"></label>
+                                <ul className="nav__mobile">
+                                    <label htmlFor="nav__mobile-check" className="nav__mobile-close">
+                                        <i class="fas fa-times"></i>
+                                    </label>
+                                
+                                    {
+                                        !isSignIn ? '' : 
+                                            <li className="nav__item">
+                                                <Link to="/profile" className="nav__link scroll-link">
+                                                    Account
+                                                </Link>
+                                            </li>
+                                    }
+                                    <li className="nav__item">
+                                            <Link to="/basket" className="nav__link scroll-link">
+                                                Basket ({quantityOfBasket})
+                                            </Link>
+                                    </li>
+                                    <li className="nav__item">
+                                        <Link to={isSignIn ? "/orders" : "/login"} className="nav__link scroll-link">
+                                            {
+                                                isSignIn ? "Orders" : "login"
+                                            }
+                                        </Link>
+                                    </li>
+                                        {
+                                    <li className="nav__item">
+                                            <Link to={isSignIn ? "/wishlist" : "/register"} className="nav__link scroll-link">
+                                                { 
+                                                    isSignIn ? "Wishlist" : "Register"
+                                                }
+                                            </Link>
+                                    </li>
+                                        }
+                                    {
+                                        !isSignIn ? '' : 
+                                            <li className="nav__item">
+                                                <Link className="nav__link scroll-link" onClick={() => logout()}>
+                                                    Logout
+                                                </Link>
+                                            </li>
+                                    }
                                 </ul>
                             </div>
                         </nav>

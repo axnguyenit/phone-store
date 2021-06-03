@@ -91,7 +91,7 @@ const Orders = () => {
 
         orderTerm.quantity = quantity;
         orderTerm.total = total;
-        orderTerm.date = new Intl.DateTimeFormat(['ban', 'id']).format(order.createdAt);
+        orderTerm.date = (new Intl.DateTimeFormat(['ban', 'id'], {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(order.createdAt));
         ordersTerm.push(orderTerm);
       })
       setOrders(ordersTerm);

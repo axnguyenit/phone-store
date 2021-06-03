@@ -235,7 +235,8 @@ export const ProDetail = ({product}) => {
                 <span className="new__price">{product.price.formatted_with_symbol}</span>
               </div>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt a doloribus iste natus et facere? dolor sit amet consectetur adipisicing elit. Sunt a doloribus iste natus et facere?
+                {product.seo.description}
+                {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt a doloribus iste natus et facere? dolor sit amet consectetur adipisicing elit. Sunt a doloribus iste natus et facere? */}
               </p>
               <div className="product__info-container">
                 <ul className="product__info">
@@ -246,7 +247,7 @@ export const ProDetail = ({product}) => {
                     <span>Brand: {product.categories[0].name}</span>
                   </li>
                   <li>
-                    <span>Availability: {product.quantity != 0 ? `In Stock` : "Out of Stock"} ({product.quantity} Items)</span>
+                    <span>Availability: {product.quantity != 0 ? `In Stock` : "Out of Stock"} ({product.inventory.available} Items)</span>
                   </li>
                 </ul>
               </div>

@@ -6,9 +6,9 @@
       "email": "nga.nguyen22@student.passerellesnumeriques.org",
       "password": "admin",
       "phone": "0987654321",
-      "role": "admin",
+      "role": "user",
       "address": "Binh Dinh",
-      "active": true
+      "active": false
     },
     {
       "id": 4,
@@ -16,7 +16,7 @@
       "email": "thuy.nguyen22@student.passerellesnumeriques.org",
       "password": "admin",
       "phone": "0987654321",
-      "role": "admin",
+      "role": "user",
       "address": "Quang Binh",
       "active": true
     },
@@ -153,17 +153,9 @@
       "phone": "0123456789",
       "role": "admin",
       "address": "Phù Mỹ - Bình Định",
-      "active": true
-    },
-    {
-      "id": 21,
-      "name": "YMA",
-      "email": "kha.nguyen22@student.passerellesnumeriques.org",
-      "password": "123",
-      "phone": "0337965469",
-      "role": "user",
-      "address": "Binh Dinh",
-      "active": true
+      "active": true,
+      "status": true,
+      "code": 0
     },
     {
       "name": "Yomost",
@@ -177,6 +169,19 @@
       "role": "manager",
       "createdAt": 1622230653240,
       "id": 22
+    },
+    {
+      "name": "Nguyen Dinh Kha",
+      "email": "kha.nguyen22@student.passerellesnumeriques.org",
+      "password": "123",
+      "phone": "0337965469",
+      "address": "Tay Son - Binh Dinh",
+      "active": true,
+      "code": 0,
+      "status": true,
+      "role": "user",
+      "createdAt": 1622671988322,
+      "id": 23
     }
   ],
   "products": [
@@ -240,7 +245,7 @@
   "orders": [
     {
       "userId": 22,
-      "status": "pending",
+      "status": "approved",
       "receiver": "Thu Dieu",
       "email": "kha.nguyen01.it@gmail.com",
       "phone": "0379579697",
@@ -256,7 +261,7 @@
     },
     {
       "userId": 22,
-      "status": "pending",
+      "status": "approved",
       "receiver": "Le Thi Thu Dieu",
       "email": "kha.nguyen01.it@gmail.com",
       "phone": "0379579697",
@@ -537,6 +542,22 @@
       ],
       "createdAt": 1622580324411,
       "id": 36
+    },
+    {
+      "userId": 22,
+      "status": "pending",
+      "receiver": "Yomost",
+      "email": "kha.nguyen01.it@gmail.com",
+      "phone": "0337965469",
+      "address": "Binh Tan - Tay Son - Binh Dinh",
+      "details": [
+        {
+          "prodId": "prod_kd6Ll28YEoV2mj",
+          "quantity": 1
+        }
+      ],
+      "createdAt": 1622660495916,
+      "id": 37
     }
   ],
   "baskets": [
@@ -628,28 +649,7 @@
     },
     {
       "userId": 22,
-      "details": [
-        {
-          "id": "prod_yA6nldj93oEWbz",
-          "quantity": 1,
-          "isCheck": false
-        },
-        {
-          "id": "prod_4OANwRpDY5vYL8",
-          "quantity": 3,
-          "isCheck": false
-        },
-        {
-          "id": "prod_kd6Ll28YEoV2mj",
-          "quantity": 1,
-          "isCheck": false
-        },
-        {
-          "id": "prod_eN1ql99pplz3ym",
-          "quantity": 1,
-          "isCheck": false
-        }
-      ],
+      "details": [],
       "createdAt": 1622230673249,
       "id": 10
     },
@@ -658,6 +658,30 @@
       "details": [],
       "createdAt": 1622577780815,
       "id": 11
+    },
+    {
+      "userId": 19,
+      "details": [],
+      "createdAt": 1622671174103,
+      "id": 12
+    },
+    {
+      "userId": 19,
+      "details": [],
+      "createdAt": 1622671878101,
+      "id": 13
+    },
+    {
+      "userId": 23,
+      "details": [],
+      "createdAt": 1622672020166,
+      "id": 14
+    },
+    {
+      "userId": 23,
+      "details": [],
+      "createdAt": 1622732054375,
+      "id": 15
     }
   ],
   "wishlist": [
@@ -703,7 +727,11 @@
     },
     {
       "userId": 22,
-      "details": [],
+      "details": [
+        {
+          "id": "prod_QG375v68Q5rMOg"
+        }
+      ],
       "createdAt": 1622230673252,
       "id": 5
     },
@@ -712,6 +740,34 @@
       "details": [],
       "createdAt": 1622577780818,
       "id": 6
+    },
+    {
+      "userId": 19,
+      "details": [],
+      "createdAt": 1622671174105,
+      "id": 7
+    },
+    {
+      "userId": 19,
+      "details": [],
+      "createdAt": 1622671878102,
+      "id": 8
+    },
+    {
+      "userId": 23,
+      "details": [
+        {
+          "id": "prod_DWy4oGn9zw6Jx2"
+        }
+      ],
+      "createdAt": 1622672020167,
+      "id": 9
+    },
+    {
+      "userId": 23,
+      "details": [],
+      "createdAt": 1622732054379,
+      "id": 10
     }
   ]
 }

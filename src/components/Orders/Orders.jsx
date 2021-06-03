@@ -36,7 +36,7 @@ const OrdersDetail = ({orders}) => (
                                                 </td>
                                                 <td className="product__content">
                                                     <span>
-                                                        {new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(order.createdAt)}
+                                                        {new Intl.DateTimeFormat(['ban', 'id'], {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(order.createdAt)}
                                                     </span>
                                                 </td>
                                                 <td className="product__content">

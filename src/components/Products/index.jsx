@@ -5,12 +5,6 @@ import CustomCard from '../CustomCard';
 const Products = ({products}) => {
     const [searchTerm, setSearchTerm] = useState('');
 
-    const sort = () => {
-        return 0.5 - Math.random();
-    }
-
-    products = products.sort(sort);
-
     return (
         <div className="container">
             <section className="category__section section" id="category">
@@ -24,7 +18,7 @@ const Products = ({products}) => {
                 <div className="category__container">
                     <div className="category__center">
                         {
-                            products.filter(product => {
+                            products.reverse().filter(product => {
                                 if(searchTerm === '') {
                                     return product;
                                 }

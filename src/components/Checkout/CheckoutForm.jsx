@@ -8,7 +8,6 @@ import {
   FormControl,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
-
 const CheckoutForm = ({
   user = {},
   handleChange,

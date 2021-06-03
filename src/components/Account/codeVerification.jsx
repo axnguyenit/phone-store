@@ -17,9 +17,10 @@ const CodeVerification = () => {
 
     const handleVerifyCode = (e) => {
         e.preventDefault();
+        console.log(e.target);
         if(localStorage.getItem('verifyUser')) {
             const userLocal = JSON.parse(localStorage.getItem('verifyUser'));
-
+            console.log("ok");
             axios.get(API_USERS_URL + '/' + userLocal).then( res => {
                 if(code === res.data.code) {
                     let userTerm = res.data;
@@ -64,8 +65,8 @@ const CodeVerification = () => {
         }
         else if(localStorage.getItem('userIDForgot')) {
             const userIDForgot = JSON.parse(localStorage.getItem('userIDForgot'));
-
-            axios.get(API_USERS_URL + '/' + userIDForgot).then( res => {
+            console.log('forgot');
+            axios.get(API_USERS_URL + `/${userIDForgot}`).then( res => {
                 console.log(res.data);
 
                 if(code === res.data.code) {
@@ -84,6 +85,7 @@ const CodeVerification = () => {
             })
         }
         else {
+            console.log('fail');
             //toast a message to notice that something went wrong! Please try again.
             toast.error('Something went wrong! Please try again.', {
                 position: "bottom-left",

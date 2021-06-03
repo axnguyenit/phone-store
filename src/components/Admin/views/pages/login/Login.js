@@ -76,7 +76,7 @@ const Login = (props) => {
                       <CInputGroupPrepend>
                       <CInputGroupText>@</CInputGroupText>
                       </CInputGroupPrepend>
-                      <CInput type="email" placeholder="Email address" onChange={(e) => setEmail(e.target.value)} autoComplete="username" required />
+                      <CInput type="email" placeholder="Email address" onChange={(e) => {setEmail(e.target.value); setErrorText('')}} autoComplete="username" required />
                     </CInputGroup>
                     <CInputGroup className="mb-4">
                       <CInputGroupPrepend>
@@ -84,7 +84,7 @@ const Login = (props) => {
                           <CIcon name="cil-lock-locked" />
                         </CInputGroupText>
                       </CInputGroupPrepend>
-                      <CInput type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} autoComplete="current-password" required />
+                      <CInput type="password" placeholder="Password" onChange={(e) => {setPassword(e.target.value); setErrorText('')}} autoComplete="current-password" required />
                     </CInputGroup>
                     <CInputGroup className="mb-4">
                       <CInputGroupPrepend>

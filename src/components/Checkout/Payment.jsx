@@ -72,12 +72,14 @@ const Payment = ({
         });
     }
   };
+
   return (
     <>
       <Elements stripe={stripePromise}>
         <ElementsConsumer>
           {({ elements, stripe }) => (
             <form onSubmit={(e) => handleSubmit(e, elements, stripe)}>
+              
               {
                 checkoutData.map((item, index) => {
                   return <div key={index}>

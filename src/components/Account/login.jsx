@@ -4,7 +4,10 @@ import NavBar from '../Header/NavBar';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import emailjs from 'emailjs-com';
 import 'react-toastify/dist/ReactToastify.css';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 toast.configure();
 
 const API_USERS_URL = `http://localhost:4000/api/users`;
@@ -13,14 +16,26 @@ const API_BASKETS_URL = `http://localhost:4000/api/baskets`;
 const Login = () => {
     const history = useHistory();
     const [users, setUsers] = useState([]);
+    const [user, setUser] = useState({
+        email: '',
+        name: '',
+    });
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorText, setErrorText] = useState('');
+    const [code, setCode] = useState(0);
 
     const fetchUsers = async() => {
         axios.get(API_USERS_URL).then( res => {
             setUsers(res.data);
         })
+    }
+
+    const rand = () => {
+        const min = 111111;
+        const max = 999999;
+        const rand = min + Math.random() * (max - min);
+        setCode(Math.round(rand));
     }
 
     const fetchBasket = () => {
@@ -130,25 +145,48 @@ const Login = () => {
     }
 
     useEffect(() => {
+        fetchUsers();
         fetchBasket();
-    });
+        rand();
+    }, []);
+
+    const sendEmail = (e) => {
+        e.preventDefault();
+        emailjs.sendForm('default_service', 'template_yomost', e.target, `user_eGZkjyOWcdrxHJK1InigS`)
+            .then((result) => {
+                console.log(result.text);
+            }, (error) => {
+                console.log(error.text);
+            });
+    }
 
     const login = (e) => {
         e.preventDefault();
-        const user = users.find( user => user.email === email 
+        const userValid = users.find( user => user.email === email 
                                         && user.password === password);
-        if(user) {
-            if(!user.status) {
-                // toast.error('Your account is not verified!', {
-                //     position: "bottom-left",
-                //     autoClose: 5000,
-                //     hideProgressBar: false,
-                //     closeOnClick: true,
-                //     pauseOnHover: true,
-                //     draggable: true,
-                //     progress: undefined,
-                // });
-                setErrorText('Your account is not verified!');
+        if(userValid) {
+            setUser(userValid);
+            if(!userValid.status) {
+                confirmAlert({
+                    title: 'Your account is not verified!',
+                    message: 'Go to verify user.',
+                    buttons: [
+                      {
+                        label: 'Verify',
+                        onClick: () => {
+                            userValid.code = code;
+                            axios.put(API_USERS_URL + `/${userValid.id}`, userValid).then(() => {
+                                sendEmail(e);
+                                localStorage.setItem('verifyUser', JSON.stringify(userValid.id));
+                                history.replace('/code-verification');
+                            })
+                        }
+                      },
+                      {
+                        label: 'Cancel'
+                      }
+                    ]
+                  });
                 //show modal to confirm go to verify form and save verifyUser to localStorage with user ID
             }
             else if(!user.active) {
@@ -165,10 +203,6 @@ const Login = () => {
         }
     }
 
-    useEffect(() => {
-        fetchUsers();
-    }, []);
-
     return (
         <>
             <NavBar/>
@@ -184,7 +218,7 @@ const Login = () => {
                             <form className="wrapper">
                             <div className="input-data">
                                 <input type="email" required onChange={(e) => {setEmail(e.target.value); setErrorText('');}}/>
-                                <div className="underline" />
+                                <div className="underline"/>
                                 <label>Email address</label>
                             </div>
                             <div className="input-data">
@@ -196,6 +230,9 @@ const Login = () => {
                             <Link to="/forgot-password">
                                 <a href="#">Forgot password?</a>
                             </Link>
+                            <input value={user.email} name="to_email" hidden/>
+                            <input value={user.name} name="to_name" hidden/>
+                            <input value={code} name="code" hidden/>
                             <div><button className="btn-signin" type="submit"> Login</button></div>
                             <div className="link">
                                 Not yet a member?

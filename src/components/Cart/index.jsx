@@ -225,9 +225,9 @@ const Cart = () => {
                                         </div>
                                     </Link>
                                     <div className="check__shipping">
-                                    <div className="continue__shopping">
-                                    <a href="#" onClick={handleCheckout}>Checkout</a>
-                                    </div>
+                                        <div className="continue__checkout">
+                                            <a href="#" onClick={handleCheckout}>Checkout</a>
+                                        </div>
                                     </div>
                                 </div>
                                 </form>

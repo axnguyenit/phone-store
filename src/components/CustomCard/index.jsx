@@ -182,30 +182,30 @@ const CustomCard = ({product}) => {
                 <div className="product__footer">
                     <h3>{product.price.formatted_with_symbol}</h3>
                     <div className="product__price">
-                    <h4>{product.name}</h4>
+                        <h4>{product.name}</h4>
                     </div>
                 </div>
                 <ul>
                     <li>
-                    <Link data-tip="Quick View" data-place="left" to={"detail" + "/" + product.id + "/" + to_slug(product.name)}>
-                        <svg>
-                        <use xlinkHref="./images/sprite.svg#icon-eye" />
-                        </svg>
-                    </Link>
+                        <Link data-tip="Quick View" data-place="left" to={"detail" + "/" + product.id + "/" + to_slug(product.name)}>
+                            <svg>
+                            <use xlinkHref="./images/sprite.svg#icon-eye" />
+                            </svg>
+                        </Link>
                     </li>
                     <li>
-                    <a data-tip="Add To Wishlist" data-place="left" onClick={() => addToWishlist(product)}>
-                        <svg>
-                        <use xlinkHref="./images/sprite.svg#icon-heart-o"/>
-                        </svg>
-                    </a>
+                        <a data-tip="Add To Wishlist" data-place="left" onClick={() => addToWishlist(product)}>
+                            <svg>
+                            <use xlinkHref="./images/sprite.svg#icon-heart-o"/>
+                            </svg>
+                        </a>
                     </li>
                     <li>
-                    <a data-tip="Add To Compare" data-place="left" onClick={() => addToBasket(product)}>
-                        <svg>
-                            <use xlinkHref="./images/sprite.svg#icon-cart-plus" />
-                        </svg>
-                    </a>
+                        <a data-tip="Add To Compare" data-place="left" onClick={() => addToBasket(product)}>
+                            <svg>
+                                <use xlinkHref="./images/sprite.svg#icon-cart-plus" />
+                            </svg>
+                        </a>
                     </li>
                 </ul>
             </div>

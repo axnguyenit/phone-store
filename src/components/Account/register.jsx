@@ -24,7 +24,6 @@ const Register = () => {
 
     const sendEmail = (e) => {
         e.preventDefault();
-    
         emailjs.sendForm('default_service', 'template_yomost', e.target, `user_eGZkjyOWcdrxHJK1InigS`)
             .then((result) => {
                 console.log(result.text);
@@ -66,7 +65,7 @@ const Register = () => {
                     };
                     
                     // call send mail function here and update code
-                    axios.put(API_USERS_URL + '/' + user.id, userUpdate).then( res => {
+                    axios.put(API_USERS_URL + `/${user.id}`, userUpdate).then(() => {
                         sendEmail(e);
                         localStorage.setItem('verifyUser', JSON.stringify(user.id));
                         history.replace('/code-verification');
@@ -138,7 +137,7 @@ const Register = () => {
                                         <div className="underline" />
                                         <label>Confirm Password</label>
                                     </div>
-                                    <input value={code} name="code" disabled hidden/>
+                                    <input value={code} name="code" hidden/>
                                     <div className="error-txt">{errorText}</div>
                                     <div><button className="btn-signin" type="submit">Register</button></div>
                                     <div className="link">

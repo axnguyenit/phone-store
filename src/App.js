@@ -1,8 +1,6 @@
 import React from "react";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect, useHistory } from "react-router-dom";
 import routes from './routes';
-
-
 
 const loading = (
   <div className="pt-3 text-center">

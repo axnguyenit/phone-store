@@ -21,7 +21,6 @@ const ForgotPassword = () => {
 
     const sendEmail = (e) => {
         e.preventDefault();
-        console.log(e);
     
         emailjs.sendForm('default_service', 'template_yomost', e.target, `user_eGZkjyOWcdrxHJK1InigS`)
             .then((result) => {
@@ -49,8 +48,7 @@ const ForgotPassword = () => {
             let userTerm = user;
             userTerm.code = code;
 
-            axios.put(API_USERS_URL + '/' + user.id, userTerm).then( res => {
-                console.log(res.data);
+            axios.put(API_USERS_URL + '/' + user.id, userTerm).then(() => {
                 sendEmail(e);
                 localStorage.setItem('userIDForgot', JSON.stringify(user.id));
                 history.replace('/code-verification');
