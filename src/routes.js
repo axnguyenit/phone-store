@@ -9,7 +9,6 @@ const ProductDetail = React.lazy(() => import('./Views/ProductDetail'));
 const Checkout = React.lazy(() => import('./components/Checkout'));
 const Basket = React.lazy(() => import('./Views/Basket'));
 const ViewProfile = React.lazy(() => import('./Views/ViewProfile'));
-// const ViewProfile = React.lazy(() => import('./components/Account/Profile'));
 const CodeVerification = React.lazy(() => import('./components/Account/codeVerification'));
 const Wishlist = React.lazy(() => import('./Views/Wishlist'));
 const Orders = React.lazy(() => import('./Views/Orders'));

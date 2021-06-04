@@ -88,9 +88,7 @@ const Register = () => {
                     status: false,
                     role: 'user',
                 }
-                console.log("2");
                 axios.post(API_USERS_URL, user).then( res => {
-                    console.log(res.data);
                     sendEmail(e);
                     localStorage.setItem('verifyUser', JSON.stringify(res.data.id));
                     history.replace('/code-verification');

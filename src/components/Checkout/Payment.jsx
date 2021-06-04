@@ -19,20 +19,20 @@ const Payment = ({
 }) => {
   const handleSubmit = async (e, elements, stripe) => {
     e.preventDefault();
-    e.target[e.target.length-1].innerHTML = 'paying...';
-
+    
     if (!stripe || !elements) return;
-
+    
     const cardElement = elements.getElement(CardElement);
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card: cardElement,
     });
-
+    
     if (!error) {
       //send email about order details to user
+      e.target[e.target.length-1].innerHTML = 'paying...';
       emailjs.sendForm('default_service', 'template_order', e.target, `user_eGZkjyOWcdrxHJK1InigS`)
-        .then((result) => {
+      .then((result) => {
           console.log(result.text);
           // add order to user account
             if(localStorage.getItem('basket')) {

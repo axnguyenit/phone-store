@@ -33,8 +33,6 @@ const CustomCard = ({product}) => {
             total: item.price.raw,
         }
         const nameItem = item.name;
-        console.log(item.quantity);
-        console.log(typeof item.quantity);
     
         if(localStorage.getItem('basket')) {
             //add to basket
@@ -145,7 +143,6 @@ const CustomCard = ({product}) => {
 
                 // the wishlist isn't empty
                 if(wishlist.length > 0) {
-                    console.log(wishlist);
                     const wishlistItem = wishlist.find(wishlistItem => wishlistItem.id === item.id);
 
                     if(wishlistItem) {

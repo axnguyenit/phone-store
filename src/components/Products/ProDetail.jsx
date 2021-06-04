@@ -5,7 +5,6 @@ import 'react-toastify/dist/ReactToastify.css';
 toast.configure();
 const API_USERS_URL = `http://localhost:4000/api/users`;
 const API_WISHLIST_URL = `http://localhost:4000/api/wishlist`;
-const API_PRODUCTS_URL = `http://localhost:4000/api/products`;
 
 export const ProDetail = ({product}) => {
   const addToBasket = (item) => {
@@ -16,8 +15,6 @@ export const ProDetail = ({product}) => {
         total: item.price.raw,
     }
     const nameItem = item.name;
-    console.log(item.quantity);
-    console.log(typeof item.quantity);
 
     if(localStorage.getItem('basket')) {
         //add to basket

@@ -7,7 +7,6 @@ import 'react-toastify/dist/ReactToastify.css';
 toast.configure();
 const Cart = () => {
     const history = useHistory();
-    const [basket, setBasket] = useState();
     const [isRender, setIsRender] = useState(false);
     let items = [];
 
@@ -124,22 +123,16 @@ const Cart = () => {
     }
 
     const updateChecked = (e, item) => {
-        console.log(e.target);
         if(localStorage.getItem('basket')) {
             let basket = JSON.parse(localStorage.getItem('basket'));
 
             basket.map((itemBasket) => {
                 if(itemBasket.id === item.id) {
-                    console.log(e.target.checked);
                     itemBasket.isCheck = e.target.checked;
                     localStorage.setItem('basket', JSON.stringify(basket));
                 }
             })
         }
-    }
-
-    const checkedItem = (e) => {
-        console.log(e.target);
     }
 
     return (
@@ -154,16 +147,7 @@ const Cart = () => {
                                     <table width="100%" className="table">
                                     <thead>
                                         <tr>
-                                            <th>
-                                            <label className="label">
-                                                <input className="label__checkbox" type="checkbox" onClick={e => checkedItem(e)}/>
-                                                <span className="label__text">
-                                                <span className="label__check">
-                                                    <i className="fa fa-check icon" />
-                                                </span>
-                                                </span>
-                                            </label>
-                                            </th>
+                                        <th></th>
                                         <th>NAME</th>
                                         <th>PRODUCT</th>
                                         <th>UNIT PRICE</th>

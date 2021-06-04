@@ -37,7 +37,7 @@ const WishList = () => {
 
   useEffect(() => {
     fetchWishlist();
-  }, []);
+  });
   
   return (
     <>

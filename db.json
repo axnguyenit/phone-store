@@ -1,16 +1,6 @@
 {
   "users": [
     {
-      "id": 3,
-      "name": "Nguyen Thi Thanh Nga",
-      "email": "nga.nguyen22@student.passerellesnumeriques.org",
-      "password": "admin",
-      "phone": "0987654321",
-      "role": "user",
-      "address": "Binh Dinh",
-      "active": true
-    },
-    {
       "id": 4,
       "name": "Nguyen Thi Thuy",
       "email": "thuy.nguyen22@student.passerellesnumeriques.org",
@@ -151,7 +141,7 @@
       "email": "vuong.thai22@student.passerellesnumeriques.org",
       "password": "admin",
       "phone": "0123456789",
-      "role": "admin",
+      "role": "manager",
       "address": "Phù Mỹ - Bình Định",
       "active": true,
       "status": true,
@@ -182,6 +172,32 @@
       "role": "user",
       "createdAt": 1622671988322,
       "id": 23
+    },
+    {
+      "name": "Nguyen Thi Thanh Nga",
+      "email": "nga.nguyen22@student.passerellesnumeriques.org",
+      "password": "55555",
+      "phone": "",
+      "address": "",
+      "active": true,
+      "code": 0,
+      "status": true,
+      "role": "manager",
+      "createdAt": 1622818413979,
+      "id": 24
+    },
+    {
+      "name": "thuy nguyen",
+      "email": "nguyenthithuyqb1004@gmail.com",
+      "password": "123",
+      "phone": "",
+      "address": "",
+      "active": true,
+      "code": 0,
+      "status": true,
+      "role": "admin",
+      "createdAt": 1622821500388,
+      "id": 25
     }
   ],
   "products": [
@@ -590,6 +606,22 @@
       ],
       "createdAt": 1622809277479,
       "id": 39
+    },
+    {
+      "userId": 25,
+      "status": "pending",
+      "receiver": "thuy nguyen",
+      "email": "nguyenthithuyqb1004@gmail.com",
+      "phone": "09865677667",
+      "address": "73\n",
+      "details": [
+        {
+          "prodId": "prod_LvJjoP0Npoe0nO",
+          "quantity": 2
+        }
+      ],
+      "createdAt": 1622825291782,
+      "id": 40
     }
   ],
   "baskets": [
@@ -714,6 +746,29 @@
       "details": [],
       "createdAt": 1622732054375,
       "id": 15
+    },
+    {
+      "userId": 24,
+      "details": [],
+      "createdAt": 1622818954943,
+      "id": 16
+    },
+    {
+      "userId": 25,
+      "details": [
+        {
+          "id": "prod_gnZO5kNOvo7MNq",
+          "quantity": 1,
+          "isCheck": false
+        },
+        {
+          "id": "prod_DWy4oGn9zw6Jx2",
+          "quantity": 1,
+          "isCheck": false
+        }
+      ],
+      "createdAt": 1622821550585,
+      "id": 17
     }
   ],
   "wishlist": [
@@ -803,6 +858,18 @@
       "details": [],
       "createdAt": 1622732054379,
       "id": 10
+    },
+    {
+      "userId": 24,
+      "details": [],
+      "createdAt": 1622818954946,
+      "id": 11
+    },
+    {
+      "userId": 25,
+      "details": [],
+      "createdAt": 1622821550588,
+      "id": 12
     }
   ]
 }

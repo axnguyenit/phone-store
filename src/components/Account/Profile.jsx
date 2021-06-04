@@ -28,7 +28,6 @@ const Profile = () => {
 
     const updateInfo = (e) => {
         e.preventDefault();
-        console.log(user);
         axios.put(API_USERS_URL + `/${user.id}`, user).then(() => {
             toast.success('Update info successfully!', {
                 position: "bottom-left",

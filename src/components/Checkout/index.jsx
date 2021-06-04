@@ -35,7 +35,6 @@ const Checkout = () => {
               return item;
             }
           })
-          console.log(basketTerm.length);
           if(basketTerm.length < 1) {
             history.push('/basket');
           }

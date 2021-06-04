@@ -302,6 +302,112 @@ Navigation
     transform: translateX(0);
 }
 
+.nav .nav__dropdown {
+    position: absolute;
+    top: 9rem;
+    right: 2px;
+    width: 15rem;
+    background-color: #ffffff;
+    display: none;
+}
+
+.nav .nav__user {
+    padding: 1rem;
+}
+
+.nav .nav__user .nav__link {
+    width: 100%;
+    padding-left: 4rem;
+}
+
+.nav .nav__user:hover .nav__dropdown {
+    display: block;
+}
+
+.search__bar {
+    position: relative;
+}
+.search__bar input {
+    width: 40rem;
+    border: 2.2px solid var(--green);
+    outline: none;
+    border-radius: .1rem;
+    transition: all 0.3s ease-in-out;
+}
+
+
+
+.search__bar input:hover,
+.search__bar input:focus {
+    box-shadow: 0 0 4px var(--green);
+}
+
+.search__bar .fa-search {
+    font-size: 16px;
+    color: #ffffff;
+    cursor: pointer;
+    line-height: 25px;
+    height: 26.5px;
+    margin-left: -1px;
+    text-align: center;
+    width: 50px;
+    background-color: var(--green);
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+}
+
+.search__bar .fa-search:hover {
+    opacity: 0.8;
+}
+
+.search__bar input[type="checkbox"]:checked ~ div {
+    display: block;
+}
+
+.search__bar div {
+    position: absolute;
+    top: 2.6rem;
+    background-color: #ffffff;
+    width: 40rem;
+    max-height: 35.5rem;
+    display: none;
+    overflow-y: auto;
+    box-shadow: 0px 2px 30px 10px rgba(0, 0, 0, 0.09);
+}
+
+::-webkit-scrollbar {
+    width: 0;
+}
+
+.search__bar .search__content li {
+    padding: 1rem 1rem;
+    border-bottom: 1px solid #ccc;
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.search__content .search__item {
+    display: flex;
+    width: 100%;
+    height: 5rem;
+    flex-direction: row;
+}
+
+.search__content li:hover {
+    background-color: #ccc;
+}
+
+.search__bar .search__content img {
+    width: 5rem;
+    height: auto;
+}
+
+.search__content .search__item span{
+    margin-left: 1rem;
+    color: #000;
+}
+
 /*
 ======================
 Navigation Media Query
@@ -318,11 +424,11 @@ Navigation Media Query
         top: -12px;
         display: block;
     }
-    .nav__logo {
-        width: 50%;
-    }
     .nav__hamburger {
         display: block;
+    }
+    .search__bar input {
+        width: 30rem;
     }
     .nav__list {
         display: none;
@@ -345,6 +451,10 @@ Navigation Media Query
     .nav__logo .icon__item svg {
         width: 1.4rem;
         height: 1.4rem;
+    }
+    .search__bar .fa-search,
+    .search__bar input {
+        display: none;
     }
     .nav__logo .icon__item {
         padding: 0.4rem;
@@ -382,9 +492,6 @@ Login
 .input-data input:valid ~ label {
     transform: translateY(-20px);
     font-size: 14px;
-}
-
-.input-data input:focus ~ label {
     color: #4158d0;
 }
 

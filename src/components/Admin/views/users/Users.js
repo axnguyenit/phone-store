@@ -167,6 +167,7 @@ const Users = () => {
                                   // if role === manager show all lock
                                   accessToken === 'manager' ?
                                     userTerm.active ? 
+                                      userTerm.role === 'manager' ? '' :
                                       <CButton
                                         color="primary"
                                         shape="square"
