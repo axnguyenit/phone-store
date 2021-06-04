@@ -189,11 +189,11 @@ const Login = () => {
                   });
                 //show modal to confirm go to verify form and save verifyUser to localStorage with user ID
             }
-            else if(!user.active) {
-                setErrorText('Your account has been locked!')
+            else if(!userValid.active) {
+                setErrorText('Your account has been locked!');
             }
             else {
-                localStorage.setItem('userID', user.id);
+                localStorage.setItem('userID', userValid.id);
                 fetchBasket();
                 history.replace('/');
             }

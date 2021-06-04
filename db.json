@@ -8,7 +8,7 @@
       "phone": "0987654321",
       "role": "user",
       "address": "Binh Dinh",
-      "active": false
+      "active": true
     },
     {
       "id": 4,
@@ -574,6 +574,22 @@
       ],
       "createdAt": 1622790205373,
       "id": 38
+    },
+    {
+      "userId": 17,
+      "status": "pending",
+      "receiver": "Nguyen Dinh Kha",
+      "email": "nguyendinhkha1812@gmail.com",
+      "phone": "0337965469",
+      "address": "Binh Dinh",
+      "details": [
+        {
+          "prodId": "prod_4OANwRpDY5vYL8",
+          "quantity": 1
+        }
+      ],
+      "createdAt": 1622809277479,
+      "id": 39
     }
   ],
   "baskets": [
@@ -583,12 +599,12 @@
       "details": [
         {
           "id": "prod_kd6Ll28YEoV2mj",
-          "quantity": 2,
+          "quantity": 1,
           "isCheck": false
         },
         {
-          "id": "prod_4OANwRpDY5vYL8",
-          "quantity": 2,
+          "id": "prod_LvJjoP0Npoe0nO",
+          "quantity": 1,
           "isCheck": false
         }
       ]
@@ -713,6 +729,9 @@
         },
         {
           "id": "prod_gnZO5kNOvo7MNq"
+        },
+        {
+          "id": "prod_VKXmwDNBX5rgDA"
         }
       ]
     },

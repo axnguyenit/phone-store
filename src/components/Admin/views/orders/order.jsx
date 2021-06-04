@@ -112,8 +112,6 @@ const Orders = () => {
     })
   }
 
-  
-
   useEffect(() => {
     fetchOrders();
   }, []);

@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState} from 'react';
 
  const Banner = () => {
+     const [muted, setMuted] = useState(true);
+    //  console.log(...muted);
     return (
         <>
             <header id="header" className="header mt-70">
                 <div className="banner">
-                    <video src="./assets/video/video-slide.mp4" autoPlay muted loop></video>
+                    <video src="./assets/video/video-slide.mp4" controls muted autoPlay loop></video>
                     <div className="banner__content">
                         <div>
                             <span className>New Inspiration 2021</span>

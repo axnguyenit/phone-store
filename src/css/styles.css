@@ -503,7 +503,7 @@ Banner Area
 }
 
 .banner video {
-    z-index: 000;
+    z-index: 999;
     position: absolute;
     top: 0;
     right: 0;
@@ -547,6 +547,7 @@ Banner Area
     background-color: transparent;
     color: #ffffff;
 }
+
 /*
 ======================
 banner Media Query

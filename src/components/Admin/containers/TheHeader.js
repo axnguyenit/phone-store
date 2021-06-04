@@ -16,9 +16,9 @@ import CIcon from '@coreui/icons-react'
 // routes config
 import routes from '../routes';
 
-import { 
-  TheHeaderDropdown,
-}  from './index'
+// import { 
+//   TheHeaderDropdown,
+// }  from './index'
 
 const TheHeader = () => {
   const dispatch = useDispatch()
@@ -53,9 +53,9 @@ const TheHeader = () => {
       <CHeaderNav className="d-md-down-none mr-auto">
       </CHeaderNav>
 
-      <CHeaderNav className="px-3">
+      {/* <CHeaderNav className="px-3">
         <TheHeaderDropdown/>
-      </CHeaderNav>
+      </CHeaderNav> */}
 
       <CSubheader className="px-3 justify-content-between">
         <CBreadcrumbRouter 
