@@ -22,7 +22,6 @@ import {
 import axios from 'axios';
 
 const API_ORDERS_URL = `http://localhost:4000/api/orders`;
-const API_USERS_URL = `http://localhost:4000/api/users`;
 
 const fields = [
   {

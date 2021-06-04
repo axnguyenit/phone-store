@@ -26,7 +26,7 @@ export const ProDetail = ({product}) => {
 
         //if basket contain item => item quantity =+ 1
         if(itemBasket) {
-            if(item.quantity === 0) {
+            if(item.inventory.available === 0) {
               toast.info(`Sorry, item ${nameItem} is currently out of stock!`, {
                 position: "bottom-left",
                 autoClose: 5000,
@@ -58,7 +58,7 @@ export const ProDetail = ({product}) => {
             }
         }
         else {
-          if(item.quantity === 0) {
+          if(item.inventory.available === 0) {
             toast.info(`Sorry, item ${nameItem} is currently out of stock!`, {
               position: "bottom-left",
               autoClose: 5000,
@@ -85,7 +85,7 @@ export const ProDetail = ({product}) => {
         }
     }
     else {
-      if(item.quantity === 0) {
+      if(item.inventory.available === 0) {
         toast.info(`Sorry, item ${nameItem} is currently out of stock!`, {
           position: "bottom-left",
           autoClose: 5000,
@@ -192,16 +192,6 @@ export const ProDetail = ({product}) => {
     }
   }
 
-  const fetchProduct = async() => {
-    axios.get(API_PRODUCTS_URL + `/${product.id}`).then(res => {
-      product.quantity = res.data.quantity;
-    })
-  }
-
-  useEffect(() => {
-    fetchProduct();
-  });
-
     return (
       <div className="container">
         <section className="mt-70 section product-details__section">
@@ -236,7 +226,6 @@ export const ProDetail = ({product}) => {
               </div>
               <p>
                 {product.seo.description}
-                {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt a doloribus iste natus et facere? dolor sit amet consectetur adipisicing elit. Sunt a doloribus iste natus et facere? */}
               </p>
               <div className="product__info-container">
                 <ul className="product__info">
@@ -247,7 +236,7 @@ export const ProDetail = ({product}) => {
                     <span>Brand: {product.categories[0].name}</span>
                   </li>
                   <li>
-                    <span>Availability: {product.quantity != 0 ? `In Stock` : "Out of Stock"} ({product.inventory.available} Items)</span>
+                    <span>Availability: {product.inventory.available != 0 ? `In Stock` : "Out of Stock"} ({product.inventory.available} Items)</span>
                   </li>
                 </ul>
               </div>

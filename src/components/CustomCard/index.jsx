@@ -31,19 +31,20 @@ const CustomCard = ({product}) => {
             quantity: 1,
             unitPrice: item.price.raw,
             total: item.price.raw,
-            isCheck: false,
         }
-
         const nameItem = item.name;
-
+        console.log(item.quantity);
+        console.log(typeof item.quantity);
+    
         if(localStorage.getItem('basket')) {
             //add to basket
             let basket = JSON.parse(localStorage.getItem('basket'));
-            const item = basket.find( item => item.id === itemAdd.id );
-
+            const itemBasket = basket.find( item => item.id === itemAdd.id );
+    
             //if basket contain item => item quantity =+ 1
-            if(item) {
-                toast.success(`Add ${nameItem} to the basket successfully!`, {
+            if(itemBasket) {
+                if(item.inventory.available === 0) {
+                  toast.info(`Sorry, item ${nameItem} is currently out of stock!`, {
                     position: "bottom-left",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -51,17 +52,41 @@ const CustomCard = ({product}) => {
                     pauseOnHover: true,
                     draggable: true,
                     progress: undefined,
-                });
-                let itemTerm = item;
-                itemTerm.quantity += 1;
-                let totalPrice = itemTerm.quantity * itemTerm.total;
-                itemTerm.total = totalPrice;
-                //find index of add item in basket to change quantity
-                let index = basket.indexOf(item);
-                basket[index] = itemTerm;
-                localStorage.setItem('basket', JSON.stringify(basket));
+                  });
+                }
+                else {
+                  toast.success(`Add ${nameItem} to the basket successfully!`, {
+                    position: "bottom-left",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                  });
+                  let itemTerm = itemBasket;
+                  itemTerm.quantity += 1;
+                  let totalPrice = itemTerm.quantity * itemTerm.total;
+                  itemTerm.total = totalPrice;
+                  //find index of add item in basket to change quantity
+                  let index = basket.indexOf(itemBasket);
+                  basket[index] = itemTerm;
+                  localStorage.setItem('basket', JSON.stringify(basket));
+                }
             }
             else {
+              if(item.inventory.available === 0) {
+                toast.info(`Sorry, item ${nameItem} is currently out of stock!`, {
+                  position: "bottom-left",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                });
+              }
+              else {
                 toast.success(`Add ${nameItem} to the basket successfully!`, {
                     position: "bottom-left",
                     autoClose: 5000,
@@ -73,11 +98,23 @@ const CustomCard = ({product}) => {
                 });
                 basket.push(itemAdd);
                 localStorage.setItem('basket', JSON.stringify(basket));
+              }
             }
         }
         else {
+          if(item.inventory.available === 0) {
+            toast.info(`Sorry, item ${nameItem} is currently out of stock!`, {
+              position: "bottom-left",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+          }
+          else {
             let basket = new Array();
-
             toast.success(`Add ${nameItem} to the basket successfully!`, {
                 position: "bottom-left",
                 autoClose: 5000,
@@ -89,6 +126,7 @@ const CustomCard = ({product}) => {
             });
             basket.push(itemAdd);
             localStorage.setItem('basket', JSON.stringify(basket));
+          }
         }
     }
 
@@ -189,14 +227,14 @@ const CustomCard = ({product}) => {
                     <li>
                         <Link data-tip="Quick View" data-place="left" to={"detail" + "/" + product.id + "/" + to_slug(product.name)}>
                             <svg>
-                            <use xlinkHref="./images/sprite.svg#icon-eye" />
+                                <use xlinkHref="./images/sprite.svg#icon-eye" />
                             </svg>
                         </Link>
                     </li>
                     <li>
                         <a data-tip="Add To Wishlist" data-place="left" onClick={() => addToWishlist(product)}>
                             <svg>
-                            <use xlinkHref="./images/sprite.svg#icon-heart-o"/>
+                                <use xlinkHref="./images/sprite.svg#icon-heart-o"/>
                             </svg>
                         </a>
                     </li>
